@@ -1,35 +1,45 @@
-import React, { Component, Fragment } from "react";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
-import { Provider } from "react-redux";
-import { loadUser } from "./actions/auth-actions";
-import PublicRoute from "./Components/routing-components/public-route";
-// import PrivateRoute from "./Components/routing-components/private-route";
-import Login from "./Components/auth/Login";
-import Register from "./Components/auth/Register";
-// import NoMatch from "./pages/NoMatch";
-import store from "./store";
+import React, { Component } from "react";
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import store from "./store.js";
+import Navigation from "./Components/nav";
+import Home from "./pages/home";
+import Register from "./Components/auth/Register";
+import { connect } from "react-redux";
+import { loadUser } from "./actions/auth-actions";
+import { clearErrors } from "./actions/error-actions";
 
 class App extends Component {
+  state = {
+    username: "",
+    password: ""
+  };
   componentDidMount() {
-    store.dispatch(loadUser());
+    clearErrors();
+    if(localStorage.getItem("token")) {
+      loadUser(this.props.auth.token);
+    }
   }
   render() {
     return (
-      <Provider store={store}>
         <Router>
-          <Fragment>
+          <div>
+            <Navigation/>
             <Switch>
-              <PublicRoute exact path="/login" component={Login} />
-              <PublicRoute exact path="/register" component={Register} />
-              {/* <Route component={NoMatch} /> */}
+              <Route exact path="/" component={Home} />
+              <Route exact path="/register" component={Register} />
+              {/* <Route component={ErrorC} /> */}
             </Switch>
-          </Fragment>
+          </div>
         </Router>
-      </Provider>
-    )
+    );
   }
-
 }
-
-export default App;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
+  auth: state.auth,
+  error: state.error
+})
+export default connect( mapStateToProps,
+  { clearErrors, loadUser }
+)(App);

@@ -10,7 +10,6 @@ class Register extends Component {
     super();
     this.state = {
       name: "",
-      email: "",
       password: "",
       password2: "",
       errors: {}
@@ -40,12 +39,11 @@ class Register extends Component {
     event.preventDefault();
     var newUser = {
       name: this.state.name,
-      email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
     };
 
-    this.props.registerAdmin(newUser, this.props.history);
+    this.props.registerAdmin(newUser);
   };
 
   render() {
@@ -71,26 +69,9 @@ class Register extends Component {
                   error={errors.name}
                   id="name"
                   type="text"
-                  className={classnames("", {
-                    invalid: errors.name
-                  })}
                 />
                 <label htmlFor="name">Name</label>
                 <span className="text-danger">{errors.name}</span>
-              </div>
-              <div>
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span className="text-danger">{errors.email}</span>
               </div>
               <div>
                 <input
@@ -99,10 +80,7 @@ class Register extends Component {
                   error={errors.password}
                   id="password"
                   type="password"
-                  className={classnames("", {
-                    invalid: errors.password
-                  })}
-                />
+                />  
                 <label htmlFor="password">Password</label>
                 <span className="text-danger">{errors.password}</span>
               </div>
@@ -113,9 +91,6 @@ class Register extends Component {
                   error={errors.password2}
                   id="password2"
                   type="password"
-                  className={classnames("", {
-                    invalid: errors.password2
-                  })}
                 />
                 <label htmlFor="password2">Confirm Password</label>
                 <span className="text-danger">{errors.password2}</span>
