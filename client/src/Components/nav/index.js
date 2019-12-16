@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 import {
     Collapse,
     Navbar,
@@ -17,8 +18,7 @@ import {
 } from 'reactstrap';
 import "./style.css";
 import { connect } from "react-redux";
-import { loginAdmin } from "../../actions/auth-actions";
-import { registerAdmin } from "../../actions/auth-actions";
+import {logout, loginAdmin } from "../../actions/auth-actions";
 import { clearErrors } from "../../actions/error-actions";
 
 const handleInputChange = event => {
@@ -27,22 +27,13 @@ const handleInputChange = event => {
 const loginSubmit = event => {
     event.preventDefault();
     const userData = {
-        Username: this.state.Username,
-        password: this.state.password
-    };
-
-    this.props.loginAdmin(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
-};
-
-const registerSubmit = event => {
-    event.preventDefault();
-    const userData = {
         username: this.state.Username,
         password: this.state.password
     };
 
-    this.props.registerAdmin(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    this.props.loginAdmin(userData);
 };
+
 
 const Navigation = () => {
     const togglemodal = () => setModal(!modal);
@@ -79,6 +70,13 @@ const Navigation = () => {
                     <Button onClick={loginSubmit}>Submit</Button>
                 </ModalFooter>
             </Modal>
+
+          <Link
+            to="/"
+            onClick={this.props.logout()}
+          >
+            Logout
+          </Link>
         </>
     );
 }
@@ -91,5 +89,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { loginAdmin, registerAdmin, clearErrors }
+    { loginAdmin, logout, clearErrors }
 )(Navigation);
