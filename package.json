@@ -1,0 +1,48 @@
+{
+  "name": "Class-manager",
+  "version": "1.0.0",
+  "description": "Artificial storefront.",
+  "main": "server.js",
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build",
+    "heroku-postbuild": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjmateer/Class-manager.git"
+  },
+  "author": "Melanie Mok, Travis Rodowick, John P. Mateer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjmateer/Class-manager/issues"
+  },
+  "homepage": "https://github.com/jjmateer/Class-manager#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "babel-eslint": "^10.0.3",
+    "bcrypt": "^3.0.6",
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "if-env": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^2.2.0",
+    "mongoose": "^5.7.7",
+    "path": "^0.12.7",
+    "react-burger-menu": "^2.6.13",
+    "react-loader-spinner": "^3.1.5",
+    "react-router-dom": "^5.1.2",
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  }
+}
