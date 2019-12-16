@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component, Fragment } from "react";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { loadUser } from "./actions/auth-actions";
+import PublicRoute from "./Components/routing-components/public-route";
+// import PrivateRoute from "./Components/routing-components/private-route";
+import Login from "./Components/auth/Login";
+import Register from "./Components/auth/Register";
+// import NoMatch from "./pages/NoMatch";
+import store from "./store";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <Router>
+          <Fragment>
+            <Switch>
+              <PublicRoute exact path="/login" component={Login} />
+              <PublicRoute exact path="/register" component={Register} />
+              {/* <Route component={NoMatch} /> */}
+            </Switch>
+          </Fragment>
+        </Router>
+      </Provider>
+    )
+  }
+
 }
 
 export default App;
