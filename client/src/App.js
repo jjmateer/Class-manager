@@ -40,7 +40,12 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation handleInputChange={this.handleInputChange} loginSubmit={this.loginSubmit} clearErrors={this.props.clearErrors} isAuthenticated={this.props.isAuthenticate} />
+          <Navigation handleInputChange={this.handleInputChange}
+            loginSubmit={this.loginSubmit}
+            clearErrors={this.props.clearErrors}
+            isAuthenticated={this.props.isAuthenticate}
+            isLoading={this.props.auth.isLoading}
+          />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />

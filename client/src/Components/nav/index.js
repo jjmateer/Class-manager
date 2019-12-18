@@ -14,7 +14,8 @@ import {
     ModalFooter,
     Form,
     Label,
-    Input
+    Input,
+    Spinner
 } from 'reactstrap';
 import "./style.css";
 import { connect } from "react-redux";
@@ -35,17 +36,17 @@ const Navigation = (props) => {
                 <Collapse isOpen={isOpen} navbar>
                     {!props.isAuthenticated ?
                         <Nav className="ml-auto" navbar>
-                            <NavLink tag={Link} to="#" onClick={togglemodal}>Login</NavLink>
-                            <NavLink tag={Link} to="/register">Register</NavLink>
-                            <NavLink tag={Link} to="/students">Students</NavLink>
+                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="#" onClick={togglemodal}>Login</NavLink>}
+                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/register">Register</NavLink>}
                         </Nav>
                         :
                         <Nav className="ml-auto" navbar>
-                            <NavLink tag={Link} to="#">Hello, {props.auth.user.name} </NavLink>
-                            <NavLink tag={Link} to="/students">Students</NavLink>
-                            <NavLink tag={Link} to="/" onClick={props.logout}>Logout</NavLink>
+                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="#">Hello, {props.auth.user.name} </NavLink>}
+                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/students">Students</NavLink>}
+                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/" onClick={props.logout}>Logout</NavLink>}
                         </Nav>
                     }
+
                 </Collapse>
             </Navbar>
             <Modal isOpen={!props.isAuthenticated ? modal : false} toggle={togglemodal}>

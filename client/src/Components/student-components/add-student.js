@@ -15,26 +15,27 @@ import "./student.css";
 
 
 const AddStudent = (props) => {
+    console.log(props)
     const togglemodalS = () => setModal(!modal);
     const [modal, setModal] = useState(false);
     return (
         <>
-            <Button style={{ marginRight: "2vw", marginTop: "2vw", float: "right" }} onClick={togglemodalS}>Add New Student</Button>
+            <Button style={{ marginRight: "2vw", marginBottom: "2vw", float: "right" }} onClick={togglemodalS}>Add New Student</Button>
             <div className="add-student-form-wrap">
                 <Modal isOpen={modal} toggle={togglemodalS}>
                     <ModalHeader toggle={togglemodalS}>New Student</ModalHeader>
                     <Form className="add-student-form" onSubmit={props.handleFormSubmit}>
                         <FormGroup>
                             <Label htmlFor="name">First name</Label>
-                            <Input required onChange={props.handleInputChange} id="firstName" type="text" />
+                            <Input required onChange={props.handleInputChange} id="firstName" />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Last name</Label>
-                            <Input required onChange={props.handleInputChange} id="lastName" type="input" />
+                            <Input required onChange={props.handleInputChange} id="lastName" />
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password2">Date of birth</Label>
-                            <Input required onChange={props.handleInputChange} id="password2" type="input" placeholder="DD/MM/YYYY" />
+                            <Input required onChange={props.handleInputChange} id="birthday" placeholder="DD/MM/YYYY" />
                         </FormGroup>
                         <FormGroup>
                             <Button className="register-submit-btn" type="submit" >Submit</Button>

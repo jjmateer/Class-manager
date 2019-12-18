@@ -19,6 +19,9 @@ class Home extends Component {
         return (
             <>
                 {this.props.auth.token ? <h1>LOGGED IN</h1> : <h1>LOGGED OUT</h1>}
+                <div className="home-menu">
+
+                </div>
             </>
         );
     }
