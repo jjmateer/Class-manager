@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {
     Collapse,
     Navbar,
@@ -18,24 +18,12 @@ import {
 } from 'reactstrap';
 import "./style.css";
 import { connect } from "react-redux";
-import {logout, loginAdmin } from "../../actions/auth-actions";
+import { logout } from "../../actions/auth-actions";
 import { clearErrors } from "../../actions/error-actions";
 
-const handleInputChange = event => {
-    this.setState({ [event.target.id]: event.target.value });
-};
-const loginSubmit = event => {
-    event.preventDefault();
-    const userData = {
-        username: this.state.Username,
-        password: this.state.password
-    };
-
-    this.props.loginAdmin(userData);
-};
 
 
-const Navigation = () => {
+const Navigation = (props) => {
     const togglemodal = () => setModal(!modal);
     const [modal, setModal] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -59,24 +47,19 @@ const Navigation = () => {
                 <Form id="loginForm">
                     <FormGroup>
                         <Label for="Username">Username</Label>
-                        <Input className="loginInputs" onChange={handleInputChange} id="username" required />
+                        <Input className="loginInputs" onChange={props.handleInputChange} id="user" required />
                     </FormGroup>
                     <FormGroup>
                         <Label for="Password">Password</Label>
-                        <Input className="loginInputs" id="password" onChange={handleInputChange} required />
+                        <Input className="loginInputs" id="password" onChange={props.handleInputChange} required />
                     </FormGroup>
                 </Form>
                 <ModalFooter>
-                    <Button onClick={loginSubmit}>Submit</Button>
+                    <Button onClick={props.loginSubmit}>Submit</Button>
                 </ModalFooter>
             </Modal>
 
-          <Link
-            to="/"
-            onClick={this.props.logout()}
-          >
-            Logout
-          </Link>
+            <a href="/" onClick={logout()} >Logout</a>
         </>
     );
 }
@@ -89,5 +72,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { loginAdmin, logout, clearErrors }
+    { logout, clearErrors }
 )(Navigation);

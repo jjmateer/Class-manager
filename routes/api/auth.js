@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
 
 router.post("/register", function (req, res) {
-  console.log(req.body)
   const { name, password, password2 } = req.body;
   switch (name, password, password2) {
     case password.length < 6:
@@ -15,14 +14,14 @@ router.post("/register", function (req, res) {
     case !name || !password || !password2:
       return res.status(400).json({ msg: "Please fill out all fields." })
   }
-User.findOne({ name })
+  User.findOne({ name })
     .then(user => {
       if (!user) {
-      User.findOne({ name })
+        User.findOne({ name })
           .then(user => {
             if (!user) {
               let salt = bcrypt.genSaltSync(10);
-            User.create({
+              User.create({
                 name: name,
                 password: bcrypt.hashSync(password, salt),
               }).then(user => {
@@ -51,16 +50,16 @@ User.findOne({ name })
 })
 
 router.post("/login", function (req, res) {
-  const { email, password } = req.body;
-  if (!email || !password) {
+  console.log(req.body)
+  const { user, password } = req.body;
+  if (!user || !password) {
     return res.status(400).json({ msg: "Please fill out all fields." })
   } else {
-  User.findOne({ email })
+    User.findOne({ name: user })
       .then(user => {
         if (!user) {
           return res.status(400).json({ msg: "Non-existent user." })
-        }
-        if (email === user.email && user && bcrypt.compareSync(password, user.password)) {
+        } else if (user && bcrypt.compareSync(password, user.password)) {
           jwt.sign({
             id: user.id
           }, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
@@ -69,8 +68,7 @@ router.post("/login", function (req, res) {
               token,
               user: {
                 id: user.id,
-                username: user.username,
-                email: user.email
+                user: user.user
               }
             });
           })
@@ -83,10 +81,10 @@ router.post("/login", function (req, res) {
 
 
 router.post('/user', (req, res) => {
-  if(req.body.token) {
-  User.findById(req.body.id)
-    .select('-password')
-    .then(user => res.json(user));
+  if (req.body.token) {
+    User.findById(req.body.id)
+      .select('-password')
+      .then(user => res.json(user));
   } else {
     res.status(400).json(null)
   }
