@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "./Components/nav";
 import Home from "./pages/home";
-import Register from "./Components/auth/Register";
+import Register from "./pages/Register";
 import { connect } from "react-redux";
 import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
@@ -20,7 +20,7 @@ class App extends Component {
     error: PropTypes.object.isRequired,
     loadUser: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired
-}
+  }
   componentDidMount() {
     this.props.loadUser();
   }
@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation handleInputChange={this.handleInputChange} loginSubmit={this.loginSubmit} clearErrors={this.props.clearErrors} />
+          <Navigation handleInputChange={this.handleInputChange} loginSubmit={this.loginSubmit} clearErrors={this.props.clearErrors} isAuthenticated={this.props.isAuthenticate} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />

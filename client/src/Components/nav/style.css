@@ -1,3 +1,7 @@
 #loginForm {
     padding:20px;
 }
+.auth-error-message{
+    background:#fa8072;
+    text-align: center;
+}

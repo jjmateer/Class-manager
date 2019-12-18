@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import {
     Collapse,
@@ -23,10 +23,6 @@ import { logout } from "../../actions/auth-actions";
 
 
 const Navigation = (props) => {
-    useEffect(() => {
-        console.log("Hi")
-        // props.clearErrors();
-    }, [])
     const togglemodal = () => setModal(!modal);
     const [modal, setModal] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
@@ -51,16 +47,16 @@ const Navigation = (props) => {
                     }
                 </Collapse>
             </Navbar>
-            <Modal isOpen={modal} toggle={togglemodal}>
+            <Modal isOpen={!props.isAuthenticated ? modal : false} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>Login</ModalHeader>
                 <Form id="loginForm" onSubmit={props.loginSubmit}>
-                    {props.error.msg ? <p>{props.error.msg.msg}</p> : null}
+                    {props.error.msg ? <p className="auth-error-message">{props.error.msg.msg}</p> : null}
                     <Label for="Username">Username</Label>
                     <Input className="loginInputs" onChange={props.handleInputChange} type="username" id="user" required />
                     <Label for="Password">Password</Label>
                     <Input className="loginInputs" id="password" onChange={props.handleInputChange} type="password" required />
                     <FormGroup>
-                    <Button to="/" style={{marginTop: 20}} type="submit">Submit</Button>
+                        <Button to="/" style={{ marginTop: 20 }} type="submit">Submit</Button>
                     </FormGroup>
                 </Form>
                 <ModalFooter>
