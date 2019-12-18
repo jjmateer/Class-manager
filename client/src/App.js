@@ -7,17 +7,22 @@ import Register from "./Components/auth/Register";
 import { connect } from "react-redux";
 import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
+import studentSearch from "./pages/student-search";
+import PropTypes from "prop-types";
 
 class App extends Component {
   state = {
     user: "",
     password: ""
   };
+  static propTypes = {
+    isAuthenticated: PropTypes.bool,
+    error: PropTypes.object.isRequired,
+    loadUser: PropTypes.func.isRequired,
+    clearErrors: PropTypes.func.isRequired
+}
   componentDidMount() {
-    clearErrors();
-    if (localStorage.getItem("token")) {
-      loadUser(this.props.auth.token);
-    }
+    this.props.loadUser();
   }
   handleInputChange = event => {
     this.setState({ [event.target.id]: event.target.value });
@@ -35,10 +40,11 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navigation handleInputChange={this.handleInputChange} loginSubmit={this.loginSubmit} />
+          <Navigation handleInputChange={this.handleInputChange} loginSubmit={this.loginSubmit} clearErrors={this.props.clearErrors} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/students" component={studentSearch} />
             {/* <Route component={ErrorC} /> */}
           </Switch>
         </div>

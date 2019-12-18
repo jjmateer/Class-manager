@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import StudentTable from "../Components/tables/student-table"
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
@@ -6,7 +7,7 @@ import { loadUser } from "../actions/auth-actions";
 
 
 
-class Home extends Component {
+class StudentSearch extends Component {
 
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -19,6 +20,7 @@ class Home extends Component {
         return (
             <>
                 {this.props.auth.token ? <h1>LOGGED IN</h1> : <h1>LOGGED OUT</h1>}
+                <StudentTable/>
             </>
         );
     }
@@ -34,4 +36,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { clearErrors, loadUser }
-)(Home);
+)(StudentSearch);

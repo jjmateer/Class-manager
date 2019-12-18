@@ -26,7 +26,7 @@ export const loadUser = () => (dispatch) => {
         }
 
         axios
-            .post('/api/auth/user', body)
+            .post('http://localhost:3001/api/auth/user', body)
             .then(res => {
                 dispatch({
                     type: USER_LOADED,
@@ -49,7 +49,6 @@ export const registerAdmin = newUser => dispatch => {
             "Content-Type": "application/json"
         }
     }
-console.log("firing")
     axios.post("http://localhost:3001/api/auth/register", newUser, config)
         .then(res => {
             dispatch({
