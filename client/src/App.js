@@ -7,7 +7,7 @@ import Register from "./pages/Register";
 import { connect } from "react-redux";
 import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
-import studentSearch from "./pages/student-search";
+import StudentSearch from "./pages/student-search";
 import PropTypes from "prop-types";
 
 class App extends Component {
@@ -44,7 +44,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/students" component={studentSearch} />
+            <Route exact path="/students" component={StudentSearch} />
             {/* <Route component={ErrorC} /> */}
           </Switch>
         </div>

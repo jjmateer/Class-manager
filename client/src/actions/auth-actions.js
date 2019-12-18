@@ -82,6 +82,7 @@ export const loginAdmin = (userData) => dispatch => {
             })
             const { token } = res.data;
             localStorage.setItem("jwtToken", token);
+            window.location.reload();
         })
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status, "LOGIN_FAIL"));

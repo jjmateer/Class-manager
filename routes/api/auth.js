@@ -68,7 +68,7 @@ router.post("/login", function (req, res) {
               token,
               user: {
                 id: user.id,
-                user: user.user
+                user: user.name
               }
             });
           })

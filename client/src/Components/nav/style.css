@@ -4,4 +4,5 @@
 .auth-error-message{
     background:#fa8072;
     text-align: center;
+    border-radius:4px;
 }

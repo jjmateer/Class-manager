@@ -41,6 +41,7 @@ const Navigation = (props) => {
                         </Nav>
                         :
                         <Nav className="ml-auto" navbar>
+                            <NavLink tag={Link} to="#">Hello, {props.auth.user.name} </NavLink>
                             <NavLink tag={Link} to="/students">Students</NavLink>
                             <NavLink tag={Link} to="/" onClick={props.logout}>Logout</NavLink>
                         </Nav>
