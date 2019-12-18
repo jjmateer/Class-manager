@@ -6,7 +6,8 @@ import {
     ModalHeader,
     Form,
     Label,
-    Input
+    Input,
+    Alert
 } from 'reactstrap';
 import { connect } from "react-redux";
 import { clearErrors } from "../../actions/error-actions";
@@ -25,6 +26,7 @@ const AddStudent = (props) => {
                 <Modal isOpen={modal} toggle={togglemodalS}>
                     <ModalHeader toggle={togglemodalS}>New Student</ModalHeader>
                     <Form className="add-student-form" onSubmit={props.handleFormSubmit}>
+                        {props.error.msg.msg ? <Alert color="danger">{props.error.msg.msg}</Alert> : null}
                         <FormGroup>
                             <Label htmlFor="name">First name</Label>
                             <Input required onChange={props.handleInputChange} id="firstName" />

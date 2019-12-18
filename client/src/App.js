@@ -7,7 +7,7 @@ import Register from "./pages/Register";
 import { connect } from "react-redux";
 import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
-import StudentSearch from "./pages/student-search";
+import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
 
 class App extends Component {

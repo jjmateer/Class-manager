@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent } from "../actions/student-actions";
+import { addStudent, getStudents } from "../actions/student-actions";
 
 
 
@@ -21,10 +21,15 @@ class StudentSearch extends Component {
         error: PropTypes.object.isRequired,
         loadUser: PropTypes.func.isRequired,
         clearErrors: PropTypes.func.isRequired,
-        addStudent: PropTypes.func.isRequired
+        addStudent: PropTypes.func.isRequired,
+        getStudents: PropTypes.func.isRequired
+    }
+    componentDidMount = () => {
+        this.props.clearErrors();
+        this.props.loadUser();
+        this.props.getStudents();
     }
     handleInputChange = event => {
-        console.log("firing")
         this.setState({ [event.target.id]: event.target.value });
     };
 
@@ -46,7 +51,9 @@ class StudentSearch extends Component {
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
                 />
-                <StudentTable />
+                <StudentTable
+                    students={this.props.student.students}
+                />
             </>
         );
     }
@@ -56,10 +63,11 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
     auth: state.auth,
+    student: state.student,
     error: state.error
 })
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent }
+    { clearErrors, loadUser, addStudent, getStudents }
 )(StudentSearch);

@@ -3,7 +3,7 @@ import { Table } from "reactstrap"
 
 
 
-const StudentTable = () => {
+const StudentTable = (props) => {
     return (
         <>
             <Table>
@@ -14,42 +14,14 @@ const StudentTable = () => {
                         <th>Last Name</th>
                         <th>Class</th>
                     </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Larry</td>
-                        <td>the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
+                    {props.students.map((student) => (
+                        <tr key={student._id}>
+                            <td>{student._id}</td>
+                            <td>{student.firstName}</td>
+                            <td>{student.lastName}</td>
+                            <td>{student.birthday}</td>
+                        </tr>
+                    ))}
                 </thead>
             </Table>
         </>

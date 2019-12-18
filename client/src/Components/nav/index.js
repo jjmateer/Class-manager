@@ -15,7 +15,8 @@ import {
     Form,
     Label,
     Input,
-    Spinner
+    Spinner,
+    Alert
 } from 'reactstrap';
 import "./style.css";
 import { connect } from "react-redux";
@@ -52,7 +53,7 @@ const Navigation = (props) => {
             <Modal isOpen={!props.isAuthenticated ? modal : false} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>Login</ModalHeader>
                 <Form id="loginForm" onSubmit={props.loginSubmit}>
-                    {props.error.msg ? <p className="auth-error-message">{props.error.msg.msg}</p> : null}
+                    {props.error.msg.msg ? <Alert color="danger">{props.error.msg.msg}</Alert> : null}
                     <Label for="Username">Username</Label>
                     <Input className="loginInputs" onChange={props.handleInputChange} type="username" id="user" required />
                     <Label for="Password">Password</Label>

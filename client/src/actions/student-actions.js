@@ -5,10 +5,13 @@ import {
     ADD_STUDENT,
     ADD_STUDENT_FAIL,
     ADD_STUDENT_SUCCESS,
-    UPDATE_STUDENT_INFO,
-    UPDATE_STUDENT_INFO_SUCCESS,
-    UPDATE_STUDENT_INFO_FAIL,
-    VIEW_STUDENT
+    // UPDATE_STUDENT_INFO,
+    // UPDATE_STUDENT_INFO_SUCCESS,
+    // UPDATE_STUDENT_INFO_FAIL,
+    // VIEW_STUDENT,
+    GET_STUDENTS,
+    GET_STUDENTS_SUCCESS,
+    GET_STUDENTS_FAIL
 } from "./types";
 
 export const addStudent = data => (dispatch) => {
@@ -34,3 +37,21 @@ export const addStudent = data => (dispatch) => {
             });
         });
 };
+
+export const getStudents = () => (dispatch) => {
+    dispatch({ type: GET_STUDENTS })
+
+    axios.get('http://localhost:3001/api/student/all')
+        .then(res => {
+            dispatch({
+                type: GET_STUDENTS_SUCCESS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({
+                type: GET_STUDENTS_FAIL
+            });
+        });
+}
