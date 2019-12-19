@@ -71,15 +71,22 @@ export const deleteStudent = data => (dispatch) => {
 }
 
 export const updateStudentInfo = (id, data) => (dispatch) => {
-    console.log(data)
-    axios.put(`http://localhost:3001/api/student/update/${id}`, data)
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    dispatch({ type: UPDATE_STUDENT_INFO })
+    axios.put(`http://localhost:3001/api/student/update/${id}`, data, config)
         .then(res => {
             dispatch({
-                type: DELETE_STUDENT,
+                type: UPDATE_STUDENT_INFO_SUCCESS,
                 payload: res.data
             })
         })
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({
+                type: UPDATE_STUDENT_INFO_FAIL
+            })
         });
 }

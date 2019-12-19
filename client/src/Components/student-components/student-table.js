@@ -26,7 +26,7 @@ const StudentTable = (props) => {
                                     <EditStudentModal 
                                     id={student._id}
                                     handleInputChange={props.handleInputChange}
-                                    updateUserInfo={props.updateStudentInfo}
+                                    updateStudentInfo={props.updateStudentInfo}
                                     error={props.error}
                                     />
                                     <Button onClick={props.deleteStudent} id={student._id}>Delete</Button>

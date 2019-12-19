@@ -24,17 +24,16 @@ const EditStudentModal = (props) => {
             <Button onClick={togglemodal}>Edit</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}></ModalHeader>
-                <Form id="editForm" onSubmit={props.updateStudentInfo}>
+                <Form id="editForm" id={props.id} onSubmit={props.updateStudentInfo}>
                     {props.error.msg.msg ? <Alert color="danger">{props.error.msg.msg}</Alert> : null}
-                    {console.log(props)}
                     <Label for="firstName">First name</Label>
-                    <Input className="editInputs" onChange={props.handleInputChange} type={props.id} id="firstName" required />
+                    <Input className="editInputs" onChange={props.handleInputChange} id="firstName" required />
                     <Label for="lastName">Last name</Label>
-                    <Input className="editInputs" onChange={props.handleInputChange} type={props.id} id="lastName" required />
+                    <Input className="editInputs" onChange={props.handleInputChange} id="lastName" required />
                     <Label for="Birthday">Birthday</Label>
-                    <Input className="editInputs" onChange={props.handleInputChange} type={props.id} id="birthday" required />
+                    <Input className="editInputs" onChange={props.handleInputChange} id="birthday" required />
                     <FormGroup>
-                        <Button to="/" style={{ marginTop: 20 }} type="submit">Submit</Button>
+                        <Button to="/" style={{ marginTop: 20 }} id={props.id}>Submit</Button>
                     </FormGroup>
                 </Form>
             </Modal>

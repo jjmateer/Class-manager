@@ -37,10 +37,20 @@ router.put("/delete/:id", (req, res) => {
 })
 
 router.put("/update/:id", (req, res) => {
-    console.log('firing')
     console.log(req.body)
-    Student.findOneAndUpdate({ _id: req.params.id })
+    const { firstName, lastName, birthday } = req.body;
+    Student.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+            $set: {
+                firstName: firstName,
+                lastName: lastName,
+                birthday: birthday
+            }
+        }   
+    )
         .then(data => {
+            console.log(data)
             res.status(200).json({ msg: "Student info updated." })
         })
         .catch(() => {

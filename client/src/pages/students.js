@@ -24,7 +24,8 @@ class StudentSearch extends Component {
         clearErrors: PropTypes.func.isRequired,
         addStudent: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
-        deleteStudent: PropTypes.func.isRequired
+        deleteStudent: PropTypes.func.isRequired,
+        updateStudentInfo: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -49,14 +50,14 @@ class StudentSearch extends Component {
         this.props.getStudents();
     }
     updateStudentInfo = event => {
-        console.log(event)
+        console.log("firing")
         event.preventDefault();
         var updatedStudent = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             birthday: this.state.birthday
         };
-        this.props.updateStudentInfo(event.target.type, updatedStudent);
+        this.props.updateStudentInfo(event.target.id, updatedStudent);
         // this.props.getStudents();
     }
     render() {
@@ -92,5 +93,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent, getStudents, deleteStudent }
+    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo }
 )(StudentSearch);
