@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <>
           <Navigation handleInputChange={this.handleInputChange}
             loginSubmit={this.loginSubmit}
             clearErrors={this.props.clearErrors}
@@ -52,7 +52,7 @@ class App extends Component {
             <Route exact path="/students" component={StudentSearch} />
             {/* <Route component={ErrorC} /> */}
           </Switch>
-        </div>
+        </>
       </Router>
     );
   }

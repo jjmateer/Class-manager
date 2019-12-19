@@ -5,7 +5,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents } from "../actions/student-actions";
+import { addStudent, getStudents, deleteStudent } from "../actions/student-actions";
+import { Spinner } from "reactstrap"
 
 
 
@@ -22,11 +23,11 @@ class StudentSearch extends Component {
         loadUser: PropTypes.func.isRequired,
         clearErrors: PropTypes.func.isRequired,
         addStudent: PropTypes.func.isRequired,
-        getStudents: PropTypes.func.isRequired
+        getStudents: PropTypes.func.isRequired,
+        deleteStudent:PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
-        this.props.loadUser();
         this.props.getStudents();
     }
     handleInputChange = event => {
@@ -40,9 +41,14 @@ class StudentSearch extends Component {
             lastName: this.state.lastName,
             birthday: this.state.birthday
         };
-
         this.props.addStudent(newStudent);
+        window.location.reload();
+
     };
+    deleteStudent = event => {
+        this.props.deleteStudent(event.target.id);
+        window.location.reload();
+    }
     render() {
         return (
             <>
@@ -50,10 +56,14 @@ class StudentSearch extends Component {
                 <AddStudent
                     handleInputChange={this.handleInputChange}
                     handleFormSubmit={this.handleFormSubmit}
+                    student={this.props.student}
                 />
-                <StudentTable
-                    students={this.props.student.students}
-                />
+                {!this.props.student.isLoading ?
+                    <StudentTable
+                        students={this.props.student.students}
+                        deleteStudent={this.deleteStudent}
+                    />
+                    : <div style={{margin:"auto", width:50}}><Spinner type="grow" color="primary" /></div>}
             </>
         );
     }
@@ -69,5 +79,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent, getStudents }
+    { clearErrors, loadUser, addStudent, getStudents, deleteStudent }
 )(StudentSearch);

@@ -11,7 +11,8 @@ import {
     // VIEW_STUDENT,
     GET_STUDENTS,
     GET_STUDENTS_SUCCESS,
-    GET_STUDENTS_FAIL
+    GET_STUDENTS_FAIL,
+    DELETE_STUDENT
 } from "./types";
 
 export const addStudent = data => (dispatch) => {
@@ -53,5 +54,18 @@ export const getStudents = () => (dispatch) => {
             dispatch({
                 type: GET_STUDENTS_FAIL
             });
+        });
+}
+export const deleteStudent = data => (dispatch) => {
+
+    axios.put(`http://localhost:3001/api/student/delete/${data}`)
+        .then(res => {
+            dispatch({
+                type: DELETE_STUDENT,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
         });
 }

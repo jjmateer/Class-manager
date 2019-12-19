@@ -2,7 +2,6 @@ const Student = require("../../models/student");
 const router = require("express").Router();
 
 router.post("/new", (req, res) => {
-    console.log(req.body);
     const { firstName, lastName, birthday } = req.body;
     Student.findOne({ firstName: firstName, lastName: lastName })
         .then(student => {
@@ -14,7 +13,7 @@ router.post("/new", (req, res) => {
                     birthday: birthday,
                     completion: 0
                 }).then(data => {
-                    res.status(200).json(data)
+                    res.status(200).json({ data, msg: { msg: "Student added to database." } })
                 })
             } else {
                 res.status(400).json({ msg: "Student already exists." })
@@ -23,11 +22,18 @@ router.post("/new", (req, res) => {
 });
 
 router.get("/all", (req, res) => {
-    console.log(req.body);
-    Student.find({})
+    Student.find({}).sort( { lastName: 1 } )
         .then(data => {
             res.status(200).json({ students: data });
         })
+})
+
+router.put("/delete/:id", (req, res) => {
+    Student.findOneAndDelete({_id: req.params.id})
+    .then(res.status(200).json({msg:"Student removed from database."}))
+    .catch(err=> {
+        res.status(400).json(err);
+    })
 })
 
 module.exports = router;

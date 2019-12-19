@@ -27,6 +27,7 @@ const AddStudent = (props) => {
                     <ModalHeader toggle={togglemodalS}>New Student</ModalHeader>
                     <Form className="add-student-form" onSubmit={props.handleFormSubmit}>
                         {props.error.msg.msg ? <Alert color="danger">{props.error.msg.msg}</Alert> : null}
+                        {props.student.msg.msg ? <Alert color="success">{props.student.msg.msg}</Alert> : null}
                         <FormGroup>
                             <Label htmlFor="name">First name</Label>
                             <Input required onChange={props.handleInputChange} id="firstName" />

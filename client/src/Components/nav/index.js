@@ -31,7 +31,7 @@ const Navigation = (props) => {
     const togglenav = () => setIsOpen(!isOpen);
     return (
         <>
-            <Navbar className="navbar-right" color="light" light expand="md">
+            <Navbar color="light" light expand="md">
                 <NavbarBrand tag={Link} to="/">Class Manager</NavbarBrand>
                 <NavbarToggler onClick={togglenav} />
                 <Collapse isOpen={isOpen} navbar>
