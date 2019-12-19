@@ -1,5 +1,6 @@
 import React from "react";
 import { Table, ButtonGroup, Button } from "reactstrap";
+import EditStudentModal from "./edit-student-modal";
 import "./student.css";
 
 
@@ -22,7 +23,12 @@ const StudentTable = (props) => {
                             <td>{student.birthday}</td>
                             <td>
                                 <ButtonGroup>
-                                    <Button>Edit</Button>
+                                    <EditStudentModal 
+                                    id={student._id}
+                                    handleInputChange={props.handleInputChange}
+                                    updateUserInfo={props.updateStudentInfo}
+                                    error={props.error}
+                                    />
                                     <Button onClick={props.deleteStudent} id={student._id}>Delete</Button>
                                 </ButtonGroup>
                             </td>

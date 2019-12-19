@@ -11,3 +11,7 @@ tr th, tr td {
 td button {
     margin:auto;
 }
+
+#editForm {
+    padding:20px;
+}

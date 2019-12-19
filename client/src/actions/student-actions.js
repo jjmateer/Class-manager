@@ -5,9 +5,9 @@ import {
     ADD_STUDENT,
     ADD_STUDENT_FAIL,
     ADD_STUDENT_SUCCESS,
-    // UPDATE_STUDENT_INFO,
-    // UPDATE_STUDENT_INFO_SUCCESS,
-    // UPDATE_STUDENT_INFO_FAIL,
+    UPDATE_STUDENT_INFO,
+    UPDATE_STUDENT_INFO_SUCCESS,
+    UPDATE_STUDENT_INFO_FAIL,
     // VIEW_STUDENT,
     GET_STUDENTS,
     GET_STUDENTS_SUCCESS,
@@ -59,6 +59,20 @@ export const getStudents = () => (dispatch) => {
 export const deleteStudent = data => (dispatch) => {
 
     axios.put(`http://localhost:3001/api/student/delete/${data}`)
+        .then(res => {
+            dispatch({
+                type: DELETE_STUDENT,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
+}
+
+export const updateStudentInfo = (id, data) => (dispatch) => {
+    console.log(data)
+    axios.put(`http://localhost:3001/api/student/update/${id}`, data)
         .then(res => {
             dispatch({
                 type: DELETE_STUDENT,

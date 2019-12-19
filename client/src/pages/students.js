@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents, deleteStudent } from "../actions/student-actions";
+import { addStudent, getStudents, deleteStudent, updateStudentInfo } from "../actions/student-actions";
 import { Spinner } from "reactstrap"
 
 
@@ -24,7 +24,7 @@ class StudentSearch extends Component {
         clearErrors: PropTypes.func.isRequired,
         addStudent: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
-        deleteStudent:PropTypes.func.isRequired
+        deleteStudent: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -42,12 +42,22 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.addStudent(newStudent);
-        window.location.reload();
 
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
-        window.location.reload();
+        this.props.getStudents();
+    }
+    updateStudentInfo = event => {
+        console.log(event)
+        event.preventDefault();
+        var updatedStudent = {
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            birthday: this.state.birthday
+        };
+        this.props.updateStudentInfo(event.target.type, updatedStudent);
+        // this.props.getStudents();
     }
     render() {
         return (
@@ -62,8 +72,11 @@ class StudentSearch extends Component {
                     <StudentTable
                         students={this.props.student.students}
                         deleteStudent={this.deleteStudent}
+                        handleInputChange={this.handleInputChange}
+                        updateStudentInfo={this.updateStudentInfo}
+                        error={this.props.error}
                     />
-                    : <div style={{margin:"auto", width:50}}><Spinner type="grow" color="primary" /></div>}
+                    : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>}
             </>
         );
     }
