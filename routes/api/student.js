@@ -9,9 +9,8 @@ router.post("/new", (req, res) => {
                 Student.create({
                     firstName: firstName,
                     lastName: lastName,
-                    grade: null,
+                    grades: [],
                     birthday: birthday,
-                    completion: 0
                 }).then(data => {
                     res.status(200).json({ data, msg: { msg: "Student added to database." } })
                 })

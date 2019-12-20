@@ -22,22 +22,20 @@ const ViewSubject = (props) => {
     const { assignments } = props.subjectinfo
     return (
         <>
-            <Button color="success" onClick={togglemodal}>View</Button>
+            <Button color="info" onClick={togglemodal}>View</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
-                <ModalHeader toggle={togglemodal}>New subject</ModalHeader>
+                <ModalHeader toggle={togglemodal}>{props.subjectinfo.title}</ModalHeader>
                 <div className="table-responsive">
                     <Table className="table">
                         <thead>
                             <tr>
                                 <th>Assignment</th>
-                                <th>Grade</th>
                             </tr>
                             {console.log(assignments)}
                             {assignments.length ?
                                 assignments.map((subject) => {
                                     return <tr key={subject._id}>
                                         <td>{subject.title}</td>
-                                        <td>{subject.grade}</td>
                                     </tr>
                                 }) : null}
                         </thead>

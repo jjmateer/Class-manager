@@ -14,7 +14,6 @@ import {
 } from 'reactstrap';
 
 
-
 const CreateCirriculum = (props) => {
     const togglemodal = () => setModal(!modal);
     const [modal, setModal] = useState(false);
@@ -26,7 +25,7 @@ const CreateCirriculum = (props) => {
                 <Form style={{padding:20}} onSubmit={props.createCurriculum}>
                     <Label for="Title">Title</Label>
                     <Input onChange={props.handleInputChange} type="title" id="title" required />
-                        <Button style={{ marginTop: 20 }} type="submit" onClick={props.createCirriculum}>Submit</Button>
+                        <Button style={{ marginTop: 20 }} type="submit" onClick={togglemodal}>Submit</Button>
                 </Form>
                 <ModalFooter>
                 </ModalFooter>

@@ -113,10 +113,10 @@ export const editCurriculum = data => (dispatch) => {
         });
 };
 
-export const deleteSubject = id => (dispatch) => {
+export const deleteSubject = (id, title) => (dispatch) => {
     dispatch({ type: DELETE_SUBJECT })
 
-    axios.put(`http://localhost:3001/api/curriculum/delete/${id}`)
+    axios.put(`http://localhost:3001/api/curriculum/delete/${id}/${title}`)
         .then(res => {
             dispatch({
                 type: DELETE_SUBJECT_SUCCESS,

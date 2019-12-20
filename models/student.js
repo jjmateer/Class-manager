@@ -9,9 +9,9 @@ const studentSchema = new Schema({
         type: String,
         required: true
     },
-    assignments: {
-        type:Object,
-        required: false
+    grades: {
+        type:Array,
+        required: true
     },
     birthday: {
         type:String,

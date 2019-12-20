@@ -42,20 +42,18 @@ class Curriculum extends Component {
         event.preventDefault();
         this.props.createCurriculum(this.state.title);
         this.props.getSubjects();
-        this.forceUpdate()
     }
 
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
         this.props.getSubjects();
-        this.forceUpdate()
+        window.location.reload();
     }
 
     deleteSubject = event => {
         event.preventDefault();
-        this.props.deleteSubject(event.target.id)
-        this.props.getSubjects();
+        this.props.deleteSubject(event.target.id, event.target.value)
         window.location.reload();
     }
 
@@ -63,7 +61,7 @@ class Curriculum extends Component {
         const { subjects } = this.props.curriculum;
         return (
             <>
-                <h1 className="page-header">Curriculum</h1>
+                <h1 className="page-header">Subjects</h1>
                 <CreateCirriculum
                     createCurriculum={this.createCurriculum}
                     handleInputChange={this.handleInputChange}
@@ -85,7 +83,7 @@ class Curriculum extends Component {
                                         handleInputChange={this.handleInputChange}
                                         subjectinfo={subject}
                                     />
-                                    <Button id={subject._id} onClick={this.deleteSubject}>Delete</Button>
+                                    <Button color="danger"  id={subject._id} value={subject.title} onClick={this.deleteSubject}>Delete</Button>
                                 </ButtonGroup>
                             </CardBody>
                         </Card>

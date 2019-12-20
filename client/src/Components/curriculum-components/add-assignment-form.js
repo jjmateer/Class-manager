@@ -26,7 +26,7 @@ const AddAssignment = (props) => {
                 <Form style={{ padding: 20 }} id={props.title} onSubmit={props.addAssignment}>
                     <Label for="Title">Title</Label>
                     <Input onChange={props.handleInputChange} type="title" id="titleAdd" required />
-                    <Button style={{ marginTop: 20 }} id={props.title} onClick={props.addAssignment} type="submit">Submit</Button>
+                    <Button style={{ marginTop: 20 }} id={props.title} onClick={togglemodal} type="submit">Submit</Button>
                 </Form>
                 <ModalFooter>
                 </ModalFooter>

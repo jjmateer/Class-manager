@@ -3,7 +3,10 @@ import {
   Button,
   Modal,
   ModalHeader,
+  ModalFooter,
+  Table
 } from 'reactstrap';
+import './student.css';
 
 const ViewStudent = (props) => {
   const togglemodal = () => setModal(!modal);
@@ -13,9 +16,9 @@ const ViewStudent = (props) => {
       <Button color="info" id={props.id} onClick={togglemodal}>View</Button>
       <Modal isOpen={modal} toggle={togglemodal}>
         <ModalHeader toggle={togglemodal}>{props.student.firstName} {props.student.lastName}</ModalHeader>
-        <ul>Assignments
-          <li></li>
-        </ul>
+        <ModalHeader>Grades</ModalHeader>
+          
+         <ModalFooter/>
       </Modal>
     </>
   );
