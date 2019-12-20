@@ -12,7 +12,8 @@ import {
     GET_STUDENTS,
     GET_STUDENTS_SUCCESS,
     GET_STUDENTS_FAIL,
-    DELETE_STUDENT
+    DELETE_STUDENT,
+    VIEW_STUDENT
 } from "./types";
 
 export const addStudent = data => (dispatch) => {
@@ -62,6 +63,24 @@ export const deleteStudent = data => (dispatch) => {
         .then(res => {
             dispatch({
                 type: DELETE_STUDENT,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
+}
+
+export const viewStudent = id => (dispatch) => {
+    const config = {
+        header: {
+            "Content-Type": "application/json"
+        }
+    }
+    axios.get(`http://localhost:3001/api/student/view/${id}`, config)
+        .then(res => {
+            dispatch({
+                type: VIEW_STUDENT,
                 payload: res.data
             })
         })

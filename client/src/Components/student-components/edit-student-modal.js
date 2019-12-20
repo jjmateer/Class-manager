@@ -20,7 +20,7 @@ const EditStudentModal = (props) => {
     const [modal, setModal] = useState(false);
     return (
         <>
-            <Button color="info" onClick={togglemodal}>Edit</Button>
+            <Button color="warning" onClick={togglemodal}>Edit</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>Edit student info</ModalHeader>
                 <Form className="editForm" id={props.id} onSubmit={props.updateStudentInfo}>

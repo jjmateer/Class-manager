@@ -32,7 +32,7 @@ router.put("/delete/:id", (req, res) => {
     Student.findOneAndDelete({ _id: req.params.id })
         .then(res.status(200).json({ msg: "Student removed from database." }))
         .catch(err => {
-            res.status(400).json({msg: "Cannot delete student from database."});
+            res.status(400).json({ msg: "Cannot delete student from database." });
         })
 })
 
@@ -46,13 +46,23 @@ router.put("/update/:id", (req, res) => {
                 lastName: lastName,
                 birthday: birthday
             }
-        }   
+        }
     )
         .then(data => {
             res.status(200).json(data)
         })
         .catch(() => {
             res.status(400).json({ msg: "Student info update failed." });
+        })
+})
+
+router.get("/view/:id", (req, res) => {
+    Student.findOne({ _id: req.params.id })
+        .then(data => {
+            res.status(200).json({view_student: data});
+        })
+        .catch(() => {
+            res.status(400).json({ msg: "Could not view student." })
         })
 })
 

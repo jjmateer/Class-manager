@@ -9,6 +9,9 @@ import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
 import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
+import PrivateRoute from "./Components/routing-components/private-route";
+import PublicRoute from "./Components/routing-components/public-route";
+import ViewStudent from "./Components/student-components/view-student";
 
 class App extends Component {
   state = {
@@ -43,13 +46,15 @@ class App extends Component {
           <Navigation handleInputChange={this.handleInputChange}
             loginSubmit={this.loginSubmit}
             clearErrors={this.props.clearErrors}
-            isAuthenticated={this.props.isAuthenticate}
+            user={this.props.auth.user}
+            isAuthenticated={this.props.isAuthenticated}
             isLoading={this.props.auth.isLoading}
           />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/students" component={StudentSearch} />
+            <PublicRoute exact path="/" component={Home} />
+            <PublicRoute exact path="/register" component={Register} />
+            <PrivateRoute exact path="/students" component={StudentSearch} />
+            <PrivateRoute exact path="/view-student" component={ViewStudent}/>
             {/* <Route component={ErrorC} /> */}
           </Switch>
         </>

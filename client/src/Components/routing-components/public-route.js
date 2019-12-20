@@ -8,7 +8,7 @@ const PublicRoute = ({ component: Component, auth, ...rest }) => (
         {...rest}
         render={props =>
             auth.isAuthenticated === true ? (
-                <Redirect to="/" />
+                <Redirect to="/students" />
             ) : (
                     <Component {...props} />
                 )

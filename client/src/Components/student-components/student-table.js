@@ -1,21 +1,14 @@
 import React, { useState } from "react";
 import {
-
-    FormGroup,
     Button,
     ButtonGroup,
-    Table,
-    Modal,
-    ModalHeader,
-    Form,
-    Label,
-    Input,
-    // Spinner,
-    Alert
+    Table
 } from 'reactstrap';
+import { Link } from "react-router-dom";
 import EditStudentModal from "./edit-student-modal";
 import "./student.css";
 import VerifyDeleteModal from "./verify-delete-modal";
+import ViewStudent from "./view-student";
 
 
 
@@ -30,6 +23,7 @@ const StudentTable = (props) => {
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Birthday</th>
+                        <th>Grade</th>
                         <th>Options</th>
                     </tr>
                     {props.students.map((student) => (
@@ -37,8 +31,10 @@ const StudentTable = (props) => {
                             <td>{student.lastName}</td>
                             <td>{student.firstName}</td>
                             <td>{student.birthday}</td>
+                            <td>{student.grade}</td>
                             <td>
                                 <ButtonGroup>
+                                    <Button color="info" tag={Link} to="/view-student" id={student._id} onClick={props.viewStudent}>View</Button>
                                     <EditStudentModal
                                         id={student._id}
                                         handleInputChange={props.handleInputChange}
@@ -51,7 +47,6 @@ const StudentTable = (props) => {
                                         deleteStudent={props.deleteStudent}
                                         error={props.error}
                                     />
-
                                 </ButtonGroup>
                             </td>
                         </tr>

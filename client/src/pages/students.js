@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents, deleteStudent, updateStudentInfo } from "../actions/student-actions";
+import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent } from "../actions/student-actions";
 import { Spinner } from "reactstrap"
 
 
@@ -25,7 +25,8 @@ class StudentSearch extends Component {
         addStudent: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
         deleteStudent: PropTypes.func.isRequired,
-        updateStudentInfo: PropTypes.func.isRequired
+        updateStudentInfo: PropTypes.func.isRequired,
+        viewStudent: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -43,11 +44,15 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.addStudent(newStudent);
-
+        this.props.getStudents();
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
         window.location.reload();
+    }
+    viewStudent = event => {
+        event.preventDefault();
+        this.props.viewStudent(event.target.id);
     }
     updateStudentInfo = event => {
         event.preventDefault();
@@ -57,7 +62,7 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.updateStudentInfo(event.target.id, updatedStudent)
-        // this.props.getStudents();
+        window.location.reload();
     }
     render() {
         return (
@@ -74,6 +79,7 @@ class StudentSearch extends Component {
                         deleteStudent={this.deleteStudent}
                         handleInputChange={this.handleInputChange}
                         updateStudentInfo={this.updateStudentInfo}
+                        viewStudent={this.viewStudent}
                         error={this.props.error}
                     />
                     : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>}
@@ -92,5 +98,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo }
+    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent }
 )(StudentSearch);

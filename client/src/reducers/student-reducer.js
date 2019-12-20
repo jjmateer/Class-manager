@@ -15,7 +15,7 @@ const initialState = {
     msg: {},
     isLoading: false,
     students: [],
-    view_student: null
+    view_student: {}
 };
 
 export default function (state = initialState, action) {
