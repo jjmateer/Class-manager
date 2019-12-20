@@ -9,10 +9,6 @@ const studentSchema = new Schema({
         type: String,
         required: true
     },
-    grade: {
-        type:Number,
-        required: false
-    },
     assignments: {
         type:Object,
         required: false

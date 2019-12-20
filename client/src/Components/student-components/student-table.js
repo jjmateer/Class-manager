@@ -21,7 +21,6 @@ const StudentTable = (props) => {
                         <th>Last Name</th>
                         <th>First Name</th>
                         <th>Birthday</th>
-                        <th>Grade</th>
                         <th>Options</th>
                     </tr>
                     {props.students.map((student) => (
@@ -29,7 +28,6 @@ const StudentTable = (props) => {
                             <td>{student.lastName}</td>
                             <td>{student.firstName}</td>
                             <td>{student.birthday}</td>
-                            <td>{student.grade}</td>
                             <td>
                                 <ButtonGroup>
                                     <ViewStudent

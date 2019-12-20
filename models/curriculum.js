@@ -10,7 +10,7 @@ const curriculumSchema = new Schema({
             type: String,
             required: true
         },
-        grading: {
+        grade: {
             type: String,
         }
     }],

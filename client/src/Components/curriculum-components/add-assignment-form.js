@@ -15,18 +15,18 @@ import {
 
 
 
-const CreateCirriculum = (props) => {
+const AddAssignment = (props) => {
     const togglemodal = () => setModal(!modal);
     const [modal, setModal] = useState(false);
     return (
         <>
-            <Button color="success" style={{ marginRight: "2vw", marginBottom: "2vw" }} onClick={togglemodal}>Create new subject</Button>
+            <Button color="success" onClick={togglemodal}>Add Assignment</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
-                <ModalHeader toggle={togglemodal}>New subject</ModalHeader>
+                <ModalHeader toggle={togglemodal}>New assignment</ModalHeader>
                 <Form style={{padding:20}} onSubmit={props.createCurriculum}>
                     <Label for="Title">Title</Label>
-                    <Input onChange={props.handleInputChange} type="title" id="title" required />
-                        <Button style={{ marginTop: 20 }} type="submit" onClick={props.createCirriculum}>Submit</Button>
+                    <Input onChange={props.handleInputChange} type="title" id="titleAdd" required />
+                        <Button style={{ marginTop: 20 }} type="submit" onClick={props.AddAssignment}>Submit</Button>
                 </Form>
                 <ModalFooter>
                 </ModalFooter>
@@ -35,4 +35,4 @@ const CreateCirriculum = (props) => {
     );
 }
 
-export default CreateCirriculum;
+export default AddAssignment;
