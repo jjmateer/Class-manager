@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import {
-    Button,
     ButtonGroup,
     Table
 } from 'reactstrap';
-import { Link } from "react-router-dom";
 import EditStudentModal from "./edit-student-modal";
 import "./student.css";
 import VerifyDeleteModal from "./verify-delete-modal";
@@ -34,7 +32,10 @@ const StudentTable = (props) => {
                             <td>{student.grade}</td>
                             <td>
                                 <ButtonGroup>
-                                    <Button color="info" tag={Link} to="/view-student" id={student._id} onClick={props.viewStudent}>View</Button>
+                                    <ViewStudent
+                                        viewStudent={props.viewstudent}
+                                        student={student}
+                                    />
                                     <EditStudentModal
                                         id={student._id}
                                         handleInputChange={props.handleInputChange}

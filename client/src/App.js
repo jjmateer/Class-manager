@@ -11,7 +11,7 @@ import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
 import PrivateRoute from "./Components/routing-components/private-route";
 import PublicRoute from "./Components/routing-components/public-route";
-import ViewStudent from "./Components/student-components/view-student";
+import Curriculum from "./pages/curriculum";
 
 class App extends Component {
   state = {
@@ -54,7 +54,7 @@ class App extends Component {
             <PublicRoute exact path="/" component={Home} />
             <PublicRoute exact path="/register" component={Register} />
             <PrivateRoute exact path="/students" component={StudentSearch} />
-            <PrivateRoute exact path="/view-student" component={ViewStudent}/>
+            <PrivateRoute exact path="/curriculum" component={Curriculum} />
             {/* <Route component={ErrorC} /> */}
           </Switch>
         </>

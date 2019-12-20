@@ -32,7 +32,7 @@ const EditStudentModal = (props) => {
                     <Label for="Birthday">Birthday</Label>
                     <Input className="editInputs" onChange={props.handleInputChange} id="birthday" required />
                     <FormGroup>
-                        <Button to="/" color="info" style={{ marginTop: 20 }} id={props.id}>Submit</Button>
+                        <Button to="/" color="warning" style={{ marginTop: 20 }} id={props.id}>Submit</Button>
                     </FormGroup>
                 </Form>
             </Modal>

@@ -13,13 +13,13 @@ const studentSchema = new Schema({
         type:Number,
         required: false
     },
+    assignments: {
+        type:Object,
+        required: false
+    },
     birthday: {
         type:String,
         required: true
-    },
-    completion: {
-        type: Number,
-        required:true
     },
     studentCreated: {
         type: Date,

@@ -44,6 +44,7 @@ const Navigation = (props) => {
                         <Nav className="ml-auto" navbar>
                             {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Alert} color="primary" style={{textAlign:"center"}}>{props.user.name}</NavLink>}
                             {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/students">Students</NavLink>}
+                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/curriculum">Curriculum</NavLink>}
                             {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/" onClick={props.logout}>Logout</NavLink>}
                         </Nav>
                     }
