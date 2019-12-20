@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import { connect } from "react-redux";
 import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
+import { getSubjects } from "./actions/curriculum-actions";
 import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
 import PrivateRoute from "./Components/routing-components/private-route";
@@ -22,10 +23,12 @@ class App extends Component {
     isAuthenticated: PropTypes.bool,
     error: PropTypes.object.isRequired,
     loadUser: PropTypes.func.isRequired,
-    clearErrors: PropTypes.func.isRequired
+    clearErrors: PropTypes.func.isRequired,
+    getSubjects:PropTypes.func.isRequired
   }
   componentDidMount() {
     this.props.loadUser();
+    this.props.getSubjects();
   }
   handleInputChange = event => {
     this.setState({ [event.target.id]: event.target.value });
@@ -68,5 +71,5 @@ const mapStateToProps = state => ({
   error: state.error
 })
 export default connect(mapStateToProps,
-  { clearErrors, loginAdmin, loadUser }
+  { clearErrors, loginAdmin, loadUser, getSubjects }
 )(App);

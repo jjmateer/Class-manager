@@ -43,7 +43,6 @@ export default function (state = inititalState, action) {
             return {
                 ...state,
                 isLoading: false,
-                subjects: null,
                 msg: action.payload
             }
         case EDIT_CURRICULUM_SUCCESS:

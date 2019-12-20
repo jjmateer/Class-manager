@@ -6,17 +6,18 @@ import { loadUser } from "../actions/auth-actions";
 import { createCurriculum, getSubjects, addAssignment, deleteSubject } from "../actions/curriculum-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    Card, CardBody,
+    CardTitle, Button, ButtonGroup
 } from 'reactstrap';
 import CreateCirriculum from "../Components/curriculum-components/create-curriculum-form";
+import ViewSubject from "../Components/curriculum-components/view-subject-modal";
 
 
 
 class Curriculum extends Component {
     state = {
         title: "",
-        titleAdd: ""
+        titleAdd: "",
     };
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -41,18 +42,21 @@ class Curriculum extends Component {
         event.preventDefault();
         this.props.createCurriculum(this.state.title);
         this.props.getSubjects();
+        this.forceUpdate()
     }
 
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
         this.props.getSubjects();
+        this.forceUpdate()
     }
 
     deleteSubject = event => {
         event.preventDefault();
         this.props.deleteSubject(event.target.id)
         this.props.getSubjects();
+        window.location.reload();
     }
 
     render() {
@@ -65,19 +69,24 @@ class Curriculum extends Component {
                     handleInputChange={this.handleInputChange}
                     error={this.props.error}
                 />
-                {subjects.length >= 1 ?
+                {subjects.length ?
 
                     subjects.map((subject) => (
                         <Card key={subject._id}>
                             <CardBody>
                                 <CardTitle>{subject.title}</CardTitle>
-                                <Button id={subject._id}>View</Button>
-                                <AddAssignment
-                                    title={subject.title}
-                                    addAssignment={this.addAssignment}
-                                    handleInputChange={this.handleInputChange}
-                                />
-                                <Button id={subject._id} onClick={this.deleteSubject}>Delete</Button>
+                                <ButtonGroup style={{float:"right"}}>
+                                    <ViewSubject
+                                        subjectinfo={subject}
+                                    />
+                                    <AddAssignment
+                                        title={subject.title}
+                                        addAssignment={this.addAssignment}
+                                        handleInputChange={this.handleInputChange}
+                                        subjectinfo={subject}
+                                    />
+                                    <Button id={subject._id} onClick={this.deleteSubject}>Delete</Button>
+                                </ButtonGroup>
                             </CardBody>
                         </Card>
                     ))
