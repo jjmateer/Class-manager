@@ -21,7 +21,8 @@ if (process.env.NODE_ENV === "production") {
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -31,12 +32,12 @@ db.once("open", function callback() {
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
   });
 } else {
   app.use(express.static(path.join(__dirname, "/client/public")));
-  app.get("*", function(req, res) {
+  app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/public/index.html"));
   });
 }

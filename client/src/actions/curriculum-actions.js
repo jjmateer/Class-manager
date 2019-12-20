@@ -5,8 +5,28 @@ import {
     VIEW_CURRICULUM,
     EDIT_CURRICULUM,
     EDIT_CURRICULUM_SUCCESS,
-    EDIT_CURRICULUM_FAIL
+    EDIT_CURRICULUM_FAIL,
+    CREATE_CURRICULUM,
+    CREATE_CURRICULUM_SUCCESS,
+    CREATE_CURRICULUM_FAIL
 } from "./types";
+
+export const createCurriculum = title => (dispatch) => {
+    console.log(title);
+    dispatch({ type: CREATE_CURRICULUM })
+
+    axios.post(`http://localhost:3001/api/curriculum/new/${title}`)
+        .then(res => {
+            dispatch({
+                type: CREATE_CURRICULUM_SUCCESS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+            dispatch({ type: CREATE_CURRICULUM_FAIL })
+        })
+}
 
 export const viewCurriculum = () => (dispatch) => {
     const config = {

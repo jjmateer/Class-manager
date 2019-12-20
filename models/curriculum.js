@@ -1,11 +1,20 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const curriculumSchema = new Schema({
-    assignments: {
-        type: Object,
+    title: {
+        type: String,
         required: true
     },
-    studentCreated: {
+    assignments: [{
+        title: {
+            type: String,
+            required: true
+        },
+        grading: {
+            type: String,
+        }
+    }],
+    curriculumCreated: {
         type: Date,
         default: Date.now
     }
