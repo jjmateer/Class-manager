@@ -5,11 +5,10 @@ import {
     Button,
     Modal,
     ModalHeader,
-    ModalFooter,
     Form,
     Label,
     Input,
-    Spinner,
+    // Spinner,
     Alert
 } from 'reactstrap';
 import "./student.css";
@@ -21,10 +20,10 @@ const EditStudentModal = (props) => {
     const [modal, setModal] = useState(false);
     return (
         <>
-            <Button onClick={togglemodal}>Edit</Button>
+            <Button color="info" onClick={togglemodal}>Edit</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
-                <ModalHeader toggle={togglemodal}></ModalHeader>
-                <Form id="editForm" id={props.id} onSubmit={props.updateStudentInfo}>
+                <ModalHeader toggle={togglemodal}>Edit student info</ModalHeader>
+                <Form className="editForm" id={props.id} onSubmit={props.updateStudentInfo}>
                     {props.error.msg.msg ? <Alert color="danger">{props.error.msg.msg}</Alert> : null}
                     <Label for="firstName">First name</Label>
                     <Input className="editInputs" onChange={props.handleInputChange} id="firstName" required />
@@ -33,7 +32,7 @@ const EditStudentModal = (props) => {
                     <Label for="Birthday">Birthday</Label>
                     <Input className="editInputs" onChange={props.handleInputChange} id="birthday" required />
                     <FormGroup>
-                        <Button to="/" style={{ marginTop: 20 }} id={props.id}>Submit</Button>
+                        <Button to="/" color="info" style={{ marginTop: 20 }} id={props.id}>Submit</Button>
                     </FormGroup>
                 </Form>
             </Modal>

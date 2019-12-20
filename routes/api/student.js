@@ -32,12 +32,11 @@ router.put("/delete/:id", (req, res) => {
     Student.findOneAndDelete({ _id: req.params.id })
         .then(res.status(200).json({ msg: "Student removed from database." }))
         .catch(err => {
-            res.status(400).json(err);
+            res.status(400).json({msg: "Cannot delete student from database."});
         })
 })
 
 router.put("/update/:id", (req, res) => {
-    console.log(req.body)
     const { firstName, lastName, birthday } = req.body;
     Student.findOneAndUpdate(
         { _id: req.params.id },
@@ -50,8 +49,7 @@ router.put("/update/:id", (req, res) => {
         }   
     )
         .then(data => {
-            console.log(data)
-            res.status(200).json({ msg: "Student info updated." })
+            res.status(200).json(data)
         })
         .catch(() => {
             res.status(400).json({ msg: "Student info update failed." });

@@ -1,11 +1,27 @@
-import React from "react";
-import { Table, ButtonGroup, Button } from "reactstrap";
+import React, { useState } from "react";
+import {
+
+    FormGroup,
+    Button,
+    ButtonGroup,
+    Table,
+    Modal,
+    ModalHeader,
+    Form,
+    Label,
+    Input,
+    // Spinner,
+    Alert
+} from 'reactstrap';
 import EditStudentModal from "./edit-student-modal";
 import "./student.css";
+import VerifyDeleteModal from "./verify-delete-modal";
 
 
 
 const StudentTable = (props) => {
+    const togglemodal = () => setModal(!modal);
+    const [modal, setModal] = useState(false);
     return (
         <div className="table-responsive">
             <Table className="table">
@@ -23,13 +39,19 @@ const StudentTable = (props) => {
                             <td>{student.birthday}</td>
                             <td>
                                 <ButtonGroup>
-                                    <EditStudentModal 
-                                    id={student._id}
-                                    handleInputChange={props.handleInputChange}
-                                    updateStudentInfo={props.updateStudentInfo}
-                                    error={props.error}
+                                    <EditStudentModal
+                                        id={student._id}
+                                        handleInputChange={props.handleInputChange}
+                                        updateStudentInfo={props.updateStudentInfo}
+                                        error={props.error}
                                     />
-                                    <Button onClick={props.deleteStudent} id={student._id}>Delete</Button>
+                                    <VerifyDeleteModal
+                                        id={student._id}
+                                        handleInputChange={props.handleInputChange}
+                                        deleteStudent={props.deleteStudent}
+                                        error={props.error}
+                                    />
+
                                 </ButtonGroup>
                             </td>
                         </tr>

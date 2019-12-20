@@ -47,17 +47,16 @@ class StudentSearch extends Component {
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
-        this.props.getStudents();
+        window.location.reload();
     }
     updateStudentInfo = event => {
-        console.log("firing")
         event.preventDefault();
         var updatedStudent = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             birthday: this.state.birthday
         };
-        this.props.updateStudentInfo(event.target.id, updatedStudent);
+        this.props.updateStudentInfo(event.target.id, updatedStudent)
         // this.props.getStudents();
     }
     render() {

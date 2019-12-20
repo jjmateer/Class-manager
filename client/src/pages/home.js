@@ -23,7 +23,7 @@ class Home extends Component {
                 <Jumbotron><h1 className="display-3">Hello, {this.props.user ? this.props.user.name : null}</h1>
                 <hr className="my-10" />
                     <Button tag={Link} to="/students">View Students</Button>
-                    <Button tag={Link}>Edit login info</Button>
+                    <Button tag={Link} to="/students">Edit login info</Button>
                 </Jumbotron>
                 <div className="home-menu">
 

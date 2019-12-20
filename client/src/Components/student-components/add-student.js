@@ -21,7 +21,7 @@ const AddStudent = (props) => {
     const [modal, setModal] = useState(false);
     return (
         <>
-            <Button style={{ marginRight: "2vw", marginBottom: "2vw", float: "right" }} onClick={togglemodalS}>Add New Student</Button>
+            <Button color="success" style={{ marginRight: "2vw", marginBottom: "2vw", float: "right" }} onClick={togglemodalS}>Add New Student</Button>
             <div className="add-student-form-wrap">
                 <Modal isOpen={modal} toggle={togglemodalS}>
                     <ModalHeader toggle={togglemodalS}>New Student</ModalHeader>
@@ -41,7 +41,7 @@ const AddStudent = (props) => {
                             <Input required onChange={props.handleInputChange} id="birthday" placeholder="DD/MM/YYYY" />
                         </FormGroup>
                         <FormGroup>
-                            <Button className="register-submit-btn" type="submit" >Submit</Button>
+                            <Button  color="success" className="register-submit-btn" type="submit" >Submit</Button>
                         </FormGroup>
                     </Form>
                 </Modal>
