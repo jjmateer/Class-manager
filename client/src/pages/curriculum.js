@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { createCurriculum, getSubjects, addAssignment } from "../actions/curriculum-actions";
+import { createCurriculum, getSubjects, addAssignment, deleteSubject } from "../actions/curriculum-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
     Card, CardImg, CardText, CardBody,
@@ -26,7 +26,8 @@ class Curriculum extends Component {
         createCurriculum: PropTypes.func.isRequired,
         getSubjects: PropTypes.func.isRequired,
         curriculum: PropTypes.object.isRequired,
-        addAssignment: PropTypes.func.isRequired
+        addAssignment: PropTypes.func.isRequired,
+        deleteSubject: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -45,6 +46,13 @@ class Curriculum extends Component {
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
+        this.props.getSubjects();
+    }
+
+    deleteSubject = event => {
+        event.preventDefault();
+        this.props.deleteSubject(event.target.id)
+        this.props.getSubjects();
     }
 
     render() {
@@ -57,7 +65,7 @@ class Curriculum extends Component {
                     handleInputChange={this.handleInputChange}
                     error={this.props.error}
                 />
-                {subjects.length >= 1 || subjects ?
+                {subjects.length >= 1 ?
 
                     subjects.map((subject) => (
                         <Card key={subject._id}>
@@ -69,7 +77,7 @@ class Curriculum extends Component {
                                     addAssignment={this.addAssignment}
                                     handleInputChange={this.handleInputChange}
                                 />
-                                <Button id={subject._id}>Delete</Button>
+                                <Button id={subject._id} onClick={this.deleteSubject}>Delete</Button>
                             </CardBody>
                         </Card>
                     ))
@@ -91,5 +99,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment }
+    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject }
 )(Curriculum);

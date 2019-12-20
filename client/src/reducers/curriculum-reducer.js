@@ -8,7 +8,10 @@ import {
     CREATE_CURRICULUM_FAIL,
     GET_SUBJECTS,
     GET_SUBJECTS_FAIL,
-    GET_SUBJECTS_SUCCESS
+    GET_SUBJECTS_SUCCESS,
+    DELETE_SUBJECT,
+    DELETE_SUBJECT_FAIL,
+    DELETE_SUBJECT_SUCCESS
 } from "../actions/types";
 
 const inititalState = {
@@ -28,6 +31,7 @@ export default function (state = inititalState, action) {
         case EDIT_CURRICULUM:
         case CREATE_CURRICULUM:
         case GET_SUBJECTS:
+        case DELETE_SUBJECT:
             return {
                 ...state,
                 isLoading: true
@@ -35,6 +39,7 @@ export default function (state = inititalState, action) {
         case EDIT_CURRICULUM_FAIL:
         case CREATE_CURRICULUM_FAIL:
         case GET_SUBJECTS_FAIL:
+        case DELETE_SUBJECT_FAIL:
             return {
                 ...state,
                 isLoading: false,
@@ -44,6 +49,7 @@ export default function (state = inititalState, action) {
         case EDIT_CURRICULUM_SUCCESS:
         case CREATE_CURRICULUM_SUCCESS:
         case GET_SUBJECTS_SUCCESS:
+        case DELETE_SUBJECT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,

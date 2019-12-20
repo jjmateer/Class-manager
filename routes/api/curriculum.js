@@ -43,7 +43,6 @@ router.post("/edit", (req, res) => {
 })
 
 router.put("/add-assignment/:title", (req, res) => {
-    console.log(req.params.title)
     Curriculum.findOneAndUpdate(
         { title: req.params.title },
         {
@@ -56,10 +55,23 @@ router.put("/add-assignment/:title", (req, res) => {
         }
     )
         .then(data => {
-
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            res.status(400).json({ msg: err })
         })
 })
-
+router.put("/delete/:id", (req, res) => {
+    Curriculum.deleteOne(
+        { _id: req.params.id }
+    )
+        .then(data => {
+            res.status(200).json(data)
+        })
+        .catch(err => {
+            res.status(400).json({ msg: err })
+        })
+})
 
 
 module.exports = router;
