@@ -33,7 +33,6 @@ export const getSubjects = () => (dispatch) => {
 }
 
 export const createCurriculum = title => (dispatch) => {
-    console.log(title);
     dispatch({ type: CREATE_CURRICULUM })
 
     axios.post(`http://localhost:3001/api/curriculum/new/${title}`)
@@ -49,10 +48,16 @@ export const createCurriculum = title => (dispatch) => {
 }
 
 export const addAssignment = (title, data) => (dispatch) => {
-
+    console.log(title)
+    const dataToSend = { data: data }
     dispatch({ type: ADD_ASSIGNMENT })
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
 
-    axios.post(`http://localhost:3001/api/curriculum/add-assignment/:title`, data)
+    axios.put(`http://localhost:3001/api/curriculum/add-assignment/${title}`, dataToSend, config)
         .then(res => {
             dispatch({
                 type: ADD_ASSIGNMENT_SUCCESS,

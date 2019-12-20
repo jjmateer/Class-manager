@@ -42,6 +42,24 @@ router.post("/edit", (req, res) => {
         })
 })
 
+router.put("/add-assignment/:title", (req, res) => {
+    console.log(req.params.title)
+    Curriculum.findOneAndUpdate(
+        { title: req.params.title },
+        {
+            $push: {
+                assignments: {
+                    title: req.body.data,
+                    grade: null
+                }
+            }
+        }
+    )
+        .then(data => {
+
+        })
+})
+
 
 
 module.exports = router;

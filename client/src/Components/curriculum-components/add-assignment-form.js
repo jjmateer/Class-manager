@@ -23,10 +23,10 @@ const AddAssignment = (props) => {
             <Button color="success" onClick={togglemodal}>Add Assignment</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>New assignment</ModalHeader>
-                <Form style={{padding:20}} onSubmit={props.createCurriculum}>
+                <Form style={{ padding: 20 }} id={props.title} onSubmit={props.addAssignment}>
                     <Label for="Title">Title</Label>
                     <Input onChange={props.handleInputChange} type="title" id="titleAdd" required />
-                        <Button style={{ marginTop: 20 }} type="submit" onClick={props.AddAssignment}>Submit</Button>
+                    <Button style={{ marginTop: 20 }} id={props.title} onClick={props.addAssignment} type="submit">Submit</Button>
                 </Form>
                 <ModalFooter>
                 </ModalFooter>

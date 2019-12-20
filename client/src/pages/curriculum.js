@@ -44,12 +44,11 @@ class Curriculum extends Component {
 
     addAssignment = event => {
         event.preventDefault();
-        this.props.addAssignment(this.state.titleAdd)
+        this.props.addAssignment(event.target.id, this.state.titleAdd)
     }
 
     render() {
         const { subjects } = this.props.curriculum;
-        console.log(subjects)
         return (
             <>
                 <h1 className="page-header">Curriculum</h1>
@@ -58,7 +57,7 @@ class Curriculum extends Component {
                     handleInputChange={this.handleInputChange}
                     error={this.props.error}
                 />
-                {subjects.length >= 1 ?
+                {subjects.length >= 1 || subjects ?
 
                     subjects.map((subject) => (
                         <Card key={subject._id}>
@@ -66,7 +65,9 @@ class Curriculum extends Component {
                                 <CardTitle>{subject.title}</CardTitle>
                                 <Button id={subject._id}>View</Button>
                                 <AddAssignment
-                                addAssignment={this.props.addAssignment}
+                                    title={subject.title}
+                                    addAssignment={this.addAssignment}
+                                    handleInputChange={this.handleInputChange}
                                 />
                                 <Button id={subject._id}>Delete</Button>
                             </CardBody>
