@@ -7,17 +7,18 @@ import { createCurriculum, getSubjects, addAssignment, deleteSubject } from "../
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
     Card, CardBody,
-    CardTitle, Button, ButtonGroup
+    CardTitle, Button, ButtonGroup, Spinner
 } from 'reactstrap';
 import CreateCirriculum from "../Components/curriculum-components/create-curriculum-form";
 import ViewSubject from "../Components/curriculum-components/view-subject-modal";
+import VerifyDeleteModal from "../Components/curriculum-components/verify-delete-modal";
 
 
 
 class Curriculum extends Component {
     state = {
         title: "",
-        titleAdd: "",
+        titleAdd: ""
     };
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -30,8 +31,11 @@ class Curriculum extends Component {
         addAssignment: PropTypes.func.isRequired,
         deleteSubject: PropTypes.func.isRequired
     }
-    componentDidMount = () => {
+    componentWillMount = () => {
         this.props.clearErrors();
+        this.props.getSubjects();
+    }
+    componentWillUnmount = () => {
         this.props.getSubjects();
     }
     handleInputChange = event => {
@@ -48,13 +52,12 @@ class Curriculum extends Component {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
         this.props.getSubjects();
-        window.location.reload();
     }
 
     deleteSubject = event => {
         event.preventDefault();
         this.props.deleteSubject(event.target.id, event.target.value)
-        window.location.reload();
+        this.props.getSubjects();
     }
 
     render() {
@@ -73,9 +76,10 @@ class Curriculum extends Component {
                         <Card key={subject._id}>
                             <CardBody>
                                 <CardTitle>{subject.title}</CardTitle>
-                                <ButtonGroup style={{float:"right"}}>
+                                <ButtonGroup style={{ float: "right" }}>
                                     <ViewSubject
                                         subjectinfo={subject}
+                                        getSubjects={this.props.getSubjects}
                                     />
                                     <AddAssignment
                                         title={subject.title}
@@ -83,13 +87,16 @@ class Curriculum extends Component {
                                         handleInputChange={this.handleInputChange}
                                         subjectinfo={subject}
                                     />
-                                    <Button color="danger"  id={subject._id} value={subject.title} onClick={this.deleteSubject}>Delete</Button>
+                                    <VerifyDeleteModal
+                                        subject={subject}
+                                        deleteSubject={this.deleteSubject}
+                                    />
                                 </ButtonGroup>
                             </CardBody>
                         </Card>
                     ))
 
-                    : null}
+                    : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>}
             </>
         );
     }

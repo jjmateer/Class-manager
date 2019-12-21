@@ -46,13 +46,18 @@ export default function (state = inititalState, action) {
                 msg: action.payload
             }
         case EDIT_CURRICULUM_SUCCESS:
-        case CREATE_CURRICULUM_SUCCESS:
         case GET_SUBJECTS_SUCCESS:
-        case DELETE_SUBJECT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
                 subjects: action.payload
+            }
+        case DELETE_SUBJECT_SUCCESS:
+        case CREATE_CURRICULUM_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                msg: action.payload
             }
         default:
             return state;

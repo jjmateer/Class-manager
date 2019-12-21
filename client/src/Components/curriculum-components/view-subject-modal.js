@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import {
     FormGroup,
@@ -31,7 +31,6 @@ const ViewSubject = (props) => {
                             <tr>
                                 <th>Assignment</th>
                             </tr>
-                            {console.log(assignments)}
                             {assignments.length ?
                                 assignments.map((subject) => {
                                     return <tr key={subject._id}>

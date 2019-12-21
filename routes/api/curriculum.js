@@ -13,8 +13,8 @@ router.post("/new/:title", (req, res) => {
                 {
                     $push: {
                         grades: {
-                                title: req.params.title,
-                                assignments: []
+                            title: req.params.title,
+                            assignments: []
                         }
                     }
                 }
@@ -26,16 +26,6 @@ router.post("/new/:title", (req, res) => {
 })
 router.get("/get-all", (req, res) => {
     Curriculum.find({})
-        .then(data => {
-            res.status(200).json(data)
-        })
-        .catch(err => {
-            res.status(400).json({ msg: err })
-        })
-})
-
-router.post("/edit", (req, res) => {
-    Curriculum.findOneAndUpdate({})
         .then(data => {
             res.status(200).json(data)
         })
@@ -68,7 +58,7 @@ router.put("/add-assignment/:title", (req, res) => {
                     }
                 },
             ).then(data => { console.log(data) })
-            res.status(200).json(data)
+            res.status(200).json({ msg: data })
         })
         .catch(err => {
             res.status(400).json({ msg: err })
@@ -89,7 +79,7 @@ router.put("/delete/:id/:title", (req, res) => {
                     }
                 }
             ).then(data => { console.log(data) })
-            res.status(200).json(data)
+            res.status(200).json({ msg: "Subject deleted from database." })
         })
         .catch(err => {
             res.status(400).json({ msg: err })
