@@ -13,10 +13,8 @@ router.post("/new/:title", (req, res) => {
                 {
                     $push: {
                         grades: {
-                            subject: {
                                 title: req.params.title,
                                 assignments: []
-                            }
                         }
                     }
                 }
@@ -29,21 +27,12 @@ router.post("/new/:title", (req, res) => {
 router.get("/get-all", (req, res) => {
     Curriculum.find({})
         .then(data => {
-            res.json(data)
-        })
-        .catch(err => {
-            res.status(400).json({ msg: err })
-        })
-})
-router.post("/view", (req, res) => {
-    Curriculum.find({})
-        .then(data => {
             res.status(200).json(data)
         })
         .catch(err => {
             res.status(400).json({ msg: err })
         })
-});
+})
 
 router.post("/edit", (req, res) => {
     Curriculum.findOneAndUpdate({})
@@ -69,7 +58,7 @@ router.put("/add-assignment/:title", (req, res) => {
     )
         .then(data => {
             Student.updateMany(
-                { "grades.subject.title": req.params.title},
+                { "grades.title": req.params.title },
                 {
                     $push: {
                         "grades.$.assignments": {
@@ -86,6 +75,8 @@ router.put("/add-assignment/:title", (req, res) => {
         })
 })
 router.put("/delete/:id/:title", (req, res) => {
+    console.log(req.params.title)
+    console.log(req.params.id)
     Curriculum.deleteOne(
         { _id: req.params.id }
     )
@@ -94,12 +85,10 @@ router.put("/delete/:id/:title", (req, res) => {
                 {},
                 {
                     $pull: {
-                        grades: {
-                            $in: [req.params.title]
-                        }
+                        grades: { title: req.params.title }
                     }
                 }
-            ).then(() => { console.log("Pulled from students.") })
+            ).then(data => { console.log(data) })
             res.status(200).json(data)
         })
         .catch(err => {
