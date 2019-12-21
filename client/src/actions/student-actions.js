@@ -8,16 +8,17 @@ import {
     UPDATE_STUDENT_INFO,
     UPDATE_STUDENT_INFO_SUCCESS,
     UPDATE_STUDENT_INFO_FAIL,
-    // VIEW_STUDENT,
+    VIEW_STUDENT,
+    VIEW_STUDENT_SUBJECT,
+    VIEW_STUDENT_SUBJECT_SUCCESS,
+    VIEW_STUDENT_SUBJECT_FAIL,
     GET_STUDENTS,
     GET_STUDENTS_SUCCESS,
     GET_STUDENTS_FAIL,
     DELETE_STUDENT,
-    VIEW_STUDENT
 } from "./types";
 
 export const addStudent = data => (dispatch) => {
-    console.log(data);
     dispatch({ type: ADD_STUDENT });
     const config = {
         headers: {
@@ -51,7 +52,6 @@ export const getStudents = () => (dispatch) => {
             })
         })
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.response.status));
             dispatch({
                 type: GET_STUDENTS_FAIL
             });
@@ -86,6 +86,20 @@ export const viewStudent = id => (dispatch) => {
         })
         .catch(err => {
             dispatch(returnErrors(err.response.data, err.response.status));
+        });
+}
+
+export const viewStudentSubject = (title, id) => (dispatch) => {
+    // console.log(title, id)
+    dispatch({ type: VIEW_STUDENT_SUBJECT })
+    axios.get(`http://localhost:3001/api/student/view-subject/${title}/${id}`)
+    .then(res => {
+        dispatch({
+            type: VIEW_STUDENT_SUBJECT_SUCCESS
+        })
+    })
+        .catch(err => {
+            dispatch({VIEW_STUDENT_SUBJECT_FAIL})
         });
 }
 

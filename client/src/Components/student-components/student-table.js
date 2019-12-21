@@ -31,7 +31,10 @@ const StudentTable = (props) => {
                             <td>
                                 <ButtonGroup>
                                     <ViewStudent
-                                        viewStudent={props.viewstudent}
+                                        viewStudent={props.viewStudent}
+                                        viewStudentSubject={props.viewStudentSubject}
+                                        view_subject={props.view_subject}
+                                        handleInputChange={props.handleInputChange}
                                         student={student}
                                     />
                                     <EditStudentModal

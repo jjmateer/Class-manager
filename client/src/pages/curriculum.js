@@ -51,13 +51,13 @@ class Curriculum extends Component {
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
-        this.props.getSubjects();
+        window.location.reload();
     }
 
     deleteSubject = event => {
         event.preventDefault();
         this.props.deleteSubject(event.target.id, event.target.value)
-        this.props.getSubjects();
+        window.location.reload();
     }
 
     render() {
@@ -70,32 +70,36 @@ class Curriculum extends Component {
                     handleInputChange={this.handleInputChange}
                     error={this.props.error}
                 />
-                {subjects.length ?
+                {!this.props.curriculum.isLoading ?
+                    <>
+                        {subjects.length ?
 
-                    subjects.map((subject) => (
-                        <Card key={subject._id}>
-                            <CardBody>
-                                <CardTitle>{subject.title}</CardTitle>
-                                <ButtonGroup style={{ float: "right" }}>
-                                    <ViewSubject
-                                        subjectinfo={subject}
-                                        getSubjects={this.props.getSubjects}
-                                    />
-                                    <AddAssignment
-                                        title={subject.title}
-                                        addAssignment={this.addAssignment}
-                                        handleInputChange={this.handleInputChange}
-                                        subjectinfo={subject}
-                                    />
-                                    <VerifyDeleteModal
-                                        subject={subject}
-                                        deleteSubject={this.deleteSubject}
-                                    />
-                                </ButtonGroup>
-                            </CardBody>
-                        </Card>
-                    ))
+                            subjects.map((subject) => (
+                                <Card key={subject._id}>
+                                    <CardBody>
+                                        <CardTitle>{subject.title}</CardTitle>
+                                        <ButtonGroup style={{ float: "right" }}>
+                                            <ViewSubject
+                                                subjectinfo={subject}
+                                                getSubjects={this.props.getSubjects}
+                                            />
+                                            <AddAssignment
+                                                title={subject.title}
+                                                addAssignment={this.addAssignment}
+                                                handleInputChange={this.handleInputChange}
+                                                subjectinfo={subject}
+                                            />
+                                            <VerifyDeleteModal
+                                                subject={subject}
+                                                deleteSubject={this.deleteSubject}
+                                            />
+                                        </ButtonGroup>
+                                    </CardBody>
+                                </Card>
+                            ))
 
+                            : null}
+                    </>
                     : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>}
             </>
         );

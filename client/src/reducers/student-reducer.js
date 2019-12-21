@@ -8,7 +8,10 @@ import {
     VIEW_STUDENT,
     GET_STUDENTS,
     GET_STUDENTS_FAIL,
-    GET_STUDENTS_SUCCESS
+    GET_STUDENTS_SUCCESS,
+    VIEW_STUDENT_SUBJECT,
+    VIEW_STUDENT_SUBJECT_SUCCESS,   
+    VIEW_STUDENT_SUBJECT_FAIL
 } from "../actions/types";
 
 const initialState = {
@@ -28,6 +31,7 @@ export default function (state = initialState, action) {
         case ADD_STUDENT:
         case UPDATE_STUDENT_INFO:
         case GET_STUDENTS:
+        case VIEW_STUDENT_SUBJECT:
             return {
                 ...state,
                 isLoading: true
@@ -35,6 +39,7 @@ export default function (state = initialState, action) {
         case ADD_STUDENT_FAIL:
         case UPDATE_STUDENT_INFO_FAIL:
         case GET_STUDENTS_FAIL:
+        case VIEW_STUDENT_SUBJECT_FAIL:
             return {
                 ...state,
                 ...action.payload,
@@ -45,6 +50,7 @@ export default function (state = initialState, action) {
         case ADD_STUDENT_SUCCESS:
         case UPDATE_STUDENT_INFO_SUCCESS:
         case GET_STUDENTS_SUCCESS:
+        case VIEW_STUDENT_SUBJECT_SUCCESS:
             return {
                 ...state,
                 ...action.payload,
