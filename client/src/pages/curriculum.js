@@ -4,10 +4,11 @@ import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
 import { createCurriculum, getSubjects, addAssignment, deleteSubject } from "../actions/curriculum-actions";
+import {getStudents} from "../actions/student-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
     Card, CardBody,
-    CardTitle, Button, ButtonGroup, Spinner
+    CardTitle, ButtonGroup, Spinner
 } from 'reactstrap';
 import CreateCirriculum from "../Components/curriculum-components/create-curriculum-form";
 import ViewSubject from "../Components/curriculum-components/view-subject-modal";
@@ -29,13 +30,11 @@ class Curriculum extends Component {
         getSubjects: PropTypes.func.isRequired,
         curriculum: PropTypes.object.isRequired,
         addAssignment: PropTypes.func.isRequired,
-        deleteSubject: PropTypes.func.isRequired
+        deleteSubject: PropTypes.func.isRequired,
+        getStudents: PropTypes.func.isRequired
     }
-    componentWillMount = () => {
+    componentDidMount = () => {
         this.props.clearErrors();
-        this.props.getSubjects();
-    }
-    componentWillUnmount = () => {
         this.props.getSubjects();
     }
     handleInputChange = event => {
@@ -46,18 +45,21 @@ class Curriculum extends Component {
         event.preventDefault();
         this.props.createCurriculum(this.state.title);
         this.props.getSubjects();
+        this.props.getStudents();
     }
 
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
         window.location.reload();
+        this.props.getStudents();
     }
 
     deleteSubject = event => {
         event.preventDefault();
         this.props.deleteSubject(event.target.id, event.target.value)
         window.location.reload();
+        this.props.getStudents();
     }
 
     render() {
@@ -117,5 +119,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject }
+    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject, getStudents }
 )(Curriculum);

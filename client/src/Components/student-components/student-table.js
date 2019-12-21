@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     ButtonGroup,
     Table
@@ -11,8 +11,6 @@ import ViewStudent from "./view-student";
 
 
 const StudentTable = (props) => {
-    const togglemodal = () => setModal(!modal);
-    const [modal, setModal] = useState(false);
     return (
         <div className="table-responsive">
             <Table className="table">
@@ -23,6 +21,8 @@ const StudentTable = (props) => {
                         <th>Birthday</th>
                         <th>Options</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     {props.students.map((student) => (
                         <tr key={student._id}>
                             <td>{student.lastName}</td>
@@ -53,7 +53,7 @@ const StudentTable = (props) => {
                             </td>
                         </tr>
                     ))}
-                </thead>
+                </tbody>
             </Table>
         </div>
     );

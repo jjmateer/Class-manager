@@ -3,7 +3,6 @@ import {
   Button,
   Modal,
   ModalHeader,
-  ModalFooter,
   Table,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
@@ -14,7 +13,6 @@ const ViewStudent = (props) => {
   const toggle = () => setDropdownOpen(prevState => !prevState);
   const togglemodal = () => setModal(!modal);
   const [modal, setModal] = useState(false);
-  console.log(props.student.grades)
   return (
     <>
       <Button color="info" id={props.id} onClick={togglemodal}>Grades</Button>
@@ -23,8 +21,8 @@ const ViewStudent = (props) => {
         <ModalHeader>
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle caret>
-              Subjects
-        </DropdownToggle>
+              {props.view_subject ? props.view_subject : "Subjects"}
+            </DropdownToggle>
             <DropdownMenu>
               {props.student.grades.map((subject) => {
                 return (
@@ -35,23 +33,27 @@ const ViewStudent = (props) => {
           </Dropdown>
         </ModalHeader>
         <Table className="table">
-          <tr>
-            <th>Assignment</th>
-            <th>Grade</th>
-          </tr>
-          {
-            props.student.grades.map((subject) => subject.title === props.view_subject && subject.assignments ? (
-              <tr key={subject._id}>
-                <td>
-                  {subject.assignments.map((assignment) => <p>{ assignment.title }</p>)}
-                </td>
-                <td>
-                  {subject.assignments.map((assignment) => <p>{ assignment.grade }</p>)}
-                </td>
-              </tr>
-            ) : null
-            )
-          }
+          <thead>
+            <tr>
+              <th>Assignment</th>
+              <th>Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              props.student.grades.map((subject) => subject.title === props.view_subject && subject.assignments ? (
+                <tr key={subject.title}>
+                  <td>
+                    {subject.assignments.map((assignment) => <p key={assignment.title}>{assignment.title}</p>)}
+                  </td>
+                  <td>
+                    {subject.assignments.map((assignment) => <p key={assignment.title}>{assignment.grade}</p>)}
+                  </td>
+                </tr>
+              ) : null
+              )
+            }
+          </tbody>
         </Table>
       </Modal>
     </>
