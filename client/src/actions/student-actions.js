@@ -9,9 +9,9 @@ import {
     UPDATE_STUDENT_INFO_SUCCESS,
     UPDATE_STUDENT_INFO_FAIL,
     VIEW_STUDENT,
-    VIEW_STUDENT_SUBJECT,
-    VIEW_STUDENT_SUBJECT_SUCCESS,
-    VIEW_STUDENT_SUBJECT_FAIL,
+    GRADE_STUDENT,
+    GRADE_STUDENT_SUCCESS,
+    GRADE_STUDENT_FAIL,
     GET_STUDENTS,
     GET_STUDENTS_SUCCESS,
     GET_STUDENTS_FAIL,
@@ -89,17 +89,17 @@ export const viewStudent = id => (dispatch) => {
         });
 }
 
-export const viewStudentSubject = (title, id) => (dispatch) => {
+export const gradeStudent = (title, id) => (dispatch) => {
     // console.log(title, id)
-    dispatch({ type: VIEW_STUDENT_SUBJECT })
+    dispatch({ type: GRADE_STUDENT })
     axios.get(`http://localhost:3001/api/student/view-subject/${title}/${id}`)
     .then(res => {
         dispatch({
-            type: VIEW_STUDENT_SUBJECT_SUCCESS
+            type: GRADE_STUDENT_SUCCESS
         })
     })
         .catch(err => {
-            dispatch({VIEW_STUDENT_SUBJECT_FAIL})
+            dispatch({GRADE_STUDENT_FAIL})
         });
 }
 

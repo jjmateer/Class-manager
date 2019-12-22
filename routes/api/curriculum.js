@@ -47,6 +47,7 @@ router.put("/add-assignment/:title", (req, res) => {
         }
     )
         .then(data => {
+            console.log(data)
             Student.updateMany(
                 { "grades.title": req.params.title },
                 {

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, viewStudentSubject } from "../actions/student-actions";
+import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudent } from "../actions/student-actions";
 import { Spinner } from "reactstrap"
 
 
@@ -28,7 +28,7 @@ class StudentSearch extends Component {
         deleteStudent: PropTypes.func.isRequired,
         updateStudentInfo: PropTypes.func.isRequired,
         viewStudent: PropTypes.func.isRequired,
-        viewStudentSubject: PropTypes.func.isRequired
+        gradeStudent: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -56,9 +56,9 @@ class StudentSearch extends Component {
         event.preventDefault();
         this.props.viewStudent(event.target.id);
     }
-    viewStudentSubject = event => {
+    gradeStudent = event => {
         event.preventDefault();
-        this.props.viewStudentSubject(event.target.value, event.target.id);
+        this.props.gradeStudent(event.target.value, event.target.id);
     }
     updateStudentInfo = event => {
         event.preventDefault();
@@ -85,7 +85,7 @@ class StudentSearch extends Component {
                         deleteStudent={this.deleteStudent}
                         handleInputChange={this.handleInputChange}
                         updateStudentInfo={this.updateStudentInfo}
-                        viewStudentSubject={this.viewStudentSubject}
+                        gradeStudent={this.gradeStudent}
                         view_subject={this.state.view_subject}
                         viewStudent={this.viewStudent}
                         error={this.props.error}
@@ -106,5 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, viewStudentSubject }
+    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudent }
 )(StudentSearch);

@@ -1,4 +1,5 @@
 const Student = require("../../models/student");
+const Curriculum = require("../../models/curriculum");
 const router = require("express").Router();
 
 router.post("/new", (req, res) => {
@@ -13,6 +14,11 @@ router.post("/new", (req, res) => {
                     birthday: birthday,
                 }).then(data => {
                     res.status(200).json({ data, msg: { msg: "Student added to database." } })
+                    Curriculum.find({})
+                        .then(subjects => {
+                            Student.findOneAndUpdate({ firstName: firstName, lastName: lastName },
+                                { $set: { grades: subjects } }).then(() => { console.log("Subjects added to new student.") })
+                        })
                 })
             } else {
                 res.status(400).json({ msg: "Student already exists." })
@@ -58,7 +64,7 @@ router.put("/update/:id", (req, res) => {
 router.get("/view/:id", (req, res) => {
     Student.findOne({ _id: req.params.id })
         .then(data => {
-            res.status(200).json({view_student: data});
+            res.status(200).json({ view_student: data });
         })
         .catch(() => {
             res.status(400).json({ msg: "Could not view student." })
