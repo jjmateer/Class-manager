@@ -89,7 +89,7 @@ export const viewStudent = id => (dispatch) => {
         });
 }
 
-export const gradeStudent = (student, assignment, value) => (dispatch) => {
+export const gradeStudent = (student, assignment, value, subject) => (dispatch) => {
     dispatch({ type: GRADE_STUDENT })
     const config = {
         headers: {

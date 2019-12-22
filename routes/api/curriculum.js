@@ -1,7 +1,7 @@
 const Curriculum = require("../../models/curriculum");
 const Student = require("../../models/student");
 const router = require("express").Router();
-
+const mongoose = require('mongoose');
 router.post("/new/:title", (req, res) => {
     const newCurriculum = {
         title: req.params.title
@@ -40,6 +40,7 @@ router.put("/add-assignment/:title", (req, res) => {
         {
             $push: {
                 assignments: {
+                    _id: new mongoose.Types.ObjectId(),
                     title: req.body.data,
                     grade: null
                 }
@@ -53,6 +54,7 @@ router.put("/add-assignment/:title", (req, res) => {
                 {
                     $push: {
                         "grades.$.assignments": {
+                            _id: new mongoose.Types.ObjectId(),
                             title: req.body.data,
                             grade: null
                         }
