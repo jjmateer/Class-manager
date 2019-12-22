@@ -12,6 +12,7 @@ import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
 import PrivateRoute from "./Components/routing-components/private-route";
 import PublicRoute from "./Components/routing-components/public-route";
+import PrintChart from "./pages/print-chart";
 import Curriculum from "./pages/curriculum";
 
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
     error: PropTypes.object.isRequired,
     loadUser: PropTypes.func.isRequired,
     clearErrors: PropTypes.func.isRequired,
-    getSubjects:PropTypes.func.isRequired
+    getSubjects: PropTypes.func.isRequired
   }
   componentDidMount() {
     this.props.loadUser();
@@ -57,6 +58,7 @@ class App extends Component {
             <PublicRoute exact path="/" component={Home} />
             <PublicRoute exact path="/register" component={Register} />
             <PrivateRoute exact path="/students" component={StudentSearch} />
+            <Route exact path="/print-chart" component={PrintChart} />
             <Route exact path="/curriculum" component={Curriculum} />
             {/* <Route component={ErrorC} /> */}
           </Switch>

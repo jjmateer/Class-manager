@@ -7,13 +7,16 @@ import {
   Table,
   Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Alert
 } from 'reactstrap';
+import { Link } from "react-router-dom";
 import './student.css';
 
 const ViewStudent = (props) => {
+  let trigger = false;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(prevState => !prevState);
-  const togglemodal = () => setModal(!modal);
+  const togglemodal = () => setModal(!modal); trigger = true;
   const [modal, setModal] = useState(false);
+
   return (
     <>
       <Button color="info" id={props.id} onClick={togglemodal}>Grades</Button>
@@ -27,7 +30,8 @@ const ViewStudent = (props) => {
             <DropdownMenu>
               {props.student.grades.map((subject, index) => {
                 return (
-                  <DropdownItem key={`subject.title${index}`} id="view_subject" onClick={props.handleInputChange} value={subject.title}>{subject.title}</DropdownItem>
+                  <DropdownItem style={{ width: 300 }} key={`subject.title${index}`} id="view_subject" onClick={props.handleInputChange} value={subject.title}>{subject.title}
+                  </DropdownItem>
                 )
               })}
             </DropdownMenu>
@@ -35,7 +39,8 @@ const ViewStudent = (props) => {
         </ModalHeader>
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (
-            <Table className="table" key={`subject._id${index}`}>
+            <Table className="table" key={`subject._id${index}`} onClick={props.viewStudent} id={props.student._id}>
+              <Link to="/print-chart" style={{ float: "right" }} id={props.student._id} className={subject.title}>Spreadsheet</Link>
               <thead>
                 <tr>
                   <th>Assignment</th>

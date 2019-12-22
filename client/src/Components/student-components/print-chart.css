@@ -1,0 +1,8 @@
+.print-chart-table tr, .print-chart-table td, .print-chart-table th {
+    border:1px solid black;
+}
+
+.print-chart-table {
+    width: 90%;
+    margin: auto 
+}
