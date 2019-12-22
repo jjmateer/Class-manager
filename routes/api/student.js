@@ -61,6 +61,25 @@ router.put("/update/:id", (req, res) => {
         })
 })
 
+router.put("/grade-student", (req, res) => {
+    console.log(req.body)
+    const { student, assignment, value } = req.body;
+    // const assignmentQuery = `grades.$[title: "${assignment}"].assignments.$["${assignment}"]`
+    Student.findOne({ _id: student })
+        .then(studentData => {
+            // console.log(studentData.grades)
+            for (let i = 0; i < studentData.grades.length; i++) {
+                for (let j = 0; j < studentData.grades[i].assignments; j++) {
+                    if (studentData.grades[i].assignments[j].title === assignment) {
+                        console.log("working")
+                    }
+                }
+                console.log(studentData.grades[i].assignments)
+            }
+        })
+
+})
+
 router.get("/view/:id", (req, res) => {
     Student.findOne({ _id: req.params.id })
         .then(data => {

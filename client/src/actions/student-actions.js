@@ -89,17 +89,26 @@ export const viewStudent = id => (dispatch) => {
         });
 }
 
-export const gradeStudent = (title, id) => (dispatch) => {
-    // console.log(title, id)
+export const gradeStudent = (student, assignment, value) => (dispatch) => {
     dispatch({ type: GRADE_STUDENT })
-    axios.get(`http://localhost:3001/api/student/view-subject/${title}/${id}`)
-    .then(res => {
-        dispatch({
-            type: GRADE_STUDENT_SUCCESS
+    const config = {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }
+    const gradeInfo = {
+        student: student, 
+        assignment: assignment,
+        value: value
+    }
+    axios.put(`http://localhost:3001/api/student/grade-student`, gradeInfo, config)
+        .then(res => {
+            dispatch({
+                type: GRADE_STUDENT_SUCCESS
+            })
         })
-    })
         .catch(err => {
-            dispatch({GRADE_STUDENT_FAIL})
+            dispatch({ GRADE_STUDENT_FAIL })
         });
 }
 

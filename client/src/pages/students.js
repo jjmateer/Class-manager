@@ -58,7 +58,7 @@ class StudentSearch extends Component {
     }
     gradeStudent = event => {
         event.preventDefault();
-        this.props.gradeStudent(event.target.value, event.target.id);
+        this.props.gradeStudent(event.target.id, event.target.name, event.target.value);
     }
     updateStudentInfo = event => {
         event.preventDefault();
