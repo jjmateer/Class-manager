@@ -63,12 +63,12 @@ router.put("/update/:id", (req, res) => {
 
 router.put("/grade-student", (req, res) => {
     let newData;
-    const { student, assignment, value } = req.body;
+    const { student, assignment, value, subject } = req.body;
     Student.findOne({ _id: student })
         .then(studentData => {
             for (let i = 0; i < studentData.grades.length; i++) {
                 for (let j = 0; j < studentData.grades[i].assignments.length; j++) {
-                    if (studentData.grades[i].assignments[j].title === assignment) {
+                    if (studentData.grades[i].assignments[j].title === assignment && studentData.grades[i].title === subject) {
                         studentData.grades[i].assignments[j].grade = value;
                         newData = studentData;
                     }

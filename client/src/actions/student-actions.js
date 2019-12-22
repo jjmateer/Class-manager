@@ -99,7 +99,8 @@ export const gradeStudent = (student, assignment, value, subject) => (dispatch) 
     const gradeInfo = {
         student: student, 
         assignment: assignment,
-        value: value
+        value: value,
+        subject: subject
     }
     axios.put(`http://localhost:3001/api/student/grade-student`, gradeInfo, config)
         .then(res => {

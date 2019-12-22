@@ -49,9 +49,9 @@ const ViewStudent = (props) => {
                     <td>
                       <Alert color="info">Current grade: {assignment.grade}</Alert>
                       <ButtonGroup>
-                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} name={assignment.title} value={"L"} >L</Button>
-                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} name={assignment.title} value={"P"}>P</Button>
-                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} name={assignment.title} value={"M"}>M</Button>
+                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} subject={subject.title} name={assignment.title} value={"L"} >L</Button>
+                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} subject={subject.title} name={assignment.title} value={"P"}>P</Button>
+                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} subject={subject.title} name={assignment.title} value={"M"}>M</Button>
                       </ButtonGroup>
                     </td>
                   </tr>

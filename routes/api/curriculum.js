@@ -54,7 +54,6 @@ router.put("/add-assignment/:title", (req, res) => {
                 {
                     $push: {
                         "grades.$.assignments": {
-                            _id: new mongoose.Types.ObjectId(),
                             title: req.body.data,
                             grade: null
                         }
