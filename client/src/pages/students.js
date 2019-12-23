@@ -55,6 +55,7 @@ class StudentSearch extends Component {
     viewStudent = event => {
         event.preventDefault();
         this.props.viewStudent(event.target.id, event.target.name);
+        this.props.history.push("/print-chart");
     }
     gradeStudent = event => {
         event.preventDefault();

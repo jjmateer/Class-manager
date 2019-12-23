@@ -85,8 +85,8 @@ class Curriculum extends Component {
                     <>
                         {subjects.length ?
 
-                            subjects.map((subject) => (
-                                <Card key={subject._id}>
+                            subjects.map((subject, index) => (
+                                <Card key={`${subject._id}${index}`}>
                                     <CardBody>
                                         <CardTitle>{subject.title}</CardTitle>
                                         <ButtonGroup style={{ float: "right" }}>

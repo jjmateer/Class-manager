@@ -34,39 +34,27 @@ class PrintChartAll extends Component {
                                 <td />
                                 {this.props.student.students[0] ?
                                     this.props.student.students[0].grades.map((sdt) => (
-                                        <>
-                                            {this.props.curriculum.view_subject.title === sdt.title ?
+                                        this.props.curriculum.view_subject.title === sdt.title ?
 
-                                                sdt.assignments.map((sdt2, index) => (
-                                                    <th id="sideways-title-wrap" key={sdt2.title}><p id="sideways-title">{sdt2.title}</p></th>
-                                                ))
+                                            sdt.assignments.map((sdt2, index) => (
+                                                <th id="sideways-title-wrap" key={`${sdt2.title}${index}`}><p id="sideways-title">{sdt2.title}</p></th>
+                                            ))
 
-                                                : null}
-                                        </>
+                                            : null
                                     )) : null}
-
-                                {/* {this.props.curriculum.view_subject.title ?
-
-                                    this.props.student.students.map((sdt) => (
-                                        sdt.grades.map((sdt2) => {
-                                            sdt2.title === this.props.curriculum.view_subject.title ?
-                                        })
-                                    ))
-
-                                    } */}
                             </tr>
                         </thead>
                         <tbody>
                             {this.props.student.students ?
                                 (this.props.student.students.map((sdt, index) => (
-                                    <tr key={sdt._id}>
-                                        <th>{sdt.firstName}</th>
+                                    <tr key={`${sdt._id}${index}`}>
+                                        <th key={`${sdt._id}${index}`}>{sdt.firstName}</th>
                                         {sdt.grades.map((sdt2, index) => (
-                                                this.props.curriculum.view_subject.title === sdt2.title ?
-                                                    sdt2.assignments.map((sdt3, index) => (
-                                                        <td key={sdt3.title}>{sdt3.grade}</td>
-                                                    ))
-                                                    :null
+                                            this.props.curriculum.view_subject.title === sdt2.title ?
+                                                sdt2.assignments.map((sdt3, index) => (
+                                                    <td key={`${sdt3.title}${index}`}>{sdt3.grade}</td>
+                                                ))
+                                                : null
 
                                         ))}
                                     </tr>
