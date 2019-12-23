@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
 import { createCurriculum, getSubjects, addAssignment, deleteSubject } from "../actions/curriculum-actions";
-import {getStudents} from "../actions/student-actions";
+import { getStudents, viewStudent } from "../actions/student-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
     Card, CardBody,
@@ -25,13 +25,15 @@ class Curriculum extends Component {
         isAuthenticated: PropTypes.bool,
         error: PropTypes.object.isRequired,
         loadUser: PropTypes.func.isRequired,
+        student: PropTypes.object.isRequired,
         clearErrors: PropTypes.func.isRequired,
         createCurriculum: PropTypes.func.isRequired,
         getSubjects: PropTypes.func.isRequired,
         curriculum: PropTypes.object.isRequired,
         addAssignment: PropTypes.func.isRequired,
         deleteSubject: PropTypes.func.isRequired,
-        getStudents: PropTypes.func.isRequired
+        getStudents: PropTypes.func.isRequired,
+        viewStudent: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -84,6 +86,8 @@ class Curriculum extends Component {
                                             <ViewSubject
                                                 subjectinfo={subject}
                                                 getSubjects={this.props.getSubjects}
+                                                viewStudent={this.props.viewStudent}
+                                                student={this.props.student}
                                             />
                                             <AddAssignment
                                                 title={subject.title}
@@ -119,5 +123,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject, getStudents }
+    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject, getStudents, viewStudent }
 )(Curriculum);

@@ -12,7 +12,8 @@ import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
 import PrivateRoute from "./Components/routing-components/private-route";
 import PublicRoute from "./Components/routing-components/public-route";
-import PrintChart from "./pages/print-chart";
+import PrintChart from "./pages/print-chart-individual";
+import PrintChartAll from "./pages/print-chart-all";
 import Curriculum from "./pages/curriculum";
 
 class App extends Component {
@@ -59,6 +60,7 @@ class App extends Component {
             <PublicRoute exact path="/register" component={Register} />
             <PrivateRoute exact path="/students" component={StudentSearch} />
             <PrivateRoute exact path="/print-chart" component={PrintChart} />
+            <PrivateRoute exact path="/print-chart-all" component={PrintChartAll} />
             <Route exact path="/curriculum" component={Curriculum} />
             {/* <Route component={ErrorC} /> */}
           </Switch>

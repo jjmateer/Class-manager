@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 import {
     Button,
     Modal,
@@ -19,10 +20,11 @@ const ViewSubject = (props) => {
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>{props.subjectinfo.title}</ModalHeader>
                 <div className="table-responsive">
-                    <Table className="table">
+                    <Table className="table" onClick={props.viewStudent} id={props.student.students._id} name={props.subjectinfo.title}>
                         <thead>
                             <tr>
                                 <th>Assignment</th>
+                                <th><Link to="/print-chart-all" style={{ float: "right" }}>Spreadsheet</Link></th>
                             </tr>
                             {assignments.length ?
                                 assignments.map((subject) => {
