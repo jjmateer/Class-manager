@@ -85,10 +85,10 @@ router.put("/grade-student", (req, res) => {
 
 })
 
-router.get("/view/:id", (req, res) => {
+router.get("/view/:id/:subject", (req, res) => {
     Student.findOne({ _id: req.params.id })
         .then(data => {
-            res.status(200).json({ view_student: data });
+            res.status(200).json({ sdata: data, subject: req.params.subject });
         })
         .catch(() => {
             res.status(400).json({ msg: "Could not view student." })

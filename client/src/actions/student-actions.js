@@ -71,13 +71,13 @@ export const deleteStudent = data => (dispatch) => {
         });
 }
 
-export const viewStudent = id => (dispatch) => {
+export const viewStudent = (id, subject) => (dispatch) => {
     const config = {
         header: {
             "Content-Type": "application/json"
         }
     }
-    axios.get(`http://localhost:3001/api/student/view/${id}`, config)
+    axios.get(`http://localhost:3001/api/student/view/${id}/${subject}`, config)
         .then(res => {
             dispatch({
                 type: VIEW_STUDENT,

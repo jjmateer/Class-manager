@@ -40,11 +40,11 @@ const ViewStudent = (props) => {
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (
             <Table className="table" key={`subject._id${index}`} onClick={props.viewStudent} id={props.student._id}>
-              <Link to="/print-chart" style={{ float: "right" }} id={props.student._id} className={subject.title}>Spreadsheet</Link>
               <thead>
                 <tr>
                   <th>Assignment</th>
                   <th>Grade</th>
+                  <th><Link to="/print-chart" style={{ float: "right" }} id={props.student._id} name={subject.title}>Spreadsheet</Link></th>
                 </tr>
               </thead>
               <tbody>

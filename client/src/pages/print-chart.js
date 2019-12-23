@@ -25,38 +25,56 @@ class PrintChart extends Component {
 
     render() {
         const { view_student } = this.props.student;
-        console.log(view_student)
         return (
             <>
-                <table className="print-chart-table" style={{ width: "90%", margin: "auto" }}>
-                    <thead>
-                        <tr>
-                            {/* {this.props.student.view_student.map((sdt) => (
-                                <th>{sdt}</th>
-                            ))} */}
+                <div className="table-responsive">
+                    <table className="print-chart-table">
+                        <thead>
+                            <tr style={{ width: 400 }}>
+                                {view_student.sdata ?
+                                    <>
+                                        <th>NOVEMBER</th>
+                                        <th>MAY</th>
+                                        <th>{view_student.subject.toUpperCase()}</th>
+                                    </>
+                                    : null}
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        </tr>
-                    </tbody>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {view_student.sdata ?
+                                <>
+                                    {view_student.sdata.grades.map((sdt) => (
+                                        sdt.title === view_student.subject ?
+                                            sdt.assignments.map((sdt2, index) => (
+                                                <tr key={`${sdt2.title}${index}`}>
+                                                    <td style={{ width: "15%" }}>{sdt2.grade}</td>
+                                                    <td style={{ width: "15%" }}>{sdt2.grade}</td>
+                                                    <td>{sdt2.title}</td>
+                                                </tr>
+                                            ))
+                                            : null
+                                    ))}
+                                </>
+                                : null}
+                                </tbody>
 
-                </table>
+                    </table>
+                </div>
             </>
-        );
-    }
-}
-
+                );
+            }
+        }
+        
 const mapStateToProps = state => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    user: state.auth.user,
-    student: state.student,
-    auth: state.auth,
-    error: state.error
-})
-
-export default connect(
-    mapStateToProps,
-    { clearErrors, loadUser, getStudents }
-)(PrintChart);
+                    isAuthenticated: state.auth.isAuthenticated,
+                user: state.auth.user,
+                student: state.student,
+                auth: state.auth,
+                error: state.error
+            })
+            
+            export default connect(
+                mapStateToProps,
+    {clearErrors, loadUser, getStudents}
+                )(PrintChart);

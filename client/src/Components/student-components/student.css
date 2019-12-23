@@ -4,8 +4,8 @@ margin:auto;
 }
 
 tr th, tr td {
-    /* text-align: center; */
-    padding-left:50px;
+    text-align: center;
+    /* padding-left:50px; */
 }
 
 td button {

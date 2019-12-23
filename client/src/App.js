@@ -58,7 +58,7 @@ class App extends Component {
             <PublicRoute exact path="/" component={Home} />
             <PublicRoute exact path="/register" component={Register} />
             <PrivateRoute exact path="/students" component={StudentSearch} />
-            <Route exact path="/print-chart" component={PrintChart} />
+            <PrivateRoute exact path="/print-chart" component={PrintChart} />
             <Route exact path="/curriculum" component={Curriculum} />
             {/* <Route component={ErrorC} /> */}
           </Switch>
