@@ -72,12 +72,7 @@ export const addAssignment = (title, data) => (dispatch) => {
 }
 
 export const viewSubject = subject => (dispatch) => {
-    const config = {
-        headers: {
-            "Content-Type": "application/json"
-        }
-    }
-    axios.get(`http://localhost:3001/api/curriculum/view/${subject}`, config)
+    axios.get(`http://localhost:3001/api/curriculum/view/${subject}`)
         .then(res => {
             dispatch({
                 type: VIEW_CURRICULUM,

@@ -39,12 +39,12 @@ const ViewStudent = (props) => {
         </ModalHeader>
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (
-            <Table className="table" key={`subject._id${index}`} onClick={props.viewStudent} id={props.student._id}>
+            <Table className="table" key={`subject._id${index}`} onClick={props.viewStudent} id={props.studentinfo._id}>
               <thead>
                 <tr>
                   <th>Assignment</th>
                   <th>Grade</th>
-                  <th><Link to="/print-chart-all" style={{ float: "right" }} id={props.student._id} name={subject.title}>Spreadsheet</Link></th>
+                  <th><Link to="/print-chart" style={{ float: "right" }} name={props.subjectinfo.title}>Spreadsheet</Link></th>
                 </tr>
               </thead>
               <tbody>

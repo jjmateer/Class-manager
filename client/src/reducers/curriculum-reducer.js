@@ -18,7 +18,7 @@ const inititalState = {
     msg: {},
     isLoading: false,
     subjects: [],
-    view_subject:null
+    view_subject:{}
 };
 
 export default function (state = inititalState, action) {

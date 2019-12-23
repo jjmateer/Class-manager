@@ -20,11 +20,11 @@ class PrintChartAll extends Component {
         clearErrors: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
         student: PropTypes.object.isRequired,
-        user: PropTypes.object
+        user: PropTypes.object,
+        curriculum: PropTypes.object.isRequired
     }
 
     render() {
-        // console.log(this.props.student.students[0])
         return (
             <>
                 <div className="table-responsive">
@@ -32,14 +32,28 @@ class PrintChartAll extends Component {
                         <thead>
                             <tr>
                                 <td />
-                                {this.props.student.students[0].grades.map((sdt) => (
-                                    <>
-                                        <th>{sdt.title}</th>
-                                        {sdt.assignments.map((sdt2, index) => (
-                                            <th id="sideways-title-wrap" key={sdt2.title}><p id="sideways-title">{sdt2.title}</p></th>
-                                        ))}
-                                    </>
-                                ))}
+                                {this.props.student.students[0] ?
+                                    this.props.student.students[0].grades.map((sdt) => (
+                                        <>
+                                            {this.props.curriculum.view_subject.title === sdt.title ?
+
+                                                sdt.assignments.map((sdt2, index) => (
+                                                    <th id="sideways-title-wrap" key={sdt2.title}><p id="sideways-title">{sdt2.title}</p></th>
+                                                ))
+
+                                                : null}
+                                        </>
+                                    )) : null}
+
+                                {/* {this.props.curriculum.view_subject.title ?
+
+                                    this.props.student.students.map((sdt) => (
+                                        sdt.grades.map((sdt2) => {
+                                            sdt2.title === this.props.curriculum.view_subject.title ?
+                                        })
+                                    ))
+
+                                    } */}
                             </tr>
                         </thead>
                         <tbody>
@@ -48,10 +62,11 @@ class PrintChartAll extends Component {
                                     <tr key={sdt._id}>
                                         <th>{sdt.firstName}</th>
                                         {sdt.grades.map((sdt2, index) => (
-
-                                            sdt2.assignments.map((sdt3, index) => (
-                                                <td key={sdt3.title}>{sdt3.grade}</td>
-                                            ))
+                                                this.props.curriculum.view_subject.title === sdt2.title ?
+                                                    sdt2.assignments.map((sdt3, index) => (
+                                                        <td key={sdt3.title}>{sdt3.grade}</td>
+                                                    ))
+                                                    :null
 
                                         ))}
                                     </tr>
@@ -71,6 +86,7 @@ const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
     user: state.auth.user,
     student: state.student,
+    curriculum: state.curriculum,
     auth: state.auth,
     error: state.error
 })

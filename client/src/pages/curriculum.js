@@ -67,14 +67,15 @@ class Curriculum extends Component {
 
     viewSubject = event => {
         event.preventDefault();
-        this.props.viewSubject(event.target.name);
+        this.props.viewSubject(event.target.id);
+        this.props.history.push("/print-chart-all");
     }
 
     render() {
         const { subjects } = this.props.curriculum;
         return (
             <>
-                <h1 className="page-header">Subjects</h1>
+                <h1 className="page-header" style={{marginBottom:100}}>Subjects</h1>
                 <CreateCirriculum
                     createCurriculum={this.createCurriculum}
                     handleInputChange={this.handleInputChange}
@@ -94,6 +95,7 @@ class Curriculum extends Component {
                                                 getSubjects={this.props.getSubjects}
                                                 viewStudent={this.props.viewStudent}
                                                 student={this.props.student}
+                                                subjecttitle={subject.title}
                                                 subjectinfo={subject}
                                                 viewSubject={this.viewSubject}
                                             />
