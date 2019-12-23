@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { createCurriculum, getSubjects, addAssignment, deleteSubject } from "../actions/curriculum-actions";
+import { createCurriculum, getSubjects, addAssignment, deleteSubject, viewSubject } from "../actions/curriculum-actions";
 import { getStudents, viewStudent } from "../actions/student-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
@@ -33,7 +33,8 @@ class Curriculum extends Component {
         addAssignment: PropTypes.func.isRequired,
         deleteSubject: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
-        viewStudent: PropTypes.func.isRequired
+        viewStudent: PropTypes.func.isRequired,
+        viewSubject: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -64,6 +65,11 @@ class Curriculum extends Component {
         this.props.getStudents();
     }
 
+    viewSubject = event => {
+        event.preventDefault();
+        this.props.viewSubject(event.target.name);
+    }
+
     render() {
         const { subjects } = this.props.curriculum;
         return (
@@ -88,6 +94,8 @@ class Curriculum extends Component {
                                                 getSubjects={this.props.getSubjects}
                                                 viewStudent={this.props.viewStudent}
                                                 student={this.props.student}
+                                                subjectinfo={subject}
+                                                viewSubject={this.viewSubject}
                                             />
                                             <AddAssignment
                                                 title={subject.title}
@@ -123,5 +131,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject, getStudents, viewStudent }
+    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject, getStudents, viewStudent, viewSubject }
 )(Curriculum);

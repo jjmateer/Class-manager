@@ -31,20 +31,28 @@ class PrintChartAll extends Component {
                     <table className="print-chart-table">
                         <thead>
                             <tr>
-                                {}
+                                <td />
+                                {this.props.student.students[0].grades.map((sdt) => (
+                                    <>
+                                        <th>{sdt.title}</th>
+                                        {sdt.assignments.map((sdt2, index) => (
+                                            <th id="sideways-title-wrap" key={sdt2.title}><p id="sideways-title">{sdt2.title}</p></th>
+                                        ))}
+                                    </>
+                                ))}
                             </tr>
                         </thead>
                         <tbody>
                             {this.props.student.students ?
                                 (this.props.student.students.map((sdt, index) => (
-                                    <tr>
+                                    <tr key={sdt._id}>
                                         <th>{sdt.firstName}</th>
                                         {sdt.grades.map((sdt2, index) => (
-                                            
-                                                sdt2.assignments.map((sdt3, index) => (
-                                                    <td>{sdt3.grade}</td>
-                                                ))
-                                            
+
+                                            sdt2.assignments.map((sdt3, index) => (
+                                                <td key={sdt3.title}>{sdt3.grade}</td>
+                                            ))
+
                                         ))}
                                     </tr>
                                 )))

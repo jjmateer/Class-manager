@@ -20,7 +20,7 @@ const ViewSubject = (props) => {
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>{props.subjectinfo.title}</ModalHeader>
                 <div className="table-responsive">
-                    <Table className="table" onClick={props.viewStudent} id={props.student.students._id} name={props.subjectinfo.title}>
+                    <Table className="table" name={props.subjectinfo.title} onClick={props.viewSubject}>
                         <thead>
                             <tr>
                                 <th>Assignment</th>

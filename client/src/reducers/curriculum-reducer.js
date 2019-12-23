@@ -17,7 +17,8 @@ import {
 const inititalState = {
     msg: {},
     isLoading: false,
-    subjects: []
+    subjects: [],
+    view_subject:null
 };
 
 export default function (state = inititalState, action) {
@@ -26,7 +27,7 @@ export default function (state = inititalState, action) {
             return {
                 ...state,
                 isLoading: false,
-                subjects: action.payload,
+                view_subject: action.payload,
             }
         case EDIT_CURRICULUM:
         case CREATE_CURRICULUM:

@@ -44,7 +44,7 @@ const ViewStudent = (props) => {
                 <tr>
                   <th>Assignment</th>
                   <th>Grade</th>
-                  <th><Link to="/print-chart" style={{ float: "right" }} id={props.student._id} name={subject.title}>Spreadsheet</Link></th>
+                  <th><Link to="/print-chart-all" style={{ float: "right" }} id={props.student._id} name={subject.title}>Spreadsheet</Link></th>
                 </tr>
               </thead>
               <tbody>

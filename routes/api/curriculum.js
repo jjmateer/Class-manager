@@ -66,6 +66,18 @@ router.put("/add-assignment/:title", (req, res) => {
             res.status(400).json({ msg: err })
         })
 })
+
+router.get("/curriculum/view/:subject", (req, res) => {
+    console.log("firing")
+    Curriculum.findOne({ title: req.params.subject })
+        .then(data => {
+            res.status(200).json({ view_subject: data })
+            console.log(data)
+        })
+        .catch(err => {
+            res.status(400).json({ msg: err })
+        })
+})
 router.put("/delete/:id/:title", (req, res) => {
     console.log(req.params.title)
     console.log(req.params.id)

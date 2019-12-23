@@ -2,15 +2,24 @@
     border:1px solid black;
 }
 
-.print-chart-table td{
-    padding-left:auto;
-    /* display:inline-block; */
+.print-chart-table th{
+width:50px;
+min-height:100px;
 }
 
 .print-chart-table {
     /* width: 385px; */
     /* height:90%; */
     margin: auto ;
-    margin-top:10vh;
+    margin-top:20vh;
     table-layout: fixed;
+}
+
+#sideways-title {
+    transform: 
+    rotate(-90deg);
+  width: 30px;
+}
+#sideways-title-wrap {
+    width:10px;
 }
