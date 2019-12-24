@@ -49,7 +49,7 @@ class PrintChartAll extends Component {
                                 (this.props.student.students.map((sdt, index) => (
                                     <tr key={`${sdt._id}${index}`}>
                                         <th key={`${sdt._id}${index}`}>{sdt.firstName}</th>
-                                        {sdt.grades.map((sdt2, index) => (
+                                        {sdt.grades.map((sdt2) => (
                                             this.props.curriculum.view_subject.title === sdt2.title ?
                                                 sdt2.assignments.map((sdt3, index) => (
                                                     <td key={`${sdt3.title}${index}`}>{sdt3.grade}</td>

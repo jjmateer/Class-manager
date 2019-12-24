@@ -50,7 +50,7 @@ class StudentSearch extends Component {
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
-        window.location.reload();
+        this.props.getStudents();
     }
     viewStudent = event => {
         event.preventDefault();
@@ -60,8 +60,9 @@ class StudentSearch extends Component {
     gradeStudent = event => {
         event.preventDefault();
         this.props.gradeStudent(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        alert(``)
-        window.location.reload();
+        alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        this.props.getStudents();
+        this.setState({ state: this.state });
     }
     updateStudentInfo = event => {
         event.preventDefault();
@@ -71,7 +72,7 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.updateStudentInfo(event.target.id, updatedStudent)
-        window.location.reload();
+        this.props.getStudents();
     }
     render() {
         return (

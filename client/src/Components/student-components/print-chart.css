@@ -1,25 +1,31 @@
-.print-chart-table tr, .print-chart-table td, .print-chart-table th {
-    border:1px solid black;
+.print-chart-table tr,
+.print-chart-table td,
+.print-chart-table th {
+  border: 1px solid black;
 }
 
-.print-chart-table th{
-width:50px;
-min-height:100px;
-}
 
 .print-chart-table {
-    /* width: 385px; */
-    /* height:90%; */
-    margin: auto ;
-    margin-top:20vh;
-    table-layout: fixed;
+  /* width: 385px; */
+  /* height:90%; */
+  border-top:none;
+  margin: auto;
+  margin-top: 30vh;
+  table-layout: fixed;
 }
 
+
+
+
 #sideways-title {
-    transform: 
-    rotate(-90deg);
-  width: 30px;
+  transform: rotate(-90deg);
+  width: auto;
+  font-size: 12.5px;
+  padding-left:3px;
+  margin:0;
 }
+
 #sideways-title-wrap {
-    width:10px;
+    padding-left:0!important;
+    max-width:25px;
 }
