@@ -15,8 +15,17 @@ var dbUrl = "";
 
 if (process.env.NODE_ENV === "production") {
   dbUrl = `mongodb+srv://jjmateer:${process.env.MONGO_PW}@cluster0-q0kab.mongodb.net/classorganizerdb?retryWrites=true&w=majority`;
-} else {
+  app.use(express.static(path.join(__dirname, "/client/build")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  });
+} 
+else {
   dbUrl = "mongodb://localhost/classorganizerdb";
+  app.use(express.static(path.join(__dirname, "/client/public")));
+  app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "./client/public/index.html"));
+  });
 }
 
 mongoose.connect(dbUrl, {
@@ -29,18 +38,6 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function callback() {
   console.log(`Connected to ${dbUrl}`);
 });
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "/client/build")));
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./client/build/index.html"));
-  });
-} else {
-  app.use(express.static(path.join(__dirname, "/client/public")));
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "./client/public/index.html"));
-  });
-}
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}.`);

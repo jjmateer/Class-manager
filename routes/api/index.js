@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const authRoutes = require("./auth.js");
+const authRoutes = require("./auth");
 const studentRoutes = require("./student");
 const curriculumRoutes = require("./curriculum");
 
