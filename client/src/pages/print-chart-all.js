@@ -25,6 +25,8 @@ class PrintChartAll extends Component {
     }
 
     render() {
+        let month = new Date().getMonth() + 1;
+        console.log(month)
         return (
             <>
                 <div className="table-responsive">
@@ -52,7 +54,7 @@ class PrintChartAll extends Component {
                                         {sdt.grades.map((sdt2) => (
                                             this.props.curriculum.view_subject.title === sdt2.title ?
                                                 sdt2.assignments.map((sdt3, index) => (
-                                                    <td key={`${sdt3.title}${index}`}>{sdt3.grade}</td>
+                                                    <td key={`${sdt3.title}${index}`}>{month >= 6 ? sdt3.gradeN : sdt.gradeM}</td>
                                                 ))
                                                 : null
 

@@ -47,8 +47,8 @@ class PrintChart extends Component {
                                         sdt.title === view_student.subject ?
                                             sdt.assignments.map((sdt2, index) => (
                                                 <tr key={`${sdt2.title}${index}`}>
-                                                    <td style={{ width: "15%" }}>{sdt2.grade}</td>
-                                                    <td style={{ width: "15%" }}>{sdt2.grade}</td>
+                                                    <td style={{ width: "15%" }}>{sdt2.gradeN}</td>
+                                                    <td style={{ width: "15%" }}>{sdt2.gradeM}</td>
                                                     <td>{sdt2.title}</td>
                                                 </tr>
                                             ))

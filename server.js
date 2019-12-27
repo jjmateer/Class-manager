@@ -6,6 +6,8 @@ const routes = require("./routes");
 const cors = require("cors");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
 app.use(cors());
 app.use(express.json());
@@ -28,6 +30,11 @@ else {
   });
 }
 
+io.on('connection', client => {
+  client.on('event', data => { console.log("hi") });
+  client.on('disconnect', () => { console.log("hi") });
+});
+
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -39,6 +46,6 @@ db.once("open", function callback() {
   console.log(`Connected to ${dbUrl}`);
 });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}.`);
 });

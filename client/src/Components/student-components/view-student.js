@@ -56,17 +56,17 @@ const ViewStudent = (props) => {
                     <td>
                       <Alert color="info">November grade: {assignment.gradeN}</Alert>
                       <ButtonGroup>
-                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} name={assignment.title} value={"L"} >L</Button>
-                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} name={assignment.title} value={"P"}>P</Button>
-                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} name={assignment.title} value={"M"}>M</Button>
+                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
                       </ButtonGroup>
                     </td>
                     <td>
                       <Alert color="info">May grade: {assignment.gradeM}</Alert>
                       <ButtonGroup>
-                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} name={assignment.title} value={"L"} >L</Button>
-                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} name={assignment.title} value={"P"}>P</Button>
-                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} name={assignment.title} value={"M"}>M</Button>
+                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
                       </ButtonGroup>
                     </td>
                   </tr>
