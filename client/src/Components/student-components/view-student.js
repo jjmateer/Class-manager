@@ -11,10 +11,9 @@ import { Link } from "react-router-dom";
 import './student.css';
 
 const ViewStudent = (props) => {
-  let trigger = false;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(prevState => !prevState);
-  const togglemodal = () => setModal(!modal); trigger = true;
+  const togglemodal = () => setModal(!modal);
   const [modal, setModal] = useState(false);
 
   return (
@@ -40,12 +39,14 @@ const ViewStudent = (props) => {
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (
             <div className="table-responsive" key={`${subject.title}${index}`}>
+              <Link to="/print-chart" key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link>
             <Table className="table">
               <thead>
                 <tr>
                   <th style={{padding:0}}>Assignment</th>
-                  <th style={{padding:0}}>Grade</th>
-                  <th style={{padding:0}}><Link to="/print-chart" key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link></th>
+                  <th style={{padding:0}}>November grade</th>
+                  <th style={{padding:0}}> May grade</th>
+                  {/* <th style={{padding:0}}><Link to="/print-chart" key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link></th> */}
                 </tr>
               </thead>
               <tbody>
@@ -53,11 +54,19 @@ const ViewStudent = (props) => {
                   <tr key={`${assignment._id}${index}`}>
                     <td>{assignment.title}</td>
                     <td>
-                      <Alert color="info">Current grade: {assignment.grade}</Alert>
+                      <Alert color="info">November grade: {assignment.gradeN}</Alert>
                       <ButtonGroup>
-                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} subject={subject.title} name={assignment.title} value={"L"} >L</Button>
-                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} subject={subject.title} name={assignment.title} value={"P"}>P</Button>
-                        <Button color="info" onClick={props.gradeStudent} id={props.student._id} subject={subject.title} name={assignment.title} value={"M"}>M</Button>
+                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} name={assignment.title} value={"L"} >L</Button>
+                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} name={assignment.title} value={"P"}>P</Button>
+                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} name={assignment.title} value={"M"}>M</Button>
+                      </ButtonGroup>
+                    </td>
+                    <td>
+                      <Alert color="info">May grade: {assignment.gradeM}</Alert>
+                      <ButtonGroup>
+                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} name={assignment.title} value={"L"} >L</Button>
+                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} name={assignment.title} value={"P"}>P</Button>
+                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} name={assignment.title} value={"M"}>M</Button>
                       </ButtonGroup>
                     </td>
                   </tr>

@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudent } from "../actions/student-actions";
+import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM } from "../actions/student-actions";
 import { Spinner } from "reactstrap"
 
 
@@ -28,7 +28,8 @@ class StudentSearch extends Component {
         deleteStudent: PropTypes.func.isRequired,
         updateStudentInfo: PropTypes.func.isRequired,
         viewStudent: PropTypes.func.isRequired,
-        gradeStudent: PropTypes.func.isRequired
+        gradeStudentN: PropTypes.func.isRequired,
+        gradeStudentM: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -47,22 +48,31 @@ class StudentSearch extends Component {
         };
         this.props.addStudent(newStudent);
         this.props.getStudents();
+        window.location.reload();
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
         this.props.getStudents();
+        window.location.reload();
     }
     viewStudent = event => {
         event.preventDefault();
         this.props.viewStudent(event.target.id, event.target.name);
         this.props.history.push("/print-chart");
     }
-    gradeStudent = event => {
+     gradeStudentN = event => {
         event.preventDefault();
-        this.props.gradeStudent(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
+        this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
         alert(`${event.target.name} grade changed to: ${event.target.value}.`)
         this.props.getStudents();
-        this.setState({ state: this.state });
+        window.location.reload();
+    }
+    gradeStudentM = event => {
+        event.preventDefault();
+        this.props.gradeStudentM(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
+        alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        this.props.getStudents();
+        window.location.reload();
     }
     updateStudentInfo = event => {
         event.preventDefault();
@@ -73,6 +83,7 @@ class StudentSearch extends Component {
         };
         this.props.updateStudentInfo(event.target.id, updatedStudent)
         this.props.getStudents();
+        window.location.reload();
     }
     render() {
         return (
@@ -89,7 +100,8 @@ class StudentSearch extends Component {
                         deleteStudent={this.deleteStudent}
                         handleInputChange={this.handleInputChange}
                         updateStudentInfo={this.updateStudentInfo}
-                        gradeStudent={this.gradeStudent}
+                        gradeStudentN={this.gradeStudentN}
+                        gradeStudentM={this.gradeStudentM}
                         view_subject={this.state.view_subject}
                         viewStudent={this.viewStudent}
                         error={this.props.error}
@@ -110,5 +122,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudent }
+    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM }
 )(StudentSearch);

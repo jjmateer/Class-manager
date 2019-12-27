@@ -61,7 +61,7 @@ router.put("/update/:id", (req, res) => {
         })
 })
 
-router.put("/grade-student", (req, res) => {
+router.put("/grade-studentN", (req, res) => {
     let newData;
     const { student, assignment, value, subject } = req.body;
     Student.findOne({ _id: student })
@@ -69,7 +69,31 @@ router.put("/grade-student", (req, res) => {
             for (let i = 0; i < studentData.grades.length; i++) {
                 for (let j = 0; j < studentData.grades[i].assignments.length; j++) {
                     if (studentData.grades[i].assignments[j].title === assignment && studentData.grades[i].title === subject) {
-                        studentData.grades[i].assignments[j].grade = value;
+                        studentData.grades[i].assignments[j].gradeN = value;
+                        newData = studentData;
+                    }
+                }
+            }
+        })
+        .then(() => {
+            Student.findOneAndUpdate({ _id: student },
+                { $set: { grades: newData.grades } })
+                .then(data => {
+                    res.status(200).json(data);
+                })
+        })
+
+})
+
+router.put("/grade-studentM", (req, res) => {
+    let newData;
+    const { student, assignment, value, subject } = req.body;
+    Student.findOne({ _id: student })
+        .then(studentData => {
+            for (let i = 0; i < studentData.grades.length; i++) {
+                for (let j = 0; j < studentData.grades[i].assignments.length; j++) {
+                    if (studentData.grades[i].assignments[j].title === assignment && studentData.grades[i].title === subject) {
+                        studentData.grades[i].assignments[j].gradeM = value;
                         newData = studentData;
                     }
                 }

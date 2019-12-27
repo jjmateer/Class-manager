@@ -42,7 +42,8 @@ router.put("/add-assignment/:title", (req, res) => {
                 assignments: {
                     _id: new mongoose.Types.ObjectId(),
                     title: req.body.data,
-                    grade: null
+                    gradeN: null,
+                    gradeM: null
                 }
             }
         }
@@ -55,7 +56,8 @@ router.put("/add-assignment/:title", (req, res) => {
                     $push: {
                         "grades.$.assignments": {
                             title: req.body.data,
-                            grade: null
+                            gradeN: null,
+                            gradeM: null
                         }
                     }
                 },
