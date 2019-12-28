@@ -15,6 +15,9 @@ import PublicRoute from "./Components/routing-components/public-route";
 import PrintChart from "./pages/print-chart-individual";
 import PrintChartAll from "./pages/print-chart-all";
 import Curriculum from "./pages/curriculum";
+import 'whatwg-fetch';
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:8000');
 
 class App extends Component {
   state = {
@@ -28,6 +31,9 @@ class App extends Component {
     clearErrors: PropTypes.func.isRequired,
     getSubjects: PropTypes.func.isRequired
   }
+sendSocketIO() {
+  socket.emit('example_message', 'demo');
+}
   componentDidMount() {
     this.props.loadUser();
     this.props.getSubjects();
@@ -45,9 +51,12 @@ class App extends Component {
     this.props.loginAdmin(userData);
   };
   render() {
+    this.sendSocketIO = this.sendSocketIO.bind(this);
+    console.log(socket)
     return (
       <Router>
         <>
+        <button onClick={this.sendSocketIO}>Send Socket.io</button>
           <Navigation handleInputChange={this.handleInputChange}
             loginSubmit={this.loginSubmit}
             clearErrors={this.props.clearErrors}

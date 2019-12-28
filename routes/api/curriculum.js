@@ -70,8 +70,6 @@ router.put("/add-assignment/:title", (req, res) => {
 })
 
 router.get("/view/:subject", (req, res) => {
-    console.log(req.params.subject)
-    console.log('FIRING')
     Curriculum.findOne({ title: req.params.subject })
         .then(data => {
             res.status(200).json(data)

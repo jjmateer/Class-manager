@@ -6,11 +6,13 @@ const routes = require("./routes");
 const cors = require("cors");
 const PORT = process.env.PORT || 3001;
 const app = express();
+var bodyParser = require('body-parser')
 const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+var io = require('socket.io')(server);
 
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(routes);
 
 var dbUrl = "";
@@ -21,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
   app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "./client/build/index.html"));
   });
-} 
+}
 else {
   dbUrl = "mongodb://localhost/classorganizerdb";
   app.use(express.static(path.join(__dirname, "/client/public")));
@@ -30,10 +32,6 @@ else {
   });
 }
 
-io.on('connection', client => {
-  client.on('event', data => { console.log("hi") });
-  client.on('disconnect', () => { console.log("hi") });
-});
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -49,3 +47,14 @@ db.once("open", function callback() {
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}.`);
 });
+
+io.on('connection', function (socket) {
+  console.log('a user connected');
+  socket.on('disconnect', function () {
+    console.log('User Disconnected');
+  });
+});
+
+io.on('connection', () =>{
+  console.log('User connected')
+})
