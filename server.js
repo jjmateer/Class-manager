@@ -54,7 +54,3 @@ io.on('connection', function (socket) {
     console.log('User Disconnected');
   });
 });
-
-io.on('connection', () =>{
-  console.log('User connected')
-})

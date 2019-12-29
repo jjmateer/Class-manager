@@ -17,7 +17,7 @@ import PrintChartAll from "./pages/print-chart-all";
 import Curriculum from "./pages/curriculum";
 import 'whatwg-fetch';
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://localhost:8000');
+const socket = openSocket('http://localhost:3001');
 
 class App extends Component {
   state = {
@@ -37,6 +37,7 @@ sendSocketIO() {
   componentDidMount() {
     this.props.loadUser();
     this.props.getSubjects();
+    this.sendSocketIO();
   }
   handleInputChange = event => {
     this.setState({ [event.target.id]: event.target.value });
@@ -56,7 +57,7 @@ sendSocketIO() {
     return (
       <Router>
         <>
-        <button onClick={this.sendSocketIO}>Send Socket.io</button>
+        {/* <button onClick={this.sendSocketIO}>Send Socket.io</button> */}
           <Navigation handleInputChange={this.handleInputChange}
             loginSubmit={this.loginSubmit}
             clearErrors={this.props.clearErrors}
