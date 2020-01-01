@@ -49,8 +49,8 @@ server.listen(PORT, () => {
 });
 
 io.on('connection', function (socket) {
-  console.log('a user connected');
+  console.log(`User Connected: ${socket.id}`);
   socket.on('disconnect', function () {
-    console.log('User Disconnected');
+    console.log(`User Disconnected ${socket.id}`);
   });
 });

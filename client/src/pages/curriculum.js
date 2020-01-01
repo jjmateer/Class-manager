@@ -40,6 +40,17 @@ class Curriculum extends Component {
         this.props.clearErrors();
         this.props.getSubjects();
     }
+
+    getSubjectsAndUpdate = () => {
+        setTimeout(
+            function () {
+                this.props.getSubjects();
+                this.forceUpdate();
+            }
+            .bind(this),
+            10
+        );
+    }
     handleInputChange = event => {
         this.setState({ [event.target.id]: event.target.value });
     };
@@ -47,22 +58,20 @@ class Curriculum extends Component {
     createCurriculum = event => {
         event.preventDefault();
         this.props.createCurriculum(this.state.title);
-        this.props.getSubjects();
-        this.props.getStudents();
+        this.getSubjectsAndUpdate();
+
     }
 
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
-        window.location.reload();
-        this.props.getStudents();
+        this.getSubjectsAndUpdate();
     }
 
     deleteSubject = event => {
         event.preventDefault();
         this.props.deleteSubject(event.target.id, event.target.value)
-        window.location.reload();
-        this.props.getStudents();
+        this.getSubjectsAndUpdate();
     }
 
     viewSubject = event => {

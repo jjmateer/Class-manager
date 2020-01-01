@@ -35,6 +35,17 @@ class StudentSearch extends Component {
         this.props.clearErrors();
         this.props.getStudents();
     }
+
+    getStudentsAndUpdate = () => {
+        setTimeout(
+            function () {
+                this.props.getStudents();
+                this.forceUpdate();
+            }
+            .bind(this),
+            10
+        );
+    }
     handleInputChange = event => {
         this.setState({ [event.target.id]: event.target.value });
     };
@@ -47,13 +58,12 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.addStudent(newStudent);
-        this.props.getStudents();
+        this.getStudentsAndUpdate()
         window.location.reload();
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
-        this.props.getStudents();
-        window.location.reload();
+        this.getStudentsAndUpdate()
     }
     viewStudent = event => {
         event.preventDefault();
@@ -64,13 +74,13 @@ class StudentSearch extends Component {
         event.preventDefault();
         this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
         alert(`${event.target.name} grade changed to: ${event.target.value}.`)
-        this.props.getStudents();
+        this.getStudentsAndUpdate()
     }
     gradeStudentM = event => {
         event.preventDefault();
         this.props.gradeStudentM(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
         alert(`${event.target.name} grade changed to: ${event.target.value}.`)
-        this.props.getStudents();
+        this.getStudentsAndUpdate()
     }
     updateStudentInfo = event => {
         event.preventDefault();
@@ -80,8 +90,7 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.updateStudentInfo(event.target.id, updatedStudent)
-        this.props.getStudents();
-        window.location.reload();
+        this.getStudentsAndUpdate();
     }
     render() {
         return (

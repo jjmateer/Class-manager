@@ -57,7 +57,6 @@ sendSocketIO() {
     return (
       <Router>
         <>
-        {/* <button onClick={this.sendSocketIO}>Send Socket.io</button> */}
           <Navigation handleInputChange={this.handleInputChange}
             loginSubmit={this.loginSubmit}
             clearErrors={this.props.clearErrors}
