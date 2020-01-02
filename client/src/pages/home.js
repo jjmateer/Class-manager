@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { Jumbotron, Button} from "reactstrap";
+import { Jumbotron, Button, ButtonGroup } from "reactstrap";
 
 
 class Home extends Component {
@@ -20,14 +20,8 @@ class Home extends Component {
     render() {
         return (
             <>
-                <Jumbotron><h1 className="display-3">Hello, {this.props.user ? this.props.user.name : null}</h1>
-                <hr className="my-10" />
-                    <Button tag={Link} to="/students">View Students</Button>
-                    <Button tag={Link} to="/students">Edit login info</Button>
+                <Jumbotron><h1 className="display-3">Welcome</h1>
                 </Jumbotron>
-                <div className="home-menu">
-
-                </div>
             </>
         );
     }

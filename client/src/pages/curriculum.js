@@ -47,7 +47,7 @@ class Curriculum extends Component {
                 this.props.getSubjects();
                 this.forceUpdate();
             }
-            .bind(this),
+                .bind(this),
             10
         );
     }
@@ -84,7 +84,7 @@ class Curriculum extends Component {
         const { subjects } = this.props.curriculum;
         return (
             <>
-                <h1 className="page-header" style={{marginBottom:100}}>Subjects</h1>
+                <h1 className="page-header" style={{ marginBottom: 100 }}>Subjects</h1>
                 <CreateCirriculum
                     createCurriculum={this.createCurriculum}
                     handleInputChange={this.handleInputChange}

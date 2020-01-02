@@ -54,7 +54,7 @@ class PrintChartAll extends Component {
                                         {sdt.grades.map((sdt2) => (
                                             this.props.curriculum.view_subject.title === sdt2.title ?
                                                 sdt2.assignments.map((sdt3, index) => (
-                                                    <td key={`${sdt3.title}${index}`}>{month >= 6 ? sdt3.gradeN : sdt.gradeM}</td>
+                                                    <td key={`${sdt3.title}${index}`}>{month > 6 ? sdt3.gradeN : sdt3.gradeM}</td>
                                                 ))
                                                 : null
 

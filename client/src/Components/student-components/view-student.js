@@ -46,7 +46,6 @@ const ViewStudent = (props) => {
                   <th style={{padding:0}}>Assignment</th>
                   <th style={{padding:0}}>November grade</th>
                   <th style={{padding:0}}> May grade</th>
-                  {/* <th style={{padding:0}}><Link to="/print-chart" key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link></th> */}
                 </tr>
               </thead>
               <tbody>

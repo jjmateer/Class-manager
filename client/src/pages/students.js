@@ -40,7 +40,7 @@ class StudentSearch extends Component {
         setTimeout(
             function () {
                 this.props.getStudents();
-                this.forceUpdate();
+                // this.forceUpdate();
             }
             .bind(this),
             10
@@ -58,8 +58,7 @@ class StudentSearch extends Component {
             birthday: this.state.birthday
         };
         this.props.addStudent(newStudent);
-        this.getStudentsAndUpdate()
-        window.location.reload();
+        this.getStudentsAndUpdate();
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);
