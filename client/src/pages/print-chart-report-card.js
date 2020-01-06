@@ -11,7 +11,6 @@ class PrintChartRC extends Component {
 
     componentDidMount() {
         this.props.getStudents();
-        console.log("working")
     }
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -25,44 +24,47 @@ class PrintChartRC extends Component {
 
     render() {
         const { view_student } = this.props.student;
+        const { sdata } = view_student;
+        const { grades } = sdata;
         return (
             <>
-                <div className="table-responsive">
-                    <table className="print-chart-table">
-                        <thead>
-                            <tr style={{ width: 400 }}>
-                                {view_student.sdata ?
-                                    <>
-                                        <th>NOVEMBER</th>
-                                        <th>MAY</th>
-                                        <th>{view_student.subject.toUpperCase()}</th>
-                                    </>
-                                    : null}
+                {
+                    grades ?
+                        grades.map((sdt) => (
+                            <div style={{ transform: "rotate(90deg)"}} className="table-responsive">
+                                <table className="print-chart-table">
+                                    <thead>
+                                        <tr style={{ width: 400 }}>
+                                            {grades ?
+                                                <>
+                                                    <th>NOVEMBER</th>
+                                                    <th>MAY</th>
+                                                    <th>{sdt.title.toUpperCase()}</th>
+                                                </>
+                                                : null}
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {/* {view_student.sdata ? */}
-                                <>
-                                    {view_student.sdata.map((sdt) => (
-                                        console.log(`TEST TEST`)
-                                        // sdt.title === view_student.subject ?
-                                        //     sdt.assignments.map((sdt2, index) => (
-                                        //         <tr key={`${sdt2.title}${index}`}>
-                                        //             <td style={{ width: "15%" }}>{sdt2.gradeN}</td>
-                                        //             <td style={{ width: "15%" }}>{sdt2.gradeM}</td>
-                                        //             <td>{sdt2.title}</td>
-                                        //             TESTTEST
-                                        //         </tr>
-                                        //     ))
-                                        //     : null
-                                    ))}
-                                </>
-                                {/* : null} */}
-                        </tbody>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {grades ?
+                                            <>
+                                                {grades.map((sdt) => (
+                                                    sdt.assignments.map((sdt2, index) => (
+                                                        <tr key={`${sdt2.title}${index}`}>
+                                                            <td style={{ width: "15%" }}>{sdt2.gradeN}</td>
+                                                            <td style={{ width: "15%" }}>{sdt2.gradeM}</td>
+                                                            <td>{sdt2.title}</td>
+                                                        </tr>
+                                                    ))
+                                                ))}
+                                            </>
+                                            : null}
+                                    </tbody>
 
-                    </table>
-                </div>
+                                </table>
+                            </div>
+                        ))
+                        : null}
             </>
         );
     }

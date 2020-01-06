@@ -32,9 +32,9 @@ class App extends Component {
     clearErrors: PropTypes.func.isRequired,
     getSubjects: PropTypes.func.isRequired
   }
-  sendSocketIO() {
-    socket.emit('example_message', 'demo');
-  }
+sendSocketIO() {
+  socket.emit('example_message', 'demo');
+}
   componentDidMount() {
     this.props.loadUser();
     this.props.getSubjects();
@@ -71,8 +71,8 @@ class App extends Component {
             <PrivateRoute exact path="/students" component={StudentSearch} />
             <PrivateRoute exact path="/print-chart" component={PrintChart} />
             <PrivateRoute exact path="/print-chart-all" component={PrintChartAll} />
-            <PrivateRoute exact path="/print-chart-rc" component={PrintChartRC} />
-            <Route exact path="/curriculum" component={Curriculum} />
+            <PrivateRoute exact path="/print-chart-rc" component={PrintChartRC}/>
+            <PrivateRoute exact path="/curriculum" component={Curriculum} />
             {/* <Route component={ErrorC} /> */}
           </Switch>
         </>

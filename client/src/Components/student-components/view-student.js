@@ -35,7 +35,7 @@ const ViewStudent = (props) => {
               })}
             </DropdownMenu>
           </Dropdown>
-          <Link to="/print-chart" key={props.student._id} onClick={props.viewStudent} id={props.student._id}>Report card</Link>
+          <Link to="/print-chart-rc" key={props.student._id} onClick={props.viewStudentRC} id={props.student._id}>Report card</Link>
         </ModalHeader>
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (

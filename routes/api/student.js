@@ -123,7 +123,7 @@ router.get("/view/:id/:subject", (req, res) => {
 router.get("/view/:id", (req, res) => {
     Student.findOne({ _id: req.params.id })
         .then(data => {
-            res.status(200).json({ sdata: data });
+            res.status(200).json({ sdata: data });43
         })
         .catch(() => {
             res.status(400).json({ msg: "Could not view student." })
