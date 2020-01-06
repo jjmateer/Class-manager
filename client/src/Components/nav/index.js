@@ -32,7 +32,7 @@ const Navigation = (props) => {
     return (
         <>
             <Navbar color="light" light expand="md">
-                <NavbarBrand tag={Link} to="/"><i class="fa fa-graduation-cap" aria-hidden="true"></i></NavbarBrand>
+                <NavbarBrand tag={Link} to="/"><i className="fa fa-graduation-cap" aria-hidden="true"></i></NavbarBrand>
                 <NavbarToggler onClick={togglenav} />
                 <Collapse isOpen={isOpen} navbar>
                     {!props.isAuthenticated ?

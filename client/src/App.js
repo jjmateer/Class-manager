@@ -14,6 +14,7 @@ import PrivateRoute from "./Components/routing-components/private-route";
 import PublicRoute from "./Components/routing-components/public-route";
 import PrintChart from "./pages/print-chart-individual";
 import PrintChartAll from "./pages/print-chart-all";
+import PrintChartRC from "./pages/print-chart-report-card";
 import Curriculum from "./pages/curriculum";
 import 'whatwg-fetch';
 import openSocket from 'socket.io-client';
@@ -31,9 +32,9 @@ class App extends Component {
     clearErrors: PropTypes.func.isRequired,
     getSubjects: PropTypes.func.isRequired
   }
-sendSocketIO() {
-  socket.emit('example_message', 'demo');
-}
+  sendSocketIO() {
+    socket.emit('example_message', 'demo');
+  }
   componentDidMount() {
     this.props.loadUser();
     this.props.getSubjects();
@@ -70,6 +71,7 @@ sendSocketIO() {
             <PrivateRoute exact path="/students" component={StudentSearch} />
             <PrivateRoute exact path="/print-chart" component={PrintChart} />
             <PrivateRoute exact path="/print-chart-all" component={PrintChartAll} />
+            <PrivateRoute exact path="/print-chart-rc" component={PrintChartRC} />
             <Route exact path="/curriculum" component={Curriculum} />
             {/* <Route component={ErrorC} /> */}
           </Switch>

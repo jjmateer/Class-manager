@@ -20,7 +20,7 @@ class Home extends Component {
     render() {
         return (
             <>
-                <Jumbotron><h1 className="display-3">Welcome</h1>
+                <Jumbotron><h1 className="display-3">Class manager</h1>
                 </Jumbotron>
             </>
         );

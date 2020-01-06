@@ -35,43 +35,44 @@ const ViewStudent = (props) => {
               })}
             </DropdownMenu>
           </Dropdown>
+          <Link to="/print-chart" key={props.student._id} onClick={props.viewStudent} id={props.student._id}>Report card</Link>
         </ModalHeader>
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (
             <div className="table-responsive" key={`${subject.title}${index}`}>
               <Link to="/print-chart" key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link>
-            <Table className="table">
-              <thead>
-                <tr>
-                  <th style={{padding:0}}>Assignment</th>
-                  <th style={{padding:0}}>November grade</th>
-                  <th style={{padding:0}}> May grade</th>
-                </tr>
-              </thead>
-              <tbody>
-                {subject.assignments.map((assignment, index) =>
-                  <tr key={`${assignment._id}${index}`}>
-                    <td>{assignment.title}</td>
-                    <td>
-                      <Alert color="info">November grade: {assignment.gradeN}</Alert>
-                      <ButtonGroup>
-                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
-                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
-                        <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
-                      </ButtonGroup>
-                    </td>
-                    <td>
-                      <Alert color="info">May grade: {assignment.gradeM}</Alert>
-                      <ButtonGroup>
-                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
-                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
-                        <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
-                      </ButtonGroup>
-                    </td>
+              <Table className="table">
+                <thead>
+                  <tr>
+                    <th style={{ padding: 0 }}>Assignment</th>
+                    <th style={{ padding: 0 }}>November grade</th>
+                    <th style={{ padding: 0 }}> May grade</th>
                   </tr>
-                )}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {subject.assignments.map((assignment, index) =>
+                    <tr key={`${assignment._id}${index}`}>
+                      <td>{assignment.title}</td>
+                      <td>
+                        <Alert color="info">November grade: {assignment.gradeN}</Alert>
+                        <ButtonGroup>
+                          <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                          <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                          <Button color="info" onClick={props.gradeStudentN} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                        </ButtonGroup>
+                      </td>
+                      <td>
+                        <Alert color="info">May grade: {assignment.gradeM}</Alert>
+                        <ButtonGroup>
+                          <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                          <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                          <Button color="info" onClick={props.gradeStudentM} id={props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                        </ButtonGroup>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
             </div>
           ) : null
           )

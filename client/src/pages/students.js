@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM } from "../actions/student-actions";
+import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM, viewStudentRC } from "../actions/student-actions";
 import { Spinner } from "reactstrap"
 
 
@@ -28,6 +28,7 @@ class StudentSearch extends Component {
         deleteStudent: PropTypes.func.isRequired,
         updateStudentInfo: PropTypes.func.isRequired,
         viewStudent: PropTypes.func.isRequired,
+        viewStudentRC: PropTypes.func.isRequired,
         gradeStudentN: PropTypes.func.isRequired,
         gradeStudentM: PropTypes.func.isRequired
     }
@@ -40,9 +41,9 @@ class StudentSearch extends Component {
         setTimeout(
             function () {
                 this.props.getStudents();
-                // this.forceUpdate();
+                this.forceUpdate();
             }
-            .bind(this),
+                .bind(this),
             10
         );
     }
@@ -69,7 +70,12 @@ class StudentSearch extends Component {
         this.props.viewStudent(event.target.id, event.target.name);
         this.props.history.push("/print-chart");
     }
-     gradeStudentN = event => {
+    viewStudentRC = event => {
+        event.preventDefault();
+        this.props.viewStudent(event.target.id);
+        this.props.history.push("/print-chart");
+    }
+    gradeStudentN = event => {
         event.preventDefault();
         this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
         alert(`${event.target.name} grade changed to: ${event.target.value}.`)
@@ -110,6 +116,7 @@ class StudentSearch extends Component {
                         gradeStudentM={this.gradeStudentM}
                         view_subject={this.state.view_subject}
                         viewStudent={this.viewStudent}
+                        viewStudentRC={this.viewStudentRC}
                         error={this.props.error}
                     />
                     : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>}
@@ -128,5 +135,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM }
+    { clearErrors, loadUser, addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM, viewStudentRC }
 )(StudentSearch);

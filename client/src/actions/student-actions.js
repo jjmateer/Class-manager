@@ -88,6 +88,23 @@ export const viewStudent = (id, subject) => (dispatch) => {
             dispatch(returnErrors(err.response.data, err.response.status));
         });
 }
+export const viewStudentRC = (id) => (dispatch) => {
+    const config = {
+        header: {
+            "Content-Type": "application/json"
+        }
+    }
+    axios.get(`http://localhost:3001/api/student/view/${id}`, config)
+        .then(res => {
+            dispatch({
+                type: VIEW_STUDENT,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status));
+        });
+}
 
 export const gradeStudentN = (student, assignment, value, subject) => (dispatch) => {
     dispatch({ type: GRADE_STUDENT })

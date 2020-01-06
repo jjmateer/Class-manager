@@ -32,6 +32,7 @@ const StudentTable = (props) => {
                                 <ButtonGroup>
                                     <ViewStudent
                                         viewStudent={props.viewStudent}
+                                        viewStudentRC={props.viewStudentRC}
                                         gradeStudentN={props.gradeStudentN}
                                         gradeStudentM={props.gradeStudentM}
                                         view_subject={props.view_subject}

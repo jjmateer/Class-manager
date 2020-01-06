@@ -113,10 +113,20 @@ router.get("/view/:id/:subject", (req, res) => {
     Student.findOne({ _id: req.params.id })
         .then(data => {
             res.status(200).json({ sdata: data, subject: req.params.subject });
+            console.log(data)
         })
         .catch(() => {
             res.status(400).json({ msg: "Could not view student." })
         })
 })
 
+router.get("/view/:id", (req, res) => {
+    Student.findOne({ _id: req.params.id })
+        .then(data => {
+            res.status(200).json({ sdata: data });
+        })
+        .catch(() => {
+            res.status(400).json({ msg: "Could not view student." })
+        })
+})
 module.exports = router;
