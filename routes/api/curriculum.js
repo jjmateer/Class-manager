@@ -101,39 +101,12 @@ router.delete("/delete-subject/:id/:title", (req, res) => {
         })
 })
 router.put("/delete-assignment/:id/:assignment", (req, res) => {
-    let newData;
-    Curriculum.findOne(
-        { _id: req.params.id }
-    )
-        .then(data => {
-            // console.log(data.assignments)
-            for (let i = 0; i < data.assignments.length; i++) {
-                // console.log(req.params.assignment);
-                // console.log(data.assignments[i].title);
-                // console.log(data.assignments[i])
-                if (data.assignments[i].title === req.params.assignment) {
-                    // console.log(data.assignments.indexOf(data.assignments[i]));
-                    // let updatedArr = data.assignments.splice(data.assignments.indexOf(data.assignments[i]), 1);
-                    var filtered = data.assignments.filter((element) => {
-                        return element.title != req.params.assignment;
-                    });
-                    // console.log(filtered)
-                    data.assignments = filtered;
-                    newData = data;
-                }
-            }
-        }).then(() => {
-            console.log(newData.assignments)
-            Curriculum.findOneAndUpdate(
-                { _id: req.params.id },
-                { $set: { assignments: newData.assignments } }
-            ).then(() => {
-                res.status(200).json({ msg: "Assignment deleted." })
-            })
-        })
-        .catch(err => {
-            res.status(400).json({ msg: err })
-        })
+    Curriculum.updateOne(
+        { _id: req.params.id },
+        { $pull: { "assignments": { "title": req.params.assignment } } }
+    ).then(() => {
+        res.status(200).json({ msg: "Assignment deleted." });
+    })
 })
 
 
