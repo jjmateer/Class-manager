@@ -100,30 +100,36 @@ router.delete("/delete-subject/:id/:title", (req, res) => {
             res.status(400).json({ msg: err })
         })
 })
-router.delete("/delete-assignment/:id/:assignment", (req, res) => {
-    console.log("FIRING")
-    console.log(req.params.assignment)
-    console.log(req.params.id)
+router.put("/delete-assignment/:id/:assignment", (req, res) => {
     let newData;
     Curriculum.findOne(
         { _id: req.params.id }
     )
         .then(data => {
-            console.log(data.assignments)
-            for(let i = 0; i <= data.assignments.length;i++){
-                if(data.assignments[i].title === req.params.assignment) {
-                    // data.assignments[i] = null;
-                    console.log(data.assignments[i])
-                    newdata = data;
+            // console.log(data.assignments)
+            for (let i = 0; i < data.assignments.length; i++) {
+                // console.log(req.params.assignment);
+                // console.log(data.assignments[i].title);
+                // console.log(data.assignments[i])
+                if (data.assignments[i].title === req.params.assignment) {
+                    // console.log(data.assignments.indexOf(data.assignments[i]));
+                    // let updatedArr = data.assignments.splice(data.assignments.indexOf(data.assignments[i]), 1);
+                    var filtered = data.assignments.filter((element) => {
+                        return element.title != req.params.assignment;
+                    });
+                    // console.log(filtered)
+                    data.assignments = filtered;
+                    newData = data;
                 }
             }
-            res.status(200).json({ msg: "Assignment deleted from database." })
         }).then(() => {
-            console.log(newData)
-            // Curriculum.findOneAndUpdate(
-            //     {_id:req.params.id},
-            //     {$set: {assignments: newData}}
-            // )
+            console.log(newData.assignments)
+            Curriculum.findOneAndUpdate(
+                { _id: req.params.id },
+                { $set: { assignments: newData.assignments } }
+            ).then(() => {
+                res.status(200).json({ msg: "Assignment deleted." })
+            })
         })
         .catch(err => {
             res.status(400).json({ msg: err })

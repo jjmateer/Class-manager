@@ -131,7 +131,7 @@ export const deleteAssignment = (id, assignment) => (dispatch) => {
     console.log(`${id} and ${assignment}`)
     dispatch({ type: DELETE_ASSIGNMENT })
 
-    axios.delete(`http://localhost:3001/api/curriculum/delete-assignment/${id}/${assignment}`)
+    axios.put(`http://localhost:3001/api/curriculum/delete-assignment/${id}/${assignment}`)
         .then(res => {
             dispatch({
                 type: DELETE_ASSIGNMENT_SUCCESS,
