@@ -4,28 +4,47 @@
   border: 1px solid black;
 }
 
-
 .print-chart-table {
   /* width: 385px; */
   /* height:90%; */
-  border-top:none;
+  border-top: none;
   margin: auto;
-  margin-top: 30vh;
+  margin-top: 10vh;
   table-layout: fixed;
 }
 
+#RC-print-chart-table {
+  /* transform: rotate(90deg); */
+  border-top: none;
+  /* margin-top: 0; */
+  /* margin: auto; */
+  table-layout: fixed;
+  display: block;
+  margin-bottom:0px;
+  margin-top:0px;
+  width:500px;
+}
 
-
+#RC-table-wrap {
+  display:block;
+  margin:auto;
+  width:500px;
+  height:auto;
+}
 
 #sideways-title {
   transform: rotate(-90deg);
   width: auto;
   font-size: 12.5px;
-  padding-left:3px;
-  margin:0;
+  padding-left: 3px;
+  margin: 0;
 }
 
 #sideways-title-wrap {
-    padding-left:0!important;
-    max-width:25px;
+  padding-left: 0 !important;
+  max-width: 25px;
+}
+
+#RC-table-wrap {
+  margin-bottom: 10vh;
 }

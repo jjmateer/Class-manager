@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
 import { getStudents } from "../actions/student-actions";
+import ReactToPrint from "react-to-print";
 import "../Components/student-components/print-chart.css";
 
 
@@ -11,6 +12,7 @@ class PrintChartRC extends Component {
 
     componentDidMount() {
         this.props.getStudents();
+
     }
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -24,18 +26,16 @@ class PrintChartRC extends Component {
 
     render() {
         const { view_student } = this.props.student;
-        const { sdata } = view_student;
-        const { grades } = sdata;
         return (
             <>
                 {
-                    grades ?
-                        grades.map((sdt) => (
-                            <div style={{ transform: "rotate(90deg)"}} className="table-responsive">
-                                <table className="print-chart-table">
+                    view_student.sdata ?
+                        <div id="RC-table-wrap">
+                            {view_student.sdata.grades.map((sdt) => (
+                                <table id="RC-print-chart-table" className="print-chart-table">
                                     <thead>
-                                        <tr style={{ width: 400 }}>
-                                            {grades ?
+                                        <tr>
+                                            {view_student.sdata.grades ?
                                                 <>
                                                     <th>NOVEMBER</th>
                                                     <th>MAY</th>
@@ -46,24 +46,22 @@ class PrintChartRC extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {grades ?
+                                        {view_student.sdata.grades ?
                                             <>
-                                                {grades.map((sdt) => (
-                                                    sdt.assignments.map((sdt2, index) => (
-                                                        <tr key={`${sdt2.title}${index}`}>
-                                                            <td style={{ width: "15%" }}>{sdt2.gradeN}</td>
-                                                            <td style={{ width: "15%" }}>{sdt2.gradeM}</td>
-                                                            <td>{sdt2.title}</td>
-                                                        </tr>
-                                                    ))
+                                                {sdt.assignments.map((sdt2, index) => (
+                                                    <tr key={`${sdt2.title}${index}`}>
+                                                        <td style={{ width: "15%" }}>{sdt2.gradeN}</td>
+                                                        <td style={{ width: "15%" }}>{sdt2.gradeM}</td>
+                                                        <td>{sdt2.title}</td>
+                                                    </tr>
                                                 ))}
                                             </>
                                             : null}
                                     </tbody>
 
                                 </table>
-                            </div>
-                        ))
+                            ))}
+                        </div>
                         : null}
             </>
         );

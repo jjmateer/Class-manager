@@ -17,7 +17,10 @@ import {
     ADD_ASSIGNMENT_FAIL,
     DELETE_SUBJECT,
     DELETE_SUBJECT_FAIL,
-    DELETE_SUBJECT_SUCCESS
+    DELETE_SUBJECT_SUCCESS,
+    DELETE_ASSIGNMENT,
+    DELETE_ASSIGNMENT_SUCCESS,
+    DELETE_ASSIGNMENT_FAIL,
 } from "./types";
 
 export const getSubjects = () => (dispatch) => {
@@ -112,7 +115,7 @@ export const deleteSubject = (id, title) => (dispatch) => {
     console.log(title)
     dispatch({ type: DELETE_SUBJECT })
 
-    axios.put(`http://localhost:3001/api/curriculum/delete/${id}/${title}`)
+    axios.delete(`http://localhost:3001/api/curriculum/delete-subject/${id}/${title}`)
         .then(res => {
             dispatch({
                 type: DELETE_SUBJECT_SUCCESS,
@@ -121,5 +124,21 @@ export const deleteSubject = (id, title) => (dispatch) => {
         })
         .catch(err => {
             dispatch({ type: DELETE_SUBJECT_FAIL })
+        })
+}
+
+export const deleteAssignment = (id, assignment) => (dispatch) => {
+    console.log(`${id} and ${assignment}`)
+    dispatch({ type: DELETE_ASSIGNMENT })
+
+    axios.delete(`http://localhost:3001/api/curriculum/delete-assignment/${id}/${assignment}`)
+        .then(res => {
+            dispatch({
+                type: DELETE_ASSIGNMENT_SUCCESS,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            dispatch({ type: DELETE_ASSIGNMENT_FAIL })
         })
 }

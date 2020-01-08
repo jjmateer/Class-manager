@@ -79,7 +79,7 @@ router.get("/view/:subject", (req, res) => {
             res.status(400).json({ msg: err })
         })
 })
-router.put("/delete/:id/:title", (req, res) => {
+router.delete("/delete-subject/:id/:title", (req, res) => {
     console.log(req.params.title)
     console.log(req.params.id)
     Curriculum.deleteOne(
@@ -95,6 +95,35 @@ router.put("/delete/:id/:title", (req, res) => {
                 }
             ).then(data => { console.log(data) })
             res.status(200).json({ msg: "Subject deleted from database." })
+        })
+        .catch(err => {
+            res.status(400).json({ msg: err })
+        })
+})
+router.delete("/delete-assignment/:id/:assignment", (req, res) => {
+    console.log("FIRING")
+    console.log(req.params.assignment)
+    console.log(req.params.id)
+    let newData;
+    Curriculum.findOne(
+        { _id: req.params.id }
+    )
+        .then(data => {
+            console.log(data.assignments)
+            for(let i = 0; i <= data.assignments.length;i++){
+                if(data.assignments[i].title === req.params.assignment) {
+                    // data.assignments[i] = null;
+                    console.log(data.assignments[i])
+                    newdata = data;
+                }
+            }
+            res.status(200).json({ msg: "Assignment deleted from database." })
+        }).then(() => {
+            console.log(newData)
+            // Curriculum.findOneAndUpdate(
+            //     {_id:req.params.id},
+            //     {$set: {assignments: newData}}
+            // )
         })
         .catch(err => {
             res.status(400).json({ msg: err })

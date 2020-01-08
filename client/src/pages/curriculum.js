@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { createCurriculum, getSubjects, addAssignment, deleteSubject, viewSubject } from "../actions/curriculum-actions";
+import {
+    createCurriculum,
+    getSubjects,
+    addAssignment,
+    deleteSubject,
+    viewSubject,
+    deleteAssignment
+} from "../actions/curriculum-actions";
 import { getStudents, viewStudent } from "../actions/student-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
@@ -30,11 +37,11 @@ class Curriculum extends Component {
         createCurriculum: PropTypes.func.isRequired,
         getSubjects: PropTypes.func.isRequired,
         curriculum: PropTypes.object.isRequired,
+        deleteAssignment: PropTypes.func.isRequired,
         addAssignment: PropTypes.func.isRequired,
         deleteSubject: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
-        viewStudent: PropTypes.func.isRequired,
-        viewSubject: PropTypes.func.isRequired
+        viewStudent: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -59,6 +66,7 @@ class Curriculum extends Component {
         event.preventDefault();
         this.props.createCurriculum(this.state.title);
         this.getSubjectsAndUpdate();
+        console.log(`Adding subject: ${this.state.title}`)
 
     }
 
@@ -71,6 +79,12 @@ class Curriculum extends Component {
     deleteSubject = event => {
         event.preventDefault();
         this.props.deleteSubject(event.target.id, event.target.value)
+        this.getSubjectsAndUpdate();
+    }
+
+    deleteAssignment = event => {
+        event.preventDefault();
+        this.props.deleteAssignment(event.target.id, event.target.name);
         this.getSubjectsAndUpdate();
     }
 
@@ -107,6 +121,7 @@ class Curriculum extends Component {
                                                 subjecttitle={subject.title}
                                                 subjectinfo={subject}
                                                 viewSubject={this.viewSubject}
+                                                deleteAssignment={this.deleteAssignment}
                                             />
                                             <AddAssignment
                                                 title={subject.title}
@@ -142,5 +157,16 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { clearErrors, loadUser, createCurriculum, getSubjects, addAssignment, deleteSubject, getStudents, viewStudent, viewSubject }
+    {
+        clearErrors,
+        loadUser,
+        createCurriculum,
+        getSubjects,
+        addAssignment,
+        deleteSubject,
+        getStudents,
+        viewStudent,
+        viewSubject,
+        deleteAssignment
+    }
 )(Curriculum);

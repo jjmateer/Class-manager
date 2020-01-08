@@ -72,7 +72,7 @@ class StudentSearch extends Component {
     }
     viewStudentRC = event => {
         event.preventDefault();
-        this.props.viewStudent(event.target.id);
+        this.props.viewStudentRC(event.target.id);
         this.props.history.push("/print-chart-rc");
     }
     gradeStudentN = event => {

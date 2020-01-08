@@ -11,14 +11,17 @@ import {
     GET_SUBJECTS_SUCCESS,
     DELETE_SUBJECT,
     DELETE_SUBJECT_FAIL,
-    DELETE_SUBJECT_SUCCESS
+    DELETE_SUBJECT_SUCCESS,
+    DELETE_ASSIGNMENT,
+    DELETE_ASSIGNMENT_SUCCESS,
+    DELETE_ASSIGNMENT_FAIL
 } from "../actions/types";
 
 const inititalState = {
     msg: {},
     isLoading: false,
     subjects: [],
-    view_subject:{}
+    view_subject: {}
 };
 
 export default function (state = inititalState, action) {
@@ -33,6 +36,7 @@ export default function (state = inititalState, action) {
         case CREATE_CURRICULUM:
         case GET_SUBJECTS:
         case DELETE_SUBJECT:
+        case DELETE_ASSIGNMENT:
             return {
                 ...state,
                 isLoading: true
@@ -41,6 +45,7 @@ export default function (state = inititalState, action) {
         case CREATE_CURRICULUM_FAIL:
         case GET_SUBJECTS_FAIL:
         case DELETE_SUBJECT_FAIL:
+        case DELETE_ASSIGNMENT_FAIL:
             return {
                 ...state,
                 isLoading: false,
@@ -48,6 +53,7 @@ export default function (state = inititalState, action) {
             }
         case EDIT_CURRICULUM_SUCCESS:
         case GET_SUBJECTS_SUCCESS:
+        case DELETE_ASSIGNMENT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,

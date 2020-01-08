@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Button,
     Modal,
@@ -27,9 +27,12 @@ const ViewSubject = (props) => {
                                 <th><Link to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ float: "right" }}>Spreadsheet</Link></th>
                             </tr>
                             {assignments.length ?
-                                assignments.map((subject) => {
-                                    return <tr key={subject.title}>
-                                        <td>{subject.title}</td>
+                                assignments.map((assignment) => {
+                                    return <tr key={assignment.title}>
+                                        <td>
+                                            <p>{assignment.title}</p>
+                                            <Button color="danger" id={props.subjectinfo._id} name={assignment.title} onClick={props.deleteAssignment}>X</Button>
+                                        </td>
                                     </tr>
                                 }) : null}
                         </thead>
