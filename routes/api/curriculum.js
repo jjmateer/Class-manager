@@ -107,6 +107,16 @@ router.put("/delete-assignment/:id/:assignment", (req, res) => {
     ).then(() => {
         res.status(200).json({ msg: "Assignment deleted." });
     })
+    Student.updateMany(
+        {},
+        {
+            $pull: {
+                "grades.$[].assignments": {
+                    "title": req.params.assignment
+                }
+            }
+        },
+    ).then(()=>{console.log("success!")})
 })
 
 

@@ -5,7 +5,16 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { clearErrors } from "../actions/error-actions";
 import { loadUser } from "../actions/auth-actions";
-import { addStudent, getStudents, deleteStudent, updateStudentInfo, viewStudent, gradeStudentN, gradeStudentM, viewStudentRC } from "../actions/student-actions";
+import {
+    addStudent,
+    getStudents,
+    deleteStudent,
+    updateStudentInfo,
+    viewStudent,
+    gradeStudentN,
+    gradeStudentM,
+    viewStudentRC
+} from "../actions/student-actions";
 import { Spinner } from "reactstrap"
 
 

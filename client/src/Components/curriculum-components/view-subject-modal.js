@@ -19,12 +19,12 @@ const ViewSubject = (props) => {
             <Button color="info" onClick={togglemodal}>View</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>{props.subjecttitle}</ModalHeader>
+                <Link to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ textAlign:"center" }}>Spreadsheet</Link>
                 <div className="table-responsive">
                     <Table key={props.subjecttitle}>
                         <thead>
                             <tr>
                                 <th>Assignment</th>
-                                <th><Link to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ float: "right" }}>Spreadsheet</Link></th>
                             </tr>
                             {assignments.length ?
                                 assignments.map((assignment) => {

@@ -29,8 +29,8 @@ class PrintChartAll extends Component {
         console.log(month)
         return (
             <>
-                <div className="table-responsive">
-                    <table className="print-chart-table">
+                <div className="table-responsive" id="print-all-table-wrap">
+                    <table className="print-chart-table" id="rotate-table">
                         <thead>
                             <tr>
                                 <td />
@@ -50,7 +50,7 @@ class PrintChartAll extends Component {
                             {this.props.student.students ?
                                 (this.props.student.students.map((sdt, index) => (
                                     <tr key={`${sdt._id}${index}`}>
-                                        <th key={`${sdt._id}${index}`}>{sdt.firstName}</th>
+                                        <th key={`${sdt._id}${index}`}>{sdt.firstName} {sdt.lastName}</th>
                                         {sdt.grades.map((sdt2) => (
                                             this.props.curriculum.view_subject.title === sdt2.title ?
                                                 sdt2.assignments.map((sdt3, index) => (
