@@ -59,9 +59,3 @@
   overflow:visible;
   font-size:18px;
 }
-
-@media print {
-  #print-all-table-wrap {
-    margin-top:-105px;
-  }
-}

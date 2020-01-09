@@ -23,7 +23,6 @@ class StudentSearch extends Component {
     state = {
         firstName: "",
         lastName: "",
-        birthday: "",
         view_subject: "",
         errors: {}
     };
@@ -64,11 +63,11 @@ class StudentSearch extends Component {
         event.preventDefault();
         var newStudent = {
             firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            birthday: this.state.birthday
+            lastName: this.state.lastName
         };
         this.props.addStudent(newStudent);
         this.getStudentsAndUpdate();
+        window.location.reload()        
     };
     deleteStudent = event => {
         this.props.deleteStudent(event.target.id);

@@ -2,7 +2,8 @@ const Curriculum = require("../../models/curriculum");
 const Student = require("../../models/student");
 const router = require("express").Router();
 const mongoose = require('mongoose');
-router.post("/new/:title", (req, res) => {
+router.post("/new-subject/:title", (req, res) => {
+    console.log("firing")
     const newCurriculum = {
         title: req.params.title
     }

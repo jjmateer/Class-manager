@@ -41,7 +41,7 @@ export const getSubjects = () => (dispatch) => {
 export const createCurriculum = title => (dispatch) => {
     dispatch({ type: CREATE_CURRICULUM })
 
-    axios.post(`http://localhost:3001/api/curriculum/new/${title}`)
+    axios.post(`http://localhost:3001/api/curriculum/new-subject/${title}`)
         .then(res => {
             dispatch({
                 type: CREATE_CURRICULUM_SUCCESS,

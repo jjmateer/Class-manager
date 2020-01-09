@@ -3,15 +3,14 @@ const Curriculum = require("../../models/curriculum");
 const router = require("express").Router();
 
 router.post("/new", (req, res) => {
-    const { firstName, lastName, birthday } = req.body;
+    const { firstName, lastName } = req.body;
     Student.findOne({ firstName: firstName, lastName: lastName })
         .then(student => {
             if (!student) {
                 Student.create({
                     firstName: firstName,
                     lastName: lastName,
-                    grades: [],
-                    birthday: birthday,
+                    grades: []
                 }).then(data => {
                     res.status(200).json({ data, msg: { msg: "Student added to database." } })
                     Curriculum.find({})

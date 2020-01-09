@@ -13,10 +13,6 @@ const studentSchema = new Schema({
         type:Array,
         required: true
     },
-    birthday: {
-        type:String,
-        required: true
-    },
     studentCreated: {
         type: Date,
         default: Date.now

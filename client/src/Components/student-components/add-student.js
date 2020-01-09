@@ -37,10 +37,6 @@ const AddStudent = (props) => {
                             <Input required onChange={props.handleInputChange} id="lastName" />
                         </FormGroup>
                         <FormGroup>
-                            <Label htmlFor="password2">Date of birth</Label>
-                            <Input required onChange={props.handleInputChange} id="birthday" placeholder="DD/MM/YYYY" />
-                        </FormGroup>
-                        <FormGroup>
                             <Button  color="success" className="register-submit-btn" type="submit" >Submit</Button>
                         </FormGroup>
                     </Form>

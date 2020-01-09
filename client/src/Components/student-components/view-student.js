@@ -40,7 +40,7 @@ const ViewStudent = (props) => {
         {
           props.student.grades.map((subject, index) => subject.title === props.view_subject && subject.assignments ? (
             <div className="table-responsive" key={`${subject.title}${index}`}>
-              <Link to="/print-chart" key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link>
+              <Link to="/print-chart" style={{textAlign:"center", width:"100%", display:"block"}} key={props.student._id} name={subject.title} onClick={props.viewStudent} id={props.student._id}>Spreadsheet</Link>
               <Table className="table">
                 <thead>
                   <tr>

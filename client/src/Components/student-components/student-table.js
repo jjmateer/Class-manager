@@ -18,16 +18,14 @@ const StudentTable = (props) => {
                     <tr>
                         <th>Last Name</th>
                         <th>First Name</th>
-                        <th>Birthday</th>
                         <th>Options</th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     {props.students.map((student) => (
                         <tr key={student._id}>
                             <td>{student.lastName}</td>
                             <td>{student.firstName}</td>
-                            <td>{student.birthday}</td>
                             <td>
                                 <ButtonGroup>
                                     <ViewStudent

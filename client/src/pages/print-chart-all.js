@@ -33,7 +33,7 @@ class PrintChartAll extends Component {
                     <table className="print-chart-table" id="rotate-table">
                         <thead>
                             <tr>
-                                <td />
+                                <td>{this.props.curriculum.view_subject.title}</td>
                                 {this.props.student.students[0] ?
                                     this.props.student.students[0].grades.map((sdt) => (
                                         this.props.curriculum.view_subject.title === sdt.title ?

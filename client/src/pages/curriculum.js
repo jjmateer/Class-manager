@@ -14,8 +14,12 @@ import {
 import { getStudents, viewStudent } from "../actions/student-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
 import {
-    Card, CardBody,
-    CardTitle, ButtonGroup, Spinner
+    Card,
+    CardBody,
+    CardTitle,
+    ButtonGroup,
+    Spinner,
+    Table
 } from 'reactstrap';
 import CreateCirriculum from "../Components/curriculum-components/create-curriculum-form";
 import ViewSubject from "../Components/curriculum-components/view-subject-modal";
@@ -107,40 +111,49 @@ class Curriculum extends Component {
                 {!this.props.curriculum.isLoading ?
                     <>
                         {subjects.length ?
-
-                            subjects.map((subject, index) => (
-                                <Card key={`${subject._id}${index}`}>
-                                    <CardBody>
-                                        <CardTitle>{subject.title}</CardTitle>
-                                        <ButtonGroup style={{ float: "right" }}>
-                                            <ViewSubject
-                                                subjectinfo={subject}
-                                                getSubjects={this.props.getSubjects}
-                                                viewStudent={this.props.viewStudent}
-                                                student={this.props.student}
-                                                subjecttitle={subject.title}
-                                                subjectinfo={subject}
-                                                viewSubject={this.viewSubject}
-                                                deleteAssignment={this.deleteAssignment}
-                                            />
-                                            <AddAssignment
-                                                title={subject.title}
-                                                addAssignment={this.addAssignment}
-                                                handleInputChange={this.handleInputChange}
-                                                subjectinfo={subject}
-                                            />
-                                            <VerifyDeleteModal
-                                                subject={subject}
-                                                deleteSubject={this.deleteSubject}
-                                            />
-                                        </ButtonGroup>
-                                    </CardBody>
-                                </Card>
-                            ))
-
+                            <div className="table-responsive">
+                                <Table>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Options</th>
+                                    </tr>
+                                    {subjects.map((subject, index) => (
+                                        <tr key={`${subject._id}${index}`}>
+                                            <td>
+                                                <CardTitle>{subject.title}</CardTitle>
+                                            </td>
+                                            <td>
+                                                <ButtonGroup>
+                                                    <ViewSubject
+                                                        subjectinfo={subject}
+                                                        getSubjects={this.props.getSubjects}
+                                                        viewStudent={this.props.viewStudent}
+                                                        student={this.props.student}
+                                                        subjecttitle={subject.title}
+                                                        subjectinfo={subject}
+                                                        viewSubject={this.viewSubject}
+                                                        deleteAssignment={this.deleteAssignment}
+                                                    />
+                                                    <AddAssignment
+                                                        title={subject.title}
+                                                        addAssignment={this.addAssignment}
+                                                        handleInputChange={this.handleInputChange}
+                                                        subjectinfo={subject}
+                                                    />
+                                                    <VerifyDeleteModal
+                                                        subject={subject}
+                                                        deleteSubject={this.deleteSubject}
+                                                    />
+                                                </ButtonGroup>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </Table>
+                            </div>
                             : null}
                     </>
-                    : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>}
+                    : <div style={{ margin: "auto", width: 50 }}><Spinner type="grow" color="primary" /></div>
+                }
             </>
         );
     }
