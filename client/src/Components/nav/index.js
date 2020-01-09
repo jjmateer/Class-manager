@@ -38,7 +38,7 @@ const Navigation = (props) => {
                     {!props.isAuthenticated ?
                         <Nav className="ml-auto" navbar>
                             {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="#" onClick={togglemodal}>Login</NavLink>}
-                            {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/register">Register</NavLink>}
+                            {/* {props.isLoading ? <Spinner type="grow" color="primary" /> : <NavLink tag={Link} to="/register">Register</NavLink>} */}
                         </Nav>
                         :
                         <Nav className="ml-auto" navbar>
@@ -62,11 +62,6 @@ const Navigation = (props) => {
                         <Button to="/" style={{ marginTop: 20 }} type="submit">Submit</Button>
                     </FormGroup>
                 </Form>
-                <ModalFooter>
-                    <p>
-                        Don't have an account? <Link to="/register">Register</Link>
-                    </p>
-                </ModalFooter>
             </Modal>
         </>
     );

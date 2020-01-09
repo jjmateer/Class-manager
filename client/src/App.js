@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { loadUser, loginAdmin } from "./actions/auth-actions";
 import { clearErrors } from "./actions/error-actions";
 import { getSubjects } from "./actions/curriculum-actions";
+import ErrorC from "./pages/errorC";
 import StudentSearch from "./pages/students";
 import PropTypes from "prop-types";
 import PrivateRoute from "./Components/routing-components/private-route";
@@ -67,13 +68,13 @@ sendSocketIO() {
           />
           <Switch>
             <PublicRoute exact path="/" component={Home} />
-            <PublicRoute exact path="/register" component={Register} />
+            {/* <PublicRoute exact path="/register" component={Register} /> */}
             <PrivateRoute exact path="/students" component={StudentSearch} />
             <PrivateRoute exact path="/print-chart" component={PrintChart} />
             <PrivateRoute exact path="/print-chart-all" component={PrintChartAll} />
             <PrivateRoute exact path="/print-chart-rc" component={PrintChartRC}/>
             <PrivateRoute exact path="/curriculum" component={Curriculum} />
-            {/* <Route component={ErrorC} /> */}
+            <Route component={ErrorC} />
           </Switch>
         </>
       </Router>
