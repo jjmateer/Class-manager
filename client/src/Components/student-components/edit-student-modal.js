@@ -29,8 +29,6 @@ const EditStudentModal = (props) => {
                     <Input className="editInputs" onChange={props.handleInputChange} id="firstName" required />
                     <Label for="lastName">Last name</Label>
                     <Input className="editInputs" onChange={props.handleInputChange} id="lastName" required />
-                    <Label for="Birthday">Birthday</Label>
-                    <Input className="editInputs" onChange={props.handleInputChange} id="birthday" required />
                     <FormGroup>
                         <Button to="/" color="warning" style={{ marginTop: 20 }} id={props.id}>Submit</Button>
                     </FormGroup>

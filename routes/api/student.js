@@ -41,14 +41,14 @@ router.put("/delete/:id", (req, res) => {
 })
 
 router.put("/update/:id", (req, res) => {
-    const { firstName, lastName, birthday } = req.body;
+    const { firstName, lastName } = req.body;
+    
     Student.findOneAndUpdate(
         { _id: req.params.id },
         {
             $set: {
                 firstName: firstName,
-                lastName: lastName,
-                birthday: birthday
+                lastName: lastName
             }
         }
     )
