@@ -29,7 +29,7 @@ const ViewStudent = (props) => {
             <DropdownMenu>
               {props.student.grades.map((subject, index) => {
                 return (
-                  <DropdownItem style={{ width: 300 }} key={`subject.title${index}`} id="view_subject" onClick={props.handleInputChange} value={subject.title}>{subject.title}
+                  <DropdownItem key={`subject.title${index}`} id="view_subject" onClick={props.handleInputChange} value={subject.title}>{subject.title}
                   </DropdownItem>
                 )
               })}
