@@ -68,7 +68,7 @@ sendSocketIO() {
           />
           <Switch>
             <PublicRoute exact path="/" component={Home} />
-            {/* <PublicRoute exact path="/register" component={Register} /> */}
+            <PublicRoute exact path="/register" component={Register} />
             <PrivateRoute exact path="/students" component={StudentSearch} />
             <PrivateRoute exact path="/print-chart" component={PrintChart} />
             <PrivateRoute exact path="/print-chart-all" component={PrintChartAll} />

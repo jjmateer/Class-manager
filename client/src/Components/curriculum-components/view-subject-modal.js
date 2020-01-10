@@ -7,7 +7,7 @@ import {
     ModalFooter,
     Table
 } from 'reactstrap';
-
+import VerifyDeleteAssignmentModal from "./verify-delete-assignment-modal";
 
 
 const ViewSubject = (props) => {
@@ -19,7 +19,7 @@ const ViewSubject = (props) => {
             <Button color="info" onClick={togglemodal}>View</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>{props.subjecttitle}</ModalHeader>
-                <Link to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ textAlign:"center" }}>Spreadsheet</Link>
+                <Link to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ textAlign: "center" }}>Spreadsheet</Link>
                 <div className="table-responsive">
                     <Table key={props.subjecttitle}>
                         <thead>
@@ -31,7 +31,11 @@ const ViewSubject = (props) => {
                                     return <tr key={assignment.title}>
                                         <td>
                                             <p>{assignment.title}</p>
-                                            <Button color="danger" id={props.subjectinfo._id} name={assignment.title} onClick={props.deleteAssignment}>X</Button>
+                                            <VerifyDeleteAssignmentModal
+                                                assignment={assignment}
+                                                subjectinfo={props.subjectinfo}
+                                                deleteAssignment={props.deleteAssignment}
+                                            />
                                         </td>
                                     </tr>
                                 }) : null}

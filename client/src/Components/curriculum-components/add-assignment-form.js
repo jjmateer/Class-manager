@@ -16,7 +16,7 @@ const AddAssignment = (props) => {
     const [modal, setModal] = useState(false);
     return (
         <>
-            <Button color="success" style={{padding:"auto"}} onClick={togglemodal}>Add Task</Button>
+            <Button color="success" style={{padding:"auto"}} onClick={togglemodal}>Add</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>New assignment</ModalHeader>
                 <Form style={{ padding: 20 }} id={props.title} onSubmit={props.addAssignment}>

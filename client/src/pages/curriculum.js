@@ -113,41 +113,45 @@ class Curriculum extends Component {
                         {subjects.length ?
                             <div className="table-responsive">
                                 <Table>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Options</th>
-                                    </tr>
-                                    {subjects.map((subject, index) => (
-                                        <tr key={`${subject._id}${index}`}>
-                                            <td>
-                                                <CardTitle>{subject.title}</CardTitle>
-                                            </td>
-                                            <td>
-                                                <ButtonGroup>
-                                                    <ViewSubject
-                                                        subjectinfo={subject}
-                                                        getSubjects={this.props.getSubjects}
-                                                        viewStudent={this.props.viewStudent}
-                                                        student={this.props.student}
-                                                        subjecttitle={subject.title}
-                                                        subjectinfo={subject}
-                                                        viewSubject={this.viewSubject}
-                                                        deleteAssignment={this.deleteAssignment}
-                                                    />
-                                                    <AddAssignment
-                                                        title={subject.title}
-                                                        addAssignment={this.addAssignment}
-                                                        handleInputChange={this.handleInputChange}
-                                                        subjectinfo={subject}
-                                                    />
-                                                    <VerifyDeleteModal
-                                                        subject={subject}
-                                                        deleteSubject={this.deleteSubject}
-                                                    />
-                                                </ButtonGroup>
-                                            </td>
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Options</th>
                                         </tr>
-                                    ))}
+                                    </thead>
+                                    <tbody>
+                                        {subjects.map((subject, index) => (
+                                            <tr key={`${subject._id}${index}`}>
+                                                <td>
+                                                    <CardTitle>{subject.title}</CardTitle>
+                                                </td>
+                                                <td>
+                                                    <ButtonGroup>
+                                                        <ViewSubject
+                                                            subjectinfo={subject}
+                                                            getSubjects={this.props.getSubjects}
+                                                            viewStudent={this.props.viewStudent}
+                                                            student={this.props.student}
+                                                            subjecttitle={subject.title}
+                                                            subjectinfo={subject}
+                                                            viewSubject={this.viewSubject}
+                                                            deleteAssignment={this.deleteAssignment}
+                                                        />
+                                                        <AddAssignment
+                                                            title={subject.title}
+                                                            addAssignment={this.addAssignment}
+                                                            handleInputChange={this.handleInputChange}
+                                                            subjectinfo={subject}
+                                                        />
+                                                        <VerifyDeleteModal
+                                                            subject={subject}
+                                                            deleteSubject={this.deleteSubject}
+                                                        />
+                                                    </ButtonGroup>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </Table>
                             </div>
                             : null}
