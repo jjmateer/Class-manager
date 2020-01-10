@@ -26,7 +26,7 @@ export const addStudent = data => (dispatch) => {
         }
     }
 
-    axios.post('http://localhost:3001/api/student/new', data, config)
+    axios.post('/api/student/new', data, config)
         .then(res => {
             dispatch({
                 type: ADD_STUDENT_SUCCESS,
@@ -44,7 +44,7 @@ export const addStudent = data => (dispatch) => {
 export const getStudents = () => (dispatch) => {
     dispatch({ type: GET_STUDENTS })
 
-    axios.get('http://localhost:3001/api/student/all')
+    axios.get('/api/student/all')
         .then(res => {
             dispatch({
                 type: GET_STUDENTS_SUCCESS,
@@ -59,7 +59,7 @@ export const getStudents = () => (dispatch) => {
 }
 export const deleteStudent = data => (dispatch) => {
 
-    axios.put(`http://localhost:3001/api/student/delete/${data}`)
+    axios.put(`/api/student/delete/${data}`)
         .then(res => {
             dispatch({
                 type: DELETE_STUDENT,
@@ -77,7 +77,7 @@ export const viewStudent = (id, subject) => (dispatch) => {
             "Content-Type": "application/json"
         }
     }
-    axios.get(`http://localhost:3001/api/student/view/${id}/${subject}`, config)
+    axios.get(`/api/student/view/${id}/${subject}`, config)
         .then(res => {
             dispatch({
                 type: VIEW_STUDENT,
@@ -94,7 +94,7 @@ export const viewStudentRC = (id) => (dispatch) => {
             "Content-Type": "application/json"
         }
     }
-    axios.get(`http://localhost:3001/api/student/view/${id}`, config)
+    axios.get(`/api/student/view/${id}`, config)
         .then(res => {
             dispatch({
                 type: VIEW_STUDENT,
@@ -119,7 +119,7 @@ export const gradeStudentN = (student, assignment, value, subject) => (dispatch)
         value: value,
         subject: subject
     }
-    axios.put(`http://localhost:3001/api/student/grade-studentN`, gradeInfo, config)
+    axios.put(`/api/student/grade-studentN`, gradeInfo, config)
         .then(res => {
             dispatch({
                 type: GRADE_STUDENT_SUCCESS
@@ -143,7 +143,7 @@ export const gradeStudentM = (student, assignment, value, subject) => (dispatch)
         value: value,
         subject: subject
     }
-    axios.put(`http://localhost:3001/api/student/grade-studentM`, gradeInfo, config)
+    axios.put(`/api/student/grade-studentM`, gradeInfo, config)
         .then(res => {
             dispatch({
                 type: GRADE_STUDENT_SUCCESS
@@ -161,7 +161,7 @@ export const updateStudentInfo = (id, data) => (dispatch) => {
         }
     }
     dispatch({ type: UPDATE_STUDENT_INFO })
-    axios.put(`http://localhost:3001/api/student/update/${id}`, data, config)
+    axios.put(`/api/student/update/${id}`, data, config)
         .then(res => {
             dispatch({
                 type: UPDATE_STUDENT_INFO_SUCCESS,
