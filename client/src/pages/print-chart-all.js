@@ -39,7 +39,7 @@ class PrintChartAll extends Component {
                                         this.props.curriculum.view_subject.title === sdt.title ?
 
                                             sdt.assignments.map((sdt2, index) => (
-                                                <th id="sideways-title-wrap" key={`${sdt2.title}${index}`}><p id="sideways-title">{sdt2.title}</p></th>
+                                                <th  id="sideways-title-wrap" key={`${sdt2.title}${index}`}><p style={{textAlign:"left", paddingLeft:5}} id="sideways-title">{sdt2.title}</p></th>
                                             ))
 
                                             : null
@@ -50,7 +50,7 @@ class PrintChartAll extends Component {
                             {this.props.student.students ?
                                 (this.props.student.students.map((sdt, index) => (
                                     <tr key={`${sdt._id}${index}`}>
-                                        <th key={`${sdt._id}${index}`}>{sdt.firstName} {sdt.lastName}</th>
+                                        <th key={`${sdt._id}${index}`} style={{textAlign:"left", paddingLeft:5}}>{sdt.lastName}, {sdt.firstName}</th>
                                         {sdt.grades.map((sdt2) => (
                                             this.props.curriculum.view_subject.title === sdt2.title ?
                                                 sdt2.assignments.map((sdt3, index) => (
