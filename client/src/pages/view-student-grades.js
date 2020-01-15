@@ -68,7 +68,7 @@ class ViewStudentGrades extends Component {
     gradeStudentN = event => {
         event.preventDefault();
         this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
         this.setState({
             arr: this.state.clicked.push(`${event.target.getAttribute("subject")}${event.target.name}`)
         })
@@ -78,7 +78,7 @@ class ViewStudentGrades extends Component {
     gradeStudentM = event => {
         event.preventDefault();
         this.props.gradeStudentM(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
         this.setState({
             arr: this.state.clicked.push(`${event.target.getAttribute("subject")}${event.target.name}`)
         })
@@ -119,7 +119,7 @@ class ViewStudentGrades extends Component {
                                                         <td>{assignment.title}</td>
                                                         <td>
                                                             <Alert color="info">November grade: {assignment.gradeN}</Alert>
-                                                            <ButtonGroup className={`${subject.title}${assignment.title}`}>
+                                                            <ButtonGroup>
                                                                 <Button color="info" className={`${this.subject}`} onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
                                                                 <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
                                                                 <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
@@ -127,7 +127,7 @@ class ViewStudentGrades extends Component {
                                                         </td>
                                                         <td>
                                                             <Alert color="info">May grade: {assignment.gradeM}</Alert>
-                                                            <ButtonGroup className={`${subject.title}${assignment.title}`}>
+                                                            <ButtonGroup>
                                                                 <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
                                                                 <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
                                                                 <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
