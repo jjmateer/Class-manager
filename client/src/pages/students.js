@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import StudentTable from "../Components/student-components/student-table";
 import AddStudent from "../Components/student-components/add-student";
 import PropTypes from "prop-types";
@@ -19,7 +19,7 @@ import { Spinner } from "reactstrap"
 
 
 
-class StudentSearch extends Component {
+class StudentSearch extends PureComponent {
     state = {
         firstName: "",
         lastName: "",
@@ -80,7 +80,7 @@ class StudentSearch extends Component {
     viewStudentRC = event => {
         event.preventDefault();
         this.props.viewStudentRC(event.target.id);
-        this.props.history.push("/print-chart-rc");
+        this.props.history.push("/student-grades");
     }
     gradeStudentN = event => {
         event.preventDefault();

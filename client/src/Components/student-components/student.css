@@ -14,3 +14,16 @@ td button {
 .editForm {
     padding:20px;
 }
+
+#studentGradeGrid {
+display:grid;
+
+}
+#studentGradeGrid {
+    display:grid-item;
+}
+#grades-wrap {
+    width:100vw;
+    height:100vh;
+    position:static;
+}

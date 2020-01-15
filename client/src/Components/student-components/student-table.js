@@ -1,16 +1,18 @@
 import React from "react";
 import {
     ButtonGroup,
+    Button,
     Table
 } from 'reactstrap';
 import EditStudentModal from "./edit-student-modal";
 import "./student.css";
 import VerifyDeleteModal from "./verify-delete-modal";
 import ViewStudent from "./view-student";
+import { Link } from "react-router-dom";
 
 
 
-const StudentTable = (props) => {
+const StudentTable = React.memo((props) => {
     return (
         <div className="table-responsive">
             <Table className="table">
@@ -37,6 +39,8 @@ const StudentTable = (props) => {
                                         handleInputChange={props.handleInputChange}
                                         student={student}
                                     />
+                                    <Button key={student._id} onClick={props.viewStudentRC} id={student._id}>Grades</Button>
+
                                     <EditStudentModal
                                         id={student._id}
                                         handleInputChange={props.handleInputChange}
@@ -57,6 +61,6 @@ const StudentTable = (props) => {
             </Table>
         </div>
     );
-}
+});
 
 export default StudentTable;

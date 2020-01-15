@@ -18,7 +18,8 @@ const initialState = {
     msg: {},
     isLoading: false,
     students: [],
-    view_student: {}
+    view_student: {},
+    get_student_id: ""
 };
 
 export default function (state = initialState, action) {

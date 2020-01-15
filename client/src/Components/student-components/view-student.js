@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 import './student.css';
 
-const ViewStudent = (props) => {
+const ViewStudent = React.memo((props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(prevState => !prevState);
   const togglemodal = () => setModal(!modal);
@@ -19,7 +19,7 @@ const ViewStudent = (props) => {
   return (
     <>
       <Button color="info" id={props.id} onClick={togglemodal}>Grades</Button>
-      <Modal isOpen={modal} toggle={togglemodal}>
+      <Modal size="xl" isOpen={modal} toggle={togglemodal}>
         <ModalHeader toggle={togglemodal}>{props.student.firstName} {props.student.lastName}</ModalHeader>
         <ModalHeader>
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
@@ -80,7 +80,7 @@ const ViewStudent = (props) => {
       </Modal>
     </>
   );
-}
+});
 
 
 
