@@ -31,7 +31,8 @@ class ViewStudentGrades extends Component {
         firstName: "",
         lastName: "",
         view_subject: "",
-        errors: {}
+        errors: {},
+        clicked: []
     };
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -68,12 +69,19 @@ class ViewStudentGrades extends Component {
         event.preventDefault();
         this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
         alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        this.setState({
+            arr: this.state.clicked.push(`${event.target.getAttribute("subject")}${event.target.name}`)
+        })
+        // console.log(clickedArr)
         this.getStudentsAndUpdate()
     }
     gradeStudentM = event => {
         event.preventDefault();
         this.props.gradeStudentM(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
         alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        this.setState({
+            arr: this.state.clicked.push(`${event.target.getAttribute("subject")}${event.target.name}`)
+        })
         this.getStudentsAndUpdate()
     }
     viewStudent = event => {
@@ -83,56 +91,80 @@ class ViewStudentGrades extends Component {
     }
     render() {
         return (
-            this.props.student.view_student.sdata ? 
-            <>
-                <h1 style={{textAlign:"center"}}>{this.props.student.view_student.sdata.firstName} {this.props.student.view_student.sdata.lastName}</h1>
+            this.props.student.view_student.sdata ?
+                <>
+                    <h1 style={{ textAlign: "center" }}>{this.props.student.view_student.sdata.firstName} {this.props.student.view_student.sdata.lastName}</h1>
                     <ViewStudentDropdown
-                    handleInputChange={this.handleInputChange}
-                    view_subject={this.props.view_subject}
-                    view_student={this.props.student.view_student}
+                        handleInputChange={this.handleInputChange}
+                        view_subject={this.props.view_subject}
+                        view_student={this.props.student.view_student}
                     />
-                {
-                    this.props.student.view_student.sdata.grades.map((subject, index) => subject.title === this.state.view_subject && subject.assignments ? (
-                        <div style={{height:"85vh"}}className="table-responsive" key={`${subject.title}${index}`}>
-                            <Button color="info" style={{ width: "100%", display: "block", textAlign: "center", marginTop:50}} key={this.props.student.view_student.sdata._id} name={subject.title} onClick={this.viewStudent} id={this.props.student.view_student.sdata._id}>Spreadsheet</Button>
-                            <Table className="table">
-                                <thead>
-                                    <tr>
-                                        <th style={{ padding: 0 }}>Assignment</th>
-                                        <th style={{ padding: 0 }}>November grade</th>
-                                        <th style={{ padding: 0 }}> May grade</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {subject.assignments.map((assignment, index) =>
-                                        <tr key={`${assignment._id}${index}`}>
-                                            <td>{assignment.title}</td>
-                                            <td>
-                                                <Alert color="info">November grade: {assignment.gradeN}</Alert>
-                                                <ButtonGroup>
-                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
-                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
-                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
-                                                </ButtonGroup>
-                                            </td>
-                                            <td>
-                                                <Alert color="info">May grade: {assignment.gradeM}</Alert>
-                                                <ButtonGroup>
-                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
-                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
-                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
-                                                </ButtonGroup>
-                                            </td>
+                    {
+                        this.props.student.view_student.sdata.grades.map((subject, index) => subject.title === this.state.view_subject && subject.assignments ? (
+                            <div style={{ height: "85vh" }} className="table-responsive" key={`${subject.title}${index}`}>
+                                <Button color="info" style={{ width: "100%", display: "block", textAlign: "center", marginTop: 50 }} key={this.props.student.view_student.sdata._id} name={subject.title} onClick={this.viewStudent} id={this.props.student.view_student.sdata._id}>Spreadsheet</Button>
+                                <Table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th style={{ padding: 0 }}>Assignment</th>
+                                            <th style={{ padding: 0 }}>November grade</th>
+                                            <th style={{ padding: 0 }}> May grade</th>
                                         </tr>
-                                    )}
-                                </tbody>
-                            </Table>
-                        </div>
-                    ) : null
-                    )
-                }
-            </>
-            : null
+                                    </thead>
+                                    <tbody>
+                                        {subject.assignments.map((assignment, index) =>
+                                            <tr key={`${assignment._id}${index}`}>
+                                                {!this.state.clicked.includes(`${subject.title}${assignment.title}`) ?
+                                                    <>
+                                                        <td>{assignment.title}</td>
+                                                        <td>
+                                                            <Alert color="info">November grade: {assignment.gradeN}</Alert>
+                                                            <ButtonGroup className={`${subject.title}${assignment.title}`}>
+                                                                <Button color="info" className={`${this.subject}`} onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                                                                <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                                                                <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                                                            </ButtonGroup>
+                                                        </td>
+                                                        <td>
+                                                            <Alert color="info">May grade: {assignment.gradeM}</Alert>
+                                                            <ButtonGroup className={`${subject.title}${assignment.title}`}>
+                                                                <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                                                                <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                                                                <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                                                            </ButtonGroup>
+                                                        </td>
+                                                    </>
+                                                    :
+                                                    <>
+                                                        <td>{assignment.title}</td>
+                                                        <td>
+                                                            <Alert color="warning">November grade: {assignment.gradeN}</Alert>
+                                                            <ButtonGroup className={`${subject.title}${assignment.title}`}>
+                                                                <Button color="warning" className={`${this.subject}`} onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                                                                <Button color="warning" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                                                                <Button color="warning" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                                                            </ButtonGroup>
+                                                        </td>
+                                                        <td>
+                                                            <Alert color="warning">May grade: {assignment.gradeM}</Alert>
+                                                            <ButtonGroup className={`${subject.title}${assignment.title}`}>
+                                                                <Button color="warning" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                                                                <Button color="warning" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                                                                <Button color="warning" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                                                            </ButtonGroup>
+                                                        </td>
+                                                    </>
+                                                }
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </Table>
+                            </div>
+                        ) : null
+                        )
+                    }
+                </>
+                : null
         )
     }
 }

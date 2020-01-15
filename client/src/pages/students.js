@@ -72,27 +72,10 @@ class StudentSearch extends PureComponent {
         this.props.deleteStudent(event.target.id);
         this.getStudentsAndUpdate()
     }
-    viewStudent = event => {
-        event.preventDefault();
-        this.props.viewStudent(event.target.id, event.target.name);
-        this.props.history.push("/print-chart");
-    }
     viewStudentRC = event => {
         event.preventDefault();
         this.props.viewStudentRC(event.target.id);
         this.props.history.push("/student-grades");
-    }
-    gradeStudentN = event => {
-        event.preventDefault();
-        this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
-        this.getStudentsAndUpdate()
-    }
-    gradeStudentM = event => {
-        event.preventDefault();
-        this.props.gradeStudentM(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
-        this.getStudentsAndUpdate()
     }
     updateStudentInfo = event => {
         event.preventDefault();
