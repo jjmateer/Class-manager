@@ -75,6 +75,11 @@ class ViewStudentGrades extends Component {
         // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
         this.getStudentsAndUpdate()
     }
+    viewStudent = event => {
+        event.preventDefault();
+        this.props.viewStudent(event.target.id, event.target.name);
+        this.props.history.push("/print-chart");
+    }
     render() {
         return (
             this.props.student.view_student.sdata ? 
@@ -98,8 +103,8 @@ class ViewStudentGrades extends Component {
                 </div>
                 {
                     this.props.student.view_student.sdata.grades.map((subject, index) => subject.title === this.state.view_subject && subject.assignments ? (
-                        <div style={{height:200}}className="table-responsive" key={`${subject.title}${index}`}>
-                            <Link to="/print-chart" style={{ width: "100%", display: "block", textAlign: "center" }} key={this.props.student._id} name={subject.title} onClick={this.props.viewStudent} id={this.props.student._id}>Spreadsheet</Link>
+                        <div style={{height:"90vh"}}className="table-responsive" key={`${subject.title}${index}`}>
+                            <Link to="/print-chart" style={{ width: "100%", display: "block", textAlign: "center" }} key={this.props.student.view_student.sdata._id} name={subject.title} onClick={this.viewStudent} id={this.props.student.view_student.sdata._id}>Spreadsheet</Link>
                             <Table className="table">
                                 <thead>
                                     <tr>
@@ -115,17 +120,17 @@ class ViewStudentGrades extends Component {
                                             <td>
                                                 <Alert color="info">November grade: {assignment.gradeN}</Alert>
                                                 <ButtonGroup>
-                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
-                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
-                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                                                    <Button color="info" onClick={this.gradeStudentN} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
                                                 </ButtonGroup>
                                             </td>
                                             <td>
                                                 <Alert color="info">May grade: {assignment.gradeM}</Alert>
                                                 <ButtonGroup>
-                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
-                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
-                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
+                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"L"} >L</Button>
+                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"P"}>P</Button>
+                                                    <Button color="info" onClick={this.gradeStudentM} id={this.props.student.view_student.sdata._id} subject={subject.title} type="button" name={assignment.title} value={"M"}>M</Button>
                                                 </ButtonGroup>
                                             </td>
                                         </tr>

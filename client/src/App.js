@@ -76,7 +76,7 @@ class App extends Component {
             <PrivateRoute exact path="/print-chart-all" component={PrintChartAll} />
             <PrivateRoute exact path="/print-chart-rc" component={PrintChartRC} />
             <PrivateRoute exact path="/curriculum" component={Curriculum} />
-            <PrivateRoute exact path="/student-grades" component={ViewStudentGrades} />
+            <Route exact path="/student-grades" component={ViewStudentGrades} />
             <Route component={ErrorC} />
           </Switch>
         </>

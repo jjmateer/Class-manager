@@ -26,6 +26,7 @@ class PrintChart extends Component {
         const { view_student } = this.props.student;
         return (
             <>
+            {view_student.subject ? 
                 <div className="table-responsive">
                     <table className="print-chart-table">
                         <thead>
@@ -60,6 +61,7 @@ class PrintChart extends Component {
 
                     </table>
                 </div>
+                : null}
             </>
                 );
             }
