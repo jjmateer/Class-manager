@@ -11,6 +11,7 @@ import {
     Table,
     Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Alert
 } from 'reactstrap';
+import ViewStudentDropdown from "../Components/student-components/view-student-dropdown";
 import {
     addStudent,
     getStudents,
@@ -66,13 +67,13 @@ class ViewStudentGrades extends Component {
     gradeStudentN = event => {
         event.preventDefault();
         this.props.gradeStudentN(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        alert(`${event.target.name} grade changed to: ${event.target.value}.`)
         this.getStudentsAndUpdate()
     }
     gradeStudentM = event => {
         event.preventDefault();
         this.props.gradeStudentM(event.target.id, event.target.name, event.target.value, event.target.getAttribute("subject"));
-        // alert(`${event.target.name} grade changed to: ${event.target.value}.`)
+        alert(`${event.target.name} grade changed to: ${event.target.value}.`)
         this.getStudentsAndUpdate()
     }
     viewStudent = event => {
@@ -84,27 +85,16 @@ class ViewStudentGrades extends Component {
         return (
             this.props.student.view_student.sdata ? 
             <>
-                <div>{this.props.student.firstName} {this.props.student.lastName}</div>
-                <div>
-                    <Dropdown isOpen={true}>
-                        <DropdownToggle color="info" caret>
-                            {this.props.view_subject ? this.props.view_subject : "Subjects"}
-                        </DropdownToggle>
-                        <DropdownMenu>
-                            {this.props.student.view_student.sdata.grades.map((subject, index) => {
-                                return (
-                                    <DropdownItem key={`subject.title${index}`} id="view_subject" onClick={this.handleInputChange} value={subject.title}>{subject.title}
-                                    </DropdownItem>
-                                )
-                            })}
-                        </DropdownMenu>
-                    </Dropdown>
-                    {/* <Link to="/print-chart-rc" key={this.props.student._id} onClick={this.props.viewStudentRC} id={this.props.student._id}>Report card</Link> */}
-                </div>
+                <h1 style={{textAlign:"center"}}>{this.props.student.view_student.sdata.firstName} {this.props.student.view_student.sdata.lastName}</h1>
+                    <ViewStudentDropdown
+                    handleInputChange={this.handleInputChange}
+                    view_subject={this.props.view_subject}
+                    view_student={this.props.student.view_student}
+                    />
                 {
                     this.props.student.view_student.sdata.grades.map((subject, index) => subject.title === this.state.view_subject && subject.assignments ? (
-                        <div style={{height:"90vh"}}className="table-responsive" key={`${subject.title}${index}`}>
-                            <Link to="/print-chart" style={{ width: "100%", display: "block", textAlign: "center" }} key={this.props.student.view_student.sdata._id} name={subject.title} onClick={this.viewStudent} id={this.props.student.view_student.sdata._id}>Spreadsheet</Link>
+                        <div style={{height:"85vh"}}className="table-responsive" key={`${subject.title}${index}`}>
+                            <Button color="info" style={{ width: "100%", display: "block", textAlign: "center", marginTop:50}} key={this.props.student.view_student.sdata._id} name={subject.title} onClick={this.viewStudent} id={this.props.student.view_student.sdata._id}>Spreadsheet</Button>
                             <Table className="table">
                                 <thead>
                                     <tr>

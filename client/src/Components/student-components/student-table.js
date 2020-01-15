@@ -30,7 +30,7 @@ const StudentTable = React.memo((props) => {
                             <td>{student.firstName}</td>
                             <td>
                                 <ButtonGroup>
-                                    <ViewStudent
+                                    {/* <ViewStudent
                                         viewStudent={props.viewStudent}
                                         viewStudentRC={props.viewStudentRC}
                                         gradeStudentN={props.gradeStudentN}
@@ -38,8 +38,8 @@ const StudentTable = React.memo((props) => {
                                         view_subject={props.view_subject}
                                         handleInputChange={props.handleInputChange}
                                         student={student}
-                                    />
-                                    <Button key={student._id} onClick={props.viewStudentRC} id={student._id}>Grades</Button>
+                                    /> */}
+                                    <Button color="info" key={student._id} onClick={props.viewStudentRC} id={student._id}>Grades</Button>
 
                                     <EditStudentModal
                                         id={student._id}
