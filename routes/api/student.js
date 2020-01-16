@@ -85,6 +85,7 @@ router.put("/grade-studentN", (req, res) => {
 })
 
 router.put("/grade-studentM", (req, res) => {
+    console.log("FIRING")
     let newData;
     const { student, assignment, value, subject } = req.body;
     Student.findOne({ _id: student })
