@@ -9,7 +9,8 @@ import {
     addAssignment,
     deleteSubject,
     viewSubject,
-    deleteAssignment
+    deleteAssignment,
+    editAssignment
 } from "../actions/curriculum-actions";
 import { getStudents, viewStudent } from "../actions/student-actions";
 import AddAssignment from "../Components/curriculum-components/add-assignment-form";
@@ -30,7 +31,8 @@ import VerifyDeleteModal from "../Components/curriculum-components/verify-delete
 class Curriculum extends Component {
     state = {
         title: "",
-        titleAdd: ""
+        titleAdd: "",
+        newAssignmentName: ""
     };
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -45,7 +47,8 @@ class Curriculum extends Component {
         addAssignment: PropTypes.func.isRequired,
         deleteSubject: PropTypes.func.isRequired,
         getStudents: PropTypes.func.isRequired,
-        viewStudent: PropTypes.func.isRequired
+        viewStudent: PropTypes.func.isRequired,
+        editAssignment: PropTypes.func.isRequired
     }
     componentDidMount = () => {
         this.props.clearErrors();
@@ -77,6 +80,12 @@ class Curriculum extends Component {
     addAssignment = event => {
         event.preventDefault();
         this.props.addAssignment(event.target.id, this.state.titleAdd)
+        this.getSubjectsAndUpdate();
+    }
+
+    editAssignment = event => {
+        event.preventDefault();
+        this.props.editAssignment(event.target.name, event.target.getAttribute("assignment"), this.state.newAssignmentName);
         this.getSubjectsAndUpdate();
     }
 
@@ -136,6 +145,8 @@ class Curriculum extends Component {
                                                             subjectinfo={subject}
                                                             viewSubject={this.viewSubject}
                                                             deleteAssignment={this.deleteAssignment}
+                                                            editAssignment={this.editAssignment}
+                                                            handleInputChange={this.handleInputChange}
                                                         />
                                                         <AddAssignment
                                                             title={subject.title}
@@ -184,6 +195,7 @@ export default connect(
         getStudents,
         viewStudent,
         viewSubject,
-        deleteAssignment
+        deleteAssignment,
+        editAssignment
     }
 )(Curriculum);

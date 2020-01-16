@@ -3,6 +3,7 @@ import {
     EDIT_CURRICULUM,
     EDIT_CURRICULUM_SUCCESS,
     EDIT_CURRICULUM_FAIL,
+    EDIT_ASSIGNMENT_NAME,
     CREATE_CURRICULUM,
     CREATE_CURRICULUM_SUCCESS,
     CREATE_CURRICULUM_FAIL,
@@ -14,7 +15,7 @@ import {
     DELETE_SUBJECT_SUCCESS,
     DELETE_ASSIGNMENT,
     DELETE_ASSIGNMENT_SUCCESS,
-    DELETE_ASSIGNMENT_FAIL
+    DELETE_ASSIGNMENT_FAIL,
 } from "../actions/types";
 
 const inititalState = {
@@ -58,6 +59,11 @@ export default function (state = inititalState, action) {
                 ...state,
                 isLoading: false,
                 subjects: action.payload
+            }
+        case EDIT_ASSIGNMENT_NAME:
+            return {
+                ...state,
+                isLoading:false
             }
         case DELETE_SUBJECT_SUCCESS:
         case CREATE_CURRICULUM_SUCCESS:

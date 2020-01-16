@@ -8,6 +8,7 @@ import {
     Table
 } from 'reactstrap';
 import VerifyDeleteAssignmentModal from "./verify-delete-assignment-modal";
+import EditAssignmentModal from "./edit-assignment-modal";
 
 
 const ViewSubject = (props) => {
@@ -27,17 +28,25 @@ const ViewSubject = (props) => {
                                 <th>Assignment</th>
                             </tr>
                             {assignments.length ?
-                                assignments.map((assignment) => {
-                                    return <tr key={assignment.title}>
-                                        <td>
-                                            <p>{assignment.title}</p>
-                                            <VerifyDeleteAssignmentModal
-                                                assignment={assignment}
-                                                subjectinfo={props.subjectinfo}
-                                                deleteAssignment={props.deleteAssignment}
-                                            />
-                                        </td>
-                                    </tr>
+                                assignments.map((assignment, index) => {
+                                    return (
+                                        <tr key={`${assignment.title}${index}`}>
+                                            <td>
+                                                <p>{assignment.title}</p>
+                                                <VerifyDeleteAssignmentModal
+                                                    assignment={assignment}
+                                                    subjectinfo={props.subjectinfo}
+                                                    deleteAssignment={props.deleteAssignment}
+                                                />
+                                                <EditAssignmentModal
+                                                    editAssignment={props.editAssignment}
+                                                    subjecttitle={props.subjecttitle}
+                                                    assignmenttitle={assignment.title}
+                                                    handleInputChange={props.handleInputChange}
+                                                />
+                                            </td>
+                                        </tr>
+                                    )
                                 }) : null}
                         </thead>
                     </Table>

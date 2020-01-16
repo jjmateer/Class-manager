@@ -6,6 +6,7 @@ import {
     EDIT_CURRICULUM,
     EDIT_CURRICULUM_SUCCESS,
     EDIT_CURRICULUM_FAIL,
+    EDIT_ASSIGNMENT_NAME,
     CREATE_CURRICULUM,
     CREATE_CURRICULUM_SUCCESS,
     CREATE_CURRICULUM_FAIL,
@@ -73,6 +74,30 @@ export const addAssignment = (title, data) => (dispatch) => {
             dispatch({ type: ADD_ASSIGNMENT_FAIL })
         })
 }
+
+export const editAssignment = (subject, assignment, newName) => (dispatch) => {
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    };
+    const dataToSend = {
+        subject:subject,
+        assignment:assignment,
+        newName:newName
+    }
+    console.log(dataToSend)
+    axios.put(`http://localhost:3001/api/curriculum/edit-assignment`, dataToSend, config)
+        .then(res => {
+            dispatch({
+                type: ADD_ASSIGNMENT_SUCCESS,
+                payload: res.data
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
 
 export const viewSubject = subject => (dispatch) => {
     axios.get(`http://localhost:3001/api/curriculum/view/${subject}`)

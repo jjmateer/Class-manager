@@ -70,6 +70,23 @@ router.put("/add-assignment/:title", (req, res) => {
         })
 })
 
+router.put("/edit-assignment", (req, res) => {
+    console.log(req.body)
+    // Curriculum.findOneAndUpdate(
+    //     { title: req.body.subject },
+    //     {
+    //         $set: {
+    //             assignments: {
+    //                 $elemMatch: {
+    //                     title: req.body.assignment
+    //                 }
+    //             }
+    //         }
+    //     })
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+})
 router.get("/view/:subject", (req, res) => {
     Curriculum.findOne({ title: req.params.subject })
         .then(data => {
@@ -117,7 +134,7 @@ router.put("/delete-assignment/:id/:assignment", (req, res) => {
                 }
             }
         },
-    ).then(()=>{console.log("success!")})
+    ).then(() => { console.log("success!") })
 })
 
 
