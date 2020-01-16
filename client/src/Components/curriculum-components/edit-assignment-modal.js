@@ -20,7 +20,7 @@ const EditAssignmentModal = (props) => {
     return (
         <>
             <Button color="warning" onClick={togglemodal}>Edit</Button>
-            <Modal isOpen={modal} onSubmit={props.editAssignment} name={props.subjecttitle} assignment={props.assignmenttitle} toggle={togglemodal}>
+            <Modal isOpen={modal} toggle={togglemodal}>
                 <Form onSubmit={props.editAssignment} name={props.subjecttitle} assignment={props.assignmenttitle}>
                     <ModalHeader toggle={togglemodal}>Edit</ModalHeader>
                     <Input onChange={props.handleInputChange} id="newAssignmentName" required />

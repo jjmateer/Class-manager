@@ -71,21 +71,28 @@ router.put("/add-assignment/:title", (req, res) => {
 })
 
 router.put("/edit-assignment", (req, res) => {
-    console.log(req.body)
-    // Curriculum.findOneAndUpdate(
-    //     { title: req.body.subject },
-    //     {
-    //         $set: {
-    //             assignments: {
-    //                 $elemMatch: {
-    //                     title: req.body.assignment
-    //                 }
-    //             }
-    //         }
-    //     })
-    //     .then(data => {
-    //         console.log(data);
-    //     })
+    let newData = {};
+    Curriculum.findOne({ title: req.body.subject })
+        .then(data => {
+            for (let i = 0; i < data.assignments.length; i++) {
+                if (data.assignments[i].title === req.body.assignment) {
+                    data.assignments[i].title = req.body.newName;
+                    newData = data.assignments;
+                }
+            }
+        }).then(() => {
+            Curriculum.findOneAndUpdate(
+                { title: req.body.subject },
+                {
+                    $set: {
+                        assignments: newData
+                    }
+                }
+            ).then(data2 => {
+                res.status(200)
+                console.log("Edit assignment sucess.")
+            })
+        })
 })
 router.get("/view/:subject", (req, res) => {
     Curriculum.findOne({ title: req.params.subject })
@@ -98,8 +105,6 @@ router.get("/view/:subject", (req, res) => {
         })
 })
 router.delete("/delete-subject/:id/:title", (req, res) => {
-    console.log(req.params.title)
-    console.log(req.params.id)
     Curriculum.deleteOne(
         { _id: req.params.id }
     )
@@ -134,7 +139,7 @@ router.put("/delete-assignment/:id/:assignment", (req, res) => {
                 }
             }
         },
-    ).then(() => { console.log("success!") })
+    ).then(() => { console.log("Assignment deleted.") })
 })
 
 
