@@ -80,7 +80,6 @@ router.put("/edit-assignment", (req, res) => {
                     newData = data.assignments;
                 }
             }
-        }).then(() => {
             Curriculum.findOneAndUpdate(
                 { title: req.body.subject },
                 {
@@ -88,11 +87,12 @@ router.put("/edit-assignment", (req, res) => {
                         assignments: newData
                     }
                 }
-            ).then(data2 => {
+            ).then(() => {
                 res.status(200)
                 console.log("Edit assignment sucess.")
             })
         })
+
 })
 router.get("/view/:subject", (req, res) => {
     Curriculum.findOne({ title: req.params.subject })
