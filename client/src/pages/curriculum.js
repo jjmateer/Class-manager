@@ -32,7 +32,8 @@ class Curriculum extends Component {
     state = {
         title: "",
         titleAdd: "",
-        newAssignmentName: ""
+        newAssignmentName: "",
+        newAssignmentIndex: 0
     };
     static propTypes = {
         isAuthenticated: PropTypes.bool,
@@ -79,7 +80,7 @@ class Curriculum extends Component {
 
     addAssignment = event => {
         event.preventDefault();
-        this.props.addAssignment(event.target.id, this.state.titleAdd)
+        this.props.addAssignment(event.target.id, this.state.titleAdd, this.state.newAssignmentIndex)
         this.getSubjectsAndUpdate();
     }
 
@@ -152,7 +153,8 @@ class Curriculum extends Component {
                                                             title={subject.title}
                                                             addAssignment={this.addAssignment}
                                                             handleInputChange={this.handleInputChange}
-                                                            subjectinfo={subject}
+                                                            subject={subject}
+                                                            newAssignmentIndex={this.state.newAssignmentIndex}
                                                         />
                                                         <VerifyDeleteModal
                                                             subject={subject}

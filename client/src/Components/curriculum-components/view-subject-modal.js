@@ -41,7 +41,7 @@ const ViewSubject = (props) => {
                                                 <EditAssignmentModal
                                                     editAssignment={props.editAssignment}
                                                     subjecttitle={props.subjecttitle}
-                                                    assignmenttitle={assignment.title}
+                                                    assignment={assignment}
                                                     handleInputChange={props.handleInputChange}
                                                 />
                                             </td>

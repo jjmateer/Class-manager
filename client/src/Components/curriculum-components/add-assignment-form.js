@@ -6,22 +6,42 @@ import {
     ModalFooter,
     Form,
     Label,
-    Input
+    Input,
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem
 } from 'reactstrap';
 
 
 
 const AddAssignment = (props) => {
+    console.log(props.subject)
     const togglemodal = () => setModal(!modal);
     const [modal, setModal] = useState(false);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const toggle = () => setDropdownOpen(prevState => !prevState);
     return (
         <>
-            <Button color="success" style={{padding:"auto"}} onClick={togglemodal}>Add</Button>
+            <Button color="success" style={{ padding: "auto" }} onClick={togglemodal}>Add</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>New assignment</ModalHeader>
                 <Form style={{ padding: 20 }} id={props.title} onSubmit={props.addAssignment}>
                     <Label for="Title">Title</Label>
                     <Input onChange={props.handleInputChange} type="title" id="titleAdd" required />
+                    <Dropdown style={{ margin: "auto", width: 100 }} isOpen={dropdownOpen} toggle={toggle}>
+                        <DropdownToggle color="info" caret>
+                            {props.newAssignmentIndex}
+                        </DropdownToggle>
+                        <DropdownMenu>
+                            {props.subject.assignments.map((subject, index) => {
+                                return (
+                                    <DropdownItem key={`subject.title${index}`}  onClick={props.handleInputChange} id="newAssignmentIndex" value={index}>{index}
+                                    </DropdownItem>
+                                )
+                            })}
+                        </DropdownMenu>
+                    </Dropdown>
                     <Button style={{ marginTop: 20 }} id={props.title} onClick={togglemodal} type="submit">Submit</Button>
                 </Form>
                 <ModalFooter>
