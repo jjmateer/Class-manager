@@ -72,6 +72,7 @@ router.put("/add-assignment/:title", (req, res) => {
 
 router.put("/edit-assignment", (req, res) => {
     let newData = {};
+    let newData2 = {};
     Curriculum.findOne({ title: req.body.subject })
         .then(data => {
             for (let i = 0; i < data.assignments.length; i++) {
@@ -88,11 +89,36 @@ router.put("/edit-assignment", (req, res) => {
                     }
                 }
             ).then(() => {
-                res.status(200)
-                console.log("Edit assignment sucess.")
+                // console.log("Edit assignment sucess.")
             })
         })
-
+    Student.find({})
+        .then(data => {
+            // console.log(data)
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].grades.title === req.params.subject) {
+                    for (let j = 0; j < data[i].grades.length; j++) {
+                        for (let k = 0; k < data[i].grades[j].assignments.length; k++) {
+                            if (data[i].grades[j].assignments[k].title === req.body.assignment) {
+                                data[i].grades[j].assignments[k].title = req.body.newName;
+                                newData2 = data[i].grades[j].assignments;
+                            }
+                        }
+                    }
+                }
+            }
+        }).then(() => {
+            // console.log(newData2)
+            Student.updateMany(
+                { "grades.$.title": req.params.subject },
+                {
+                    $set: {
+                        "grades.$.assignments": newData2
+                    }
+                }
+            )
+            .then(data2 => { console.log((data2)) })
+        })
 })
 router.get("/view/:subject", (req, res) => {
     Curriculum.findOne({ title: req.params.subject })
