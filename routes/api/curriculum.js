@@ -89,12 +89,11 @@ router.put("/edit-assignment", (req, res) => {
                     }
                 }
             ).then(() => {
-                // console.log("Edit assignment sucess.")
+                console.log("Edit assignment success.")
             })
         })
     Student.find({})
         .then(data => {
-            // console.log(data)
             for (let i = 0; i < data.length; i++) {
                 if (data[i].grades.title === req.params.subject) {
                     for (let j = 0; j < data[i].grades.length; j++) {
@@ -108,7 +107,6 @@ router.put("/edit-assignment", (req, res) => {
                 }
             }
         }).then(() => {
-            // console.log(newData2)
             Student.updateMany(
                 { "grades.$.title": req.params.subject },
                 {
@@ -117,7 +115,7 @@ router.put("/edit-assignment", (req, res) => {
                     }
                 }
             )
-            .then(data2 => { console.log((data2)) })
+                .then(data2 => { res.status(200).json({msg:"Assignment successfully updated."}) })
         })
 })
 router.get("/view/:subject", (req, res) => {
