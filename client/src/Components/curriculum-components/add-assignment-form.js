@@ -23,7 +23,7 @@ const AddAssignment = (props) => {
     const toggle = () => setDropdownOpen(prevState => !prevState);
     return (
         <>
-            <Button color="success" style={{ width:"50%",margin:"auto" }} onClick={togglemodal}>Add Assignment</Button>
+            <Button color="success" style={{ width: "50%", margin: "auto" }} onClick={togglemodal}>Add</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>New assignment</ModalHeader>
                 <Form style={{ padding: 20 }} id={props.title} onSubmit={props.addAssignment}>
@@ -37,10 +37,12 @@ const AddAssignment = (props) => {
                         <DropdownMenu>
                             {props.subject.assignments.map((subject, index) => {
                                 return (
-                                    <DropdownItem key={`subject.title${index}`}  onClick={props.handleInputChange} id="newAssignmentIndex" value={index}>{index}
+                                    <DropdownItem key={`subject.title${index}`} onClick={props.handleInputChange} id="newAssignmentIndex" value={index}>{index}
                                     </DropdownItem>
                                 )
                             })}
+                            <DropdownItem onClick={props.handleInputChange} id="newAssignmentIndex" value={props.subject.assignments.length + 1}>Bottom
+                            </DropdownItem>
                         </DropdownMenu>
                     </Dropdown>
                     <Button color="success" style={{ marginTop: 20 }} id={props.title} onClick={togglemodal} type="submit">Submit</Button>

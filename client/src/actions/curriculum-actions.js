@@ -27,7 +27,7 @@ import {
 export const getSubjects = () => (dispatch) => {
     dispatch({ type: GET_SUBJECTS })
 
-    axios.get(`/api/curriculum/get-all`)
+    axios.get(`http://localhost:3001/api/curriculum/get-all`)
         .then(res => {
             dispatch({
                 type: GET_SUBJECTS_SUCCESS,
@@ -42,7 +42,7 @@ export const getSubjects = () => (dispatch) => {
 export const createCurriculum = title => (dispatch) => {
     dispatch({ type: CREATE_CURRICULUM })
 
-    axios.post(`/api/curriculum/new-subject/${title}`)
+    axios.post(`http://localhost:3001/api/curriculum/new-subject/${title}`)
         .then(res => {
             dispatch({
                 type: CREATE_CURRICULUM_SUCCESS,
@@ -66,7 +66,7 @@ export const addAssignment = (title, data, addIndex) => (dispatch) => {
         }
     }
 
-    axios.put(`/api/curriculum/add-assignment/${title}`, dataToSend, config)
+    axios.put(`http://localhost:3001/api/curriculum/add-assignment/${title}`, dataToSend, config)
         .then(res => {
             dispatch({
                 type: ADD_ASSIGNMENT_SUCCESS,
@@ -90,7 +90,7 @@ export const editAssignment = (subject, assignment, newName) => (dispatch) => {
         newName: newName
     }
 
-    axios.put(`/api/curriculum/edit-assignment`, dataToSend, config)
+    axios.put(`http://localhost:3001/api/curriculum/edit-assignment`, dataToSend, config)
         .then(res => {
             dispatch({
                 type: EDIT_ASSIGNMENT_NAME,
@@ -103,7 +103,7 @@ export const editAssignment = (subject, assignment, newName) => (dispatch) => {
 };
 
 export const viewSubject = subject => (dispatch) => {
-    axios.get(`/api/curriculum/view/${subject}`)
+    axios.get(`http://localhost:3001/api/curriculum/view/${subject}`)
         .then(res => {
             dispatch({
                 type: VIEW_CURRICULUM,
@@ -123,7 +123,7 @@ export const editCurriculum = data => (dispatch) => {
         }
     }
 
-    axios.post('/api/curriculum/edit', data, config)
+    axios.post('http://localhost:3001/api/curriculum/edit', data, config)
         .then(res => {
             dispatch({
                 type: EDIT_CURRICULUM_SUCCESS,
@@ -143,7 +143,7 @@ export const deleteSubject = (id, title) => (dispatch) => {
     console.log(title)
     dispatch({ type: DELETE_SUBJECT })
 
-    axios.delete(`/api/curriculum/delete-subject/${id}/${title}`)
+    axios.delete(`http://localhost:3001/api/curriculum/delete-subject/${id}/${title}`)
         .then(res => {
             dispatch({
                 type: DELETE_SUBJECT_SUCCESS,
@@ -159,7 +159,7 @@ export const deleteAssignment = (id, assignment) => (dispatch) => {
     console.log(`${id} and ${assignment}`)
     dispatch({ type: DELETE_ASSIGNMENT })
 
-    axios.put(`/api/curriculum/delete-assignment/${id}/${assignment}`)
+    axios.put(`http://localhost:3001/api/curriculum/delete-assignment/${id}/${assignment}`)
         .then(res => {
             dispatch({
                 type: DELETE_ASSIGNMENT_SUCCESS,

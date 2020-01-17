@@ -22,14 +22,14 @@ const ViewSubject = (props) => {
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>{props.subjecttitle}</ModalHeader>
                 <div style={{flexDirection:"row"}}>
-                <Button tag={Link} color="info" to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ width:"50%",margin:"auto" }}>Spreadsheet</Button>
-                <AddAssignment
+                <Button tag={Link} color="info" to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ width:"100%",margin:"auto" }}>Spreadsheet</Button>
+                {/* <AddAssignment
                     title={props.subjectinfo.title}
                     addAssignment={props.addAssignment}
                     handleInputChange={props.handleInputChange}
                     subject={props.subjectinfo}
                     newAssignmentIndex={props.newAssignmentIndex}
-                />
+                /> */}
                 </div>
                 <div className="table-responsive">
                     <Table key={props.subjecttitle}>

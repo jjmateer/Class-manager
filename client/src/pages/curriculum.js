@@ -150,6 +150,13 @@ class Curriculum extends Component {
                                                             handleInputChange={this.handleInputChange}
                                                             newAssignmentIndex={this.state.newAssignmentIndex}
                                                         />
+                                                        <AddAssignment
+                                                            title={subject.title}
+                                                            addAssignment={this.addAssignment}
+                                                            handleInputChange={this.handleInputChange}
+                                                            subject={subject}
+                                                            newAssignmentIndex={this.state.newAssignmentIndex}
+                                                        />
                                                         <VerifyDeleteModal
                                                             subject={subject}
                                                             deleteSubject={this.deleteSubject}
