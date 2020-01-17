@@ -8,7 +8,8 @@ import {
     Table
 } from 'reactstrap';
 import VerifyDeleteAssignmentModal from "./verify-delete-assignment-modal";
-import EditAssignmentModal from "./edit-assignment-modal";
+import AddAssignment from "./add-assignment-form";
+// import EditAssignmentModal from "./edit-assignment-modal";
 
 
 const ViewSubject = (props) => {
@@ -20,17 +21,28 @@ const ViewSubject = (props) => {
             <Button color="info" onClick={togglemodal}>View</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>{props.subjecttitle}</ModalHeader>
-                <Link to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ textAlign: "center" }}>Spreadsheet</Link>
+                <div style={{flexDirection:"row"}}>
+                <Button tag={Link} color="info" to="/print-chart-all" id={props.subjecttitle} onClick={props.viewSubject} style={{ width:"50%",margin:"auto" }}>Spreadsheet</Button>
+                <AddAssignment
+                    title={props.subjectinfo.title}
+                    addAssignment={props.addAssignment}
+                    handleInputChange={props.handleInputChange}
+                    subject={props.subjectinfo}
+                    newAssignmentIndex={props.newAssignmentIndex}
+                />
+                </div>
                 <div className="table-responsive">
                     <Table key={props.subjecttitle}>
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Assignment</th>
                             </tr>
                             {assignments.length ?
                                 assignments.map((assignment, index) => {
                                     return (
                                         <tr key={`${assignment.title}${index}`}>
+                                            <td>{index}</td>
                                             <td>
                                                 <p>{assignment.title}</p>
                                                 <VerifyDeleteAssignmentModal
@@ -38,12 +50,12 @@ const ViewSubject = (props) => {
                                                     subjectinfo={props.subjectinfo}
                                                     deleteAssignment={props.deleteAssignment}
                                                 />
-                                                <EditAssignmentModal
+                                                {/* <EditAssignmentModal
                                                     editAssignment={props.editAssignment}
                                                     subjecttitle={props.subjecttitle}
                                                     assignment={assignment}
                                                     handleInputChange={props.handleInputChange}
-                                                />
+                                                /> */}
                                             </td>
                                         </tr>
                                     )

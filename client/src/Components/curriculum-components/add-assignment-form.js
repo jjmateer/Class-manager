@@ -23,14 +23,15 @@ const AddAssignment = (props) => {
     const toggle = () => setDropdownOpen(prevState => !prevState);
     return (
         <>
-            <Button color="success" style={{ padding: "auto" }} onClick={togglemodal}>Add</Button>
+            <Button color="success" style={{ width:"50%",margin:"auto" }} onClick={togglemodal}>Add Assignment</Button>
             <Modal isOpen={modal} toggle={togglemodal}>
                 <ModalHeader toggle={togglemodal}>New assignment</ModalHeader>
                 <Form style={{ padding: 20 }} id={props.title} onSubmit={props.addAssignment}>
                     <Label for="Title">Title</Label>
                     <Input onChange={props.handleInputChange} type="title" id="titleAdd" required />
-                    <Dropdown style={{ margin: "auto", width: 100 }} isOpen={dropdownOpen} toggle={toggle}>
-                        <DropdownToggle color="info" caret>
+                    <Label for="Title">Position: </Label>
+                    <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+                        <DropdownToggle caret>
                             {props.newAssignmentIndex}
                         </DropdownToggle>
                         <DropdownMenu>
@@ -42,7 +43,7 @@ const AddAssignment = (props) => {
                             })}
                         </DropdownMenu>
                     </Dropdown>
-                    <Button style={{ marginTop: 20 }} id={props.title} onClick={togglemodal} type="submit">Submit</Button>
+                    <Button color="success" style={{ marginTop: 20 }} id={props.title} onClick={togglemodal} type="submit">Submit</Button>
                 </Form>
                 <ModalFooter>
                 </ModalFooter>
