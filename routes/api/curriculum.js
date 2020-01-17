@@ -100,6 +100,8 @@ router.put("/edit-assignment", (req, res) => {
                         for (let k = 0; k < data[i].grades[j].assignments.length; k++) {
                             if (data[i].grades[j].assignments[k].title === req.body.assignment) {
                                 data[i].grades[j].assignments[k].title = req.body.newName;
+                                data[i].grades[j].assignments[k].gradeN = null;
+                                data[i].grades[j].assignments[k].gradeM = null;
                                 newData2 = data[i].grades[j].assignments;
                             }
                         }
@@ -115,7 +117,7 @@ router.put("/edit-assignment", (req, res) => {
                     }
                 }
             )
-                .then(data2 => { res.status(200).json({msg:"Assignment successfully updated."}) })
+                .then(data2 => { res.status(200).json({ msg: "Assignment successfully updated." }) })
         })
 })
 router.get("/view/:subject", (req, res) => {
